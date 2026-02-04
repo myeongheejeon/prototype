@@ -21,24 +21,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 8
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
+          cache: 'npm'
+          cache-dependency-path: ver01/package-lock.json
 
       - name: Install dependencies
         working-directory: ./ver01
-        run: pnpm install
+        run: npm ci
 
       - name: Build
         working-directory: ./ver01
-        run: pnpm run build
+        run: npm run build
         env:
           NODE_ENV: production
 
