@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { Search, ShoppingCart, User } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
@@ -42,32 +42,50 @@ const chatMessages = [
 export default function GelatoApp() {
   const [isSearchMode, setIsSearchMode] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
-  const [isProductsExpanded, setIsProductsExpanded] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const productsRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    let ticking = false
+  // 스크롤 값 추적 (framer-motion의 useScroll 사용)
+  // window 스크롤을 추적하므로 container 옵션 없이 사용
+  const { scrollY } = useScroll()
 
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          if (containerRef.current && !isSearchMode) {
-            const scrolled = window.scrollY
-            if (scrolled > 250 && !isProductsExpanded) {
-              setIsProductsExpanded(true)
-            } else if (scrolled <= 150 && isProductsExpanded) {
-              setIsProductsExpanded(false)
-            }
-          }
-          ticking = false
-        })
-        ticking = true
-      }
-    }
+  // 스크롤 진행도 계산 (0 ~ 1)
+  // 0 ~ 400px 스크롤 구간에서 0 ~ 1로 변환
+  const scrollProgress = useTransform(scrollY, [0, 400], [0, 1], {
+    clamp: true,
+  })
 
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [isProductsExpanded, isSearchMode])
+  // 중앙 텍스트 필드 표시 여부 (스크롤하면 숨김)
+  const centerSearchBarOpacity = useTransform(scrollProgress, [0, 0.5], [1, 0], {
+    clamp: true,
+  })
+
+  // GNB 검색 필드 표시 여부 (스크롤 진행도에 따라)
+  const gnbSearchBarOpacity = useTransform(scrollProgress, [0.3, 1], [0, 1], {
+    clamp: true,
+  })
+
+  // 추천 상품 영역 패럴렉스 효과
+  // 스크롤에 따라 위로 올라오는 효과 - 한 화면에 가득 차도록
+  // 초기 위치를 더 아래로 설정하여 스크롤 시 한 화면에 가득 차도록
+  const productsTranslateY = useTransform(scrollProgress, [0, 1], [400, 0])
+  // 초기에는 약간 보이다가 스크롤하면 완전히 보이도록
+  const productsOpacity = useTransform(scrollProgress, [0, 0.5], [0.5, 1], {
+    clamp: true,
+  })
+
+  // 제안 칩 표시 여부
+  const suggestionChipsOpacity = useTransform(scrollProgress, [0, 0.5], [1, 0], {
+    clamp: true,
+  })
+  const suggestionChipsDisplay = useTransform(suggestionChipsOpacity, (v) => v > 0 ? 'flex' : 'none')
+
+  // GNB 검색 필드 스타일 값들
+  const stickyBgOpacity = useTransform(scrollProgress, [0.3, 1], [0, 0.9])
+  const stickyBackdropBlur = useTransform(scrollProgress, [0.3, 1], [0, 12])
+  const stickyPaddingTop = useTransform(scrollProgress, [0.3, 1], [0, 12])
+  const stickyPaddingBottom = useTransform(scrollProgress, [0.3, 1], [0, 12])
+  const stickyBoxShadow = useTransform(scrollProgress, [0.3, 1], [0, 0.1])
 
   const handleChipClick = () => {
     setIsSearchMode(true)
@@ -111,102 +129,128 @@ export default function GelatoApp() {
           {!isSearchMode ? (
             // Home View
             <div ref={containerRef} className="relative">
-              {/* Sticky Search Bar */}
-              <div
-                className={
-                  isProductsExpanded 
-                    ? 'sticky top-16 z-40 bg-white/90 backdrop-blur-md py-3 shadow-sm' 
-                    : 'relative'
-                }
+              {/* 중앙 텍스트 필드 - 처음 메인 홈에 표시되는 큰 텍스트 필드 */}
+              <motion.div
+                className="relative flex flex-col items-center justify-center px-6"
                 style={{
-                  transition: 'all 0.5s ease',
+                  minHeight: '90vh',
+                  opacity: centerSearchBarOpacity,
+                  pointerEvents: useTransform(centerSearchBarOpacity, (v) => v > 0 ? 'auto' : 'none'),
                 }}
               >
-                <div 
-                  className="flex flex-col items-center justify-center px-6"
-                  style={{
-                    minHeight: isProductsExpanded ? '0' : '90vh',
-                    transition: 'min-height 0.5s ease',
-                  }}
-                >
-                  <motion.div 
-                    className="w-full space-y-8"
-                    animate={{
-                      maxWidth: isProductsExpanded ? '600px' : '1024px',
-                    }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    {/* Search Bar */}
-                    <div className={`space-y-6 ${isProductsExpanded ? 'space-y-0' : ''}`}>
-                      <div className="relative">
-                        <motion.div 
-                          className="animate-pulse-glow relative bg-white/50 backdrop-blur-md"
-                          animate={{
-                            borderRadius: isProductsExpanded ? '20px' : '24px',
+                <div className="w-full max-w-4xl space-y-8">
+                  <div className="space-y-6">
+                    <div className="relative">
+                      <div className="animate-pulse-glow relative bg-white/50 backdrop-blur-md rounded-3xl">
+                        <textarea
+                          placeholder="원하는 옷의 스타일을 설명해보세요..."
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
+                              e.preventDefault()
+                              setIsSearchMode(true)
+                            }
                           }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          <textarea
-                            placeholder="원하는 옷의 스타일을 설명해보세요..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            onKeyDown={(e) => {
-                              if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
-                                e.preventDefault()
-                                setIsSearchMode(true)
-                              }
-                            }}
-                            style={{
-                              minHeight: isProductsExpanded ? '50px' : '100px',
-                              paddingLeft: isProductsExpanded ? '16px' : '24px',
-                              paddingRight: isProductsExpanded ? '56px' : '64px',
-                              paddingTop: isProductsExpanded ? '13px' : '20px',
-                              paddingBottom: isProductsExpanded ? '13px' : '20px',
-                              transition: 'all 0.5s ease',
-                            }}
-                            className="w-full resize-none rounded-3xl border-0 bg-transparent text-base leading-relaxed placeholder:text-gray-500 focus:outline-none focus:ring-0"
-                            rows={1}
-                          />
-                          <motion.div
-                            className="absolute text-blue-600"
-                            animate={{
-                              right: isProductsExpanded ? '16px' : '24px',
-                              bottom: isProductsExpanded ? '13px' : '20px',
-                            }}
-                            transition={{ duration: 0.5 }}
-                          >
-                            <Search size={isProductsExpanded ? 20 : 24} />
-                          </motion.div>
-                        </motion.div>
+                          style={{
+                            minHeight: '100px',
+                            paddingLeft: '24px',
+                            paddingRight: '64px',
+                            paddingTop: '20px',
+                            paddingBottom: '20px',
+                          }}
+                          className="w-full resize-none border-0 bg-transparent text-base leading-relaxed placeholder:text-gray-500 focus:outline-none focus:ring-0"
+                          rows={1}
+                        />
+                        <div className="absolute right-6 bottom-5 text-blue-600">
+                          <Search size={24} />
+                        </div>
                       </div>
-
-                      {/* Suggestion Chips */}
-                      {!isProductsExpanded && (
-                        <motion.div 
-                          initial={{ opacity: 1 }}
-                          animate={{ opacity: isProductsExpanded ? 0 : 1 }}
-                          className="flex flex-wrap justify-center gap-3 px-4"
-                        >
-                          {suggestionChips.map((chip, index) => (
-                            <motion.button
-                              key={index}
-                              whileHover={{ scale: 1.02, backgroundColor: 'rgba(59, 130, 246, 0.08)' }}
-                              whileTap={{ scale: 0.98 }}
-                              onClick={handleChipClick}
-                              className="rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm text-gray-700 transition-all hover:border-blue-400"
-                            >
-                              {chip}
-                            </motion.button>
-                          ))}
-                        </motion.div>
-                      )}
                     </div>
-                  </motion.div>
-                </div>
-              </div>
 
-              {/* Recommendation Section */}
-              <div className="px-4 pt-8">
+                    {/* Suggestion Chips */}
+                    <motion.div 
+                      className="flex flex-wrap justify-center gap-3 px-4"
+                      style={{
+                        opacity: suggestionChipsOpacity,
+                        display: suggestionChipsDisplay,
+                      }}
+                    >
+                      {suggestionChips.map((chip, index) => (
+                        <motion.button
+                          key={index}
+                          whileHover={{ scale: 1.02, backgroundColor: 'rgba(59, 130, 246, 0.08)' }}
+                          whileTap={{ scale: 0.98 }}
+                          onClick={handleChipClick}
+                          className="rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm text-gray-700 transition-all hover:border-blue-400"
+                        >
+                          {chip}
+                        </motion.button>
+                      ))}
+                    </motion.div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* GNB 검색 필드 - 스크롤하면 나타나는 작은 검색 필드 */}
+              <motion.div
+                className="fixed left-0 right-0 z-40"
+                style={{
+                  top: '64px', // GNB 바로 아래
+                  opacity: gnbSearchBarOpacity,
+                  pointerEvents: useTransform(gnbSearchBarOpacity, (v) => v > 0 ? 'auto' : 'none'),
+                  backgroundColor: useTransform(stickyBgOpacity, (v) => `rgba(255,255,255,${v})`),
+                  backdropFilter: useTransform(stickyBackdropBlur, (v) => `blur(${v}px)`),
+                  paddingTop: stickyPaddingTop,
+                  paddingBottom: stickyPaddingBottom,
+                  boxShadow: useTransform(stickyBoxShadow, (v) => `0 1px 3px rgba(0,0,0,${v})`),
+                }}
+              >
+                <div className="flex items-center justify-center px-6">
+                  <div className="w-full max-w-[600px]">
+                    <div className="relative">
+                      <div className="relative bg-white/50 backdrop-blur-md rounded-[20px]">
+                        <textarea
+                          placeholder="원하는 옷의 스타일을 설명해보세요..."
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
+                              e.preventDefault()
+                              setIsSearchMode(true)
+                            }
+                          }}
+                          style={{
+                            minHeight: '50px',
+                            paddingLeft: '16px',
+                            paddingRight: '56px',
+                            paddingTop: '13px',
+                            paddingBottom: '13px',
+                          }}
+                          className="w-full resize-none border-0 bg-transparent text-base leading-relaxed placeholder:text-gray-500 focus:outline-none focus:ring-0"
+                          rows={1}
+                        />
+                        <div className="absolute right-4 bottom-3.5 text-blue-600">
+                          <Search size={20} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Recommendation Section - 패럴렉스 효과 */}
+              <motion.div 
+                ref={productsRef}
+                className="px-4 pt-8"
+                style={{
+                  y: productsTranslateY,
+                  opacity: productsOpacity,
+                  willChange: 'transform, opacity',
+                  backgroundColor: 'transparent',
+                  minHeight: '100vh', // 한 화면에 가득 차도록
+                }}
+              >
                 <div className="min-h-screen space-y-6 pb-12">
                   <div className="columns-2 gap-3 space-y-3 md:columns-3 lg:columns-4 xl:columns-5">
                     {mockProducts.map((product, index) => (
@@ -234,7 +278,7 @@ export default function GelatoApp() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           ) : (
             // Search Mode - Split View
