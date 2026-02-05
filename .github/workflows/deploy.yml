@@ -38,6 +38,13 @@ jobs:
         env:
           NODE_ENV: production
 
+      - name: Verify build output
+        run: |
+          echo "=== ver01/out 디렉터리 내용 ==="
+          ls -la ver01/out/
+          echo "=== index.html 존재 여부 ==="
+          test -f ver01/out/index.html && echo "OK: index.html 있음" || (echo "ERROR: index.html 없음" && exit 1)
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
