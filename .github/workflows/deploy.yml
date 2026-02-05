@@ -44,7 +44,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './ver01/out'
+          path: './ver01/out/prototype'
 
   deploy:
     environment:
