@@ -1,0 +1,8 @@
+1:"$Sreact.fragment"
+2:I[97367,["/prototype/_next/static/chunks/ff1a16fafef87110.js","/prototype/_next/static/chunks/bfa4740ca9d3df3a.js"],"ViewportBoundary"]
+4:I[97367,["/prototype/_next/static/chunks/ff1a16fafef87110.js","/prototype/_next/static/chunks/bfa4740ca9d3df3a.js"],"MetadataBoundary"]
+5:"$Sreact.suspense"
+7:I[27201,["/prototype/_next/static/chunks/ff1a16fafef87110.js","/prototype/_next/static/chunks/bfa4740ca9d3df3a.js"],"IconMark"]
+0:{"buildId":"RWzBnDVAvf_dAf_7caFl9","rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":"$@3"}],["$","div",null,{"hidden":true,"children":["$","$L4",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":"$@6"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"loading":null,"isPartial":false}
+3:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+6:[["$","title","0",{"children":"Gelato - AI-Powered Fashion Search"}],["$","meta","1",{"name":"description","content":"Find your perfect style with AI-powered recommendations"}],["$","meta","2",{"name":"generator","content":"v0.app"}],["$","link","3",{"rel":"icon","href":"/icon-light-32x32.png","media":"(prefers-color-scheme: light)"}],["$","link","4",{"rel":"icon","href":"/icon-dark-32x32.png","media":"(prefers-color-scheme: dark)"}],["$","link","5",{"rel":"icon","href":"/icon.svg","type":"image/svg+xml"}],["$","link","6",{"rel":"apple-touch-icon","href":"/apple-icon.png"}],["$","$L7","7",{}]]
