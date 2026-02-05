@@ -7,6 +7,12 @@ import { Header } from '@/components/Header'
 import { RecommendedProductItem } from '@/components/RecommendedProductItem'
 import { motion, AnimatePresence } from 'framer-motion'
 
+// basePath를 포함한 이미지 경로 처리 함수
+const getImagePath = (path: string) => {
+  const basePath = process.env.NODE_ENV === 'production' ? '/prototype' : ''
+  return `${basePath}${path}`
+}
+
 export type AspectRatioType = '1:1' | '2:1' | '1:2'
 
 export interface Product {
@@ -546,7 +552,7 @@ export default function GelatoApp() {
             >
               {/* 로고: /public 로고 이미지 */}
               <img
-                src="/logo_nike.svg"
+                src={getImagePath("/logo_nike.svg")}
                 alt="로고"
                 width={125.014}
                 height={44.438}
@@ -770,7 +776,7 @@ export default function GelatoApp() {
                             width: 148,
                             height: 148,
                             aspectRatio: '1/1',
-                            background: `url(${item.image}) lightgray 50% / cover no-repeat`,
+                            background: `url(${getImagePath(item.image)}) lightgray 50% / cover no-repeat`,
                             borderRadius: 16,
                             cursor: 'pointer',
                             border: isSelected ? `3px solid ${item.color}` : 'none',
@@ -900,7 +906,7 @@ export default function GelatoApp() {
                     </div>
                   </div>
                   <video
-                    src="/화면 기록 2026-02-05 오후 3.24.08.mov"
+                    src={getImagePath("/화면 기록 2026-02-05 오후 3.24.08.mov")}
                     autoPlay
                     loop
                     muted

@@ -2,6 +2,12 @@
 
 import React from 'react'
 
+// basePath를 포함한 이미지 경로 처리 함수
+const getImagePath = (path: string) => {
+  const basePath = process.env.NODE_ENV === 'production' ? '/prototype' : ''
+  return `${basePath}${path}`
+}
+
 export type AspectRatioType = '1:1' | '2:1' | '1:2'
 
 export interface RecommendedProductItemProps {
@@ -55,7 +61,7 @@ export function RecommendedProductItem({
         }}
       >
         <img
-          src={image}
+          src={getImagePath(image)}
           alt={title}
           className="h-full w-full object-cover object-center"
         />
@@ -73,7 +79,7 @@ export function RecommendedProductItem({
           }}
           aria-label="리파인"
         >
-          <img src="/refine.svg" alt="" width={20} height={20} className="shrink-0 w-5 h-5" />
+          <img src={getImagePath("/refine.svg")} alt="" width={20} height={20} className="shrink-0 w-5 h-5" />
         </button>
       </div>
 
