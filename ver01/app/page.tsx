@@ -1,37 +1,84 @@
 'use client'
 
-import React, { useState, useRef } from 'react'
-import { Search, ShoppingCart, User } from 'lucide-react'
+import React, { useState, useRef, useEffect } from 'react'
+import { Search } from 'lucide-react'
 import { Input } from '@/components/ui/input'
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
+import { Header } from '@/components/Header'
+import { RecommendedProductItem } from '@/components/RecommendedProductItem'
+import { motion, AnimatePresence } from 'framer-motion'
 
-interface Product {
+export type AspectRatioType = '1:1' | '2:1' | '1:2'
+
+export interface Product {
   id: number
+  brand: string
   title: string
-  price: string
+  price: number
   image: string
-  height: number
+  discountRate?: number
+  aspectRatio?: AspectRatioType
 }
 
-const mockProducts: Product[] = [
-  { id: 1, title: 'Oversized Hoodie', price: '₩89,000', image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=500&fit=crop', height: 500 },
-  { id: 2, title: 'Denim Jacket', price: '₩125,000', image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=350&fit=crop', height: 350 },
-  { id: 3, title: 'Cargo Pants', price: '₩68,000', image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=400&h=450&fit=crop', height: 450 },
-  { id: 4, title: 'White Sneakers', price: '₩145,000', image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=320&fit=crop', height: 320 },
-  { id: 5, title: 'Leather Bag', price: '₩210,000', image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=480&fit=crop', height: 480 },
-  { id: 6, title: 'Striped Shirt', price: '₩55,000', image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=380&fit=crop', height: 380 },
-  { id: 7, title: 'Black Cap', price: '₩32,000', image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=400&fit=crop', height: 400 },
-  { id: 8, title: 'Wide Pants', price: '₩78,000', image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=520&fit=crop', height: 520 },
-  { id: 9, title: 'Knit Sweater', price: '₩95,000', image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=460&fit=crop', height: 460 },
-  { id: 10, title: 'Chelsea Boots', price: '₩168,000', image: 'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=400&h=340&fit=crop', height: 340 },
-  { id: 11, title: 'Wool Coat', price: '₩285,000', image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=400&h=550&fit=crop', height: 550 },
-  { id: 12, title: 'Basic Tee', price: '₩29,000', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=360&fit=crop', height: 360 },
+const baseProducts: Product[] = [
+  { id: 1, brand: 'NIKE', title: 'Oversized Hoodie', price: 89000, discountRate: 10, image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=500&fit=crop', aspectRatio: '1:2' },
+  { id: 2, brand: 'LEVI\'S', title: 'Denim Jacket', price: 125000, image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=350&fit=crop', aspectRatio: '2:1' },
+  { id: 3, brand: 'CARHARTT', title: 'Cargo Pants', price: 68000, discountRate: 15, image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=400&h=450&fit=crop', aspectRatio: '1:1' },
+  { id: 4, brand: 'CONVERSE', title: 'White Sneakers', price: 145000, image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=320&fit=crop', aspectRatio: '1:2' },
+  { id: 5, brand: 'COACH', title: 'Leather Bag', price: 210000, discountRate: 20, image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=480&fit=crop', aspectRatio: '1:1' },
+  { id: 6, brand: 'UNIQLO', title: 'Striped Shirt', price: 55000, image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=380&fit=crop', aspectRatio: '2:1' },
+  { id: 7, brand: 'NEW ERA', title: 'Black Cap', price: 32000, discountRate: 5, image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=400&fit=crop', aspectRatio: '1:1' },
+  { id: 8, brand: 'COS', title: 'Wide Pants', price: 78000, image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=520&fit=crop', aspectRatio: '1:2' },
+  { id: 9, brand: '&OTHER STORIES', title: 'Knit Sweater', price: 95000, discountRate: 12, image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=460&fit=crop', aspectRatio: '2:1' },
+  { id: 10, brand: 'DR. MARTENS', title: 'Chelsea Boots', price: 168000, image: 'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=400&h=340&fit=crop', aspectRatio: '1:1' },
+  { id: 11, brand: 'MAX MARA', title: 'Wool Coat', price: 285000, discountRate: 30, image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=400&h=550&fit=crop', aspectRatio: '1:2' },
+  { id: 12, brand: 'BASIC', title: 'Basic Tee', price: 29000, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=360&fit=crop', aspectRatio: '1:1' },
 ]
 
+const aspectRatios: AspectRatioType[] = ['1:1', '2:1', '1:2']
+const mockProducts: Product[] = (() => {
+  const list: Product[] = []
+  for (let i = 0; i < 60; i++) {
+    const base = baseProducts[i % baseProducts.length]
+    list.push({
+      ...base,
+      id: i + 1,
+      title: base.title + (i >= baseProducts.length ? ` ${Math.floor(i / baseProducts.length) + 1}` : ''),
+      price: base.price + (i % 7) * 1000,
+      aspectRatio: aspectRatios[i % aspectRatios.length],
+    })
+  }
+  return list
+})()
+
 const suggestionChips = [
-  '성수동 갈 때 입기 좋은 힙한 옷',
-  '저번에 찜한 바지랑 어울리는 티셔츠',
-  '30대 남성 선물 추천',
+  {
+    text: '성수동 팝업 갈 때 힙한 느낌 내고 싶어',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width={15} height={15} viewBox="0 0 15 15" fill="none">
+        <path
+          d="M12.7375 2.1625L9.99999 1.25C9.99999 1.91304 9.7366 2.54893 9.26776 3.01777C8.79892 3.48661 8.16304 3.75 7.49999 3.75C6.83695 3.75 6.20107 3.48661 5.73223 3.01777C5.26339 2.54893 4.99999 1.91304 4.99999 1.25L2.26249 2.1625C1.97961 2.25675 1.73973 2.44901 1.58615 2.70459C1.43258 2.96017 1.37542 3.26223 1.42499 3.55625L1.78749 5.725C1.81129 5.87182 1.88667 6.00534 2.00008 6.10157C2.1135 6.1978 2.25751 6.25043 2.40624 6.25H3.74999V12.5C3.74999 13.1875 4.31249 13.75 4.99999 13.75H9.99999C10.3315 13.75 10.6495 13.6183 10.8839 13.3839C11.1183 13.1495 11.25 12.8315 11.25 12.5V6.25H12.5937C12.7425 6.25043 12.8865 6.1978 12.9999 6.10157C13.1133 6.00534 13.1887 5.87182 13.2125 5.725L13.575 3.55625C13.6246 3.26223 13.5674 2.96017 13.4138 2.70459C13.2603 2.44901 13.0204 2.25675 12.7375 2.1625Z"
+          stroke="#9EA2A8"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
+    text: '감각적인 5만원대 집들이 선물 찾아줘',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" width={15} height={15} viewBox="0 0 15 15" fill="none">
+        <path
+          d="M7.5 5V13.125M7.5 5C7.27392 4.06838 6.88465 3.27188 6.38296 2.71444C5.88127 2.15701 5.29043 1.86446 4.6875 1.87497C4.2731 1.87497 3.87567 2.03959 3.58265 2.33261C3.28962 2.62564 3.125 3.02307 3.125 3.43747C3.125 3.85187 3.28962 4.2493 3.58265 4.54232C3.87567 4.83535 4.2731 4.99997 4.6875 4.99997M7.5 5C7.72608 4.06838 8.11535 3.27188 8.61704 2.71444C9.11873 2.15701 9.70957 1.86446 10.3125 1.87497C10.7269 1.87497 11.1243 2.03959 11.4174 2.33261C11.7104 2.62564 11.875 3.02307 11.875 3.43747C11.875 3.85187 11.7104 4.2493 11.4174 4.54232C11.1243 4.83535 10.7269 4.99997 10.3125 4.99997M11.875 7.5V11.875C11.875 12.2065 11.7433 12.5245 11.5089 12.7589C11.2745 12.9933 10.9565 13.125 10.625 13.125H4.375C4.04348 13.125 3.72554 12.9933 3.49112 12.7589C3.2567 12.5245 3.125 12.2065 3.125 11.875V7.5M2.5 5H12.5C12.8452 5 13.125 5.27982 13.125 5.625V6.875C13.125 7.22018 12.8452 7.5 12.5 7.5H2.5C2.15482 7.5 1.875 7.22018 1.875 6.875V5.625C1.875 5.27982 2.15482 5 2.5 5Z"
+          stroke="#9EA2A8"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
 ]
 
 const chatMessages = [
@@ -39,351 +86,480 @@ const chatMessages = [
   { type: 'ai', content: '성수동 스타일을 위해 트렌디한 캐주얼 아이템들을 추천드립니다. 미니멀하면서도 세련된 디자인의 옷들을 선별했어요.' },
 ]
 
+const page0Variants = {
+  active: {
+    y: 0,
+    scale: 1,
+    opacity: 1,
+    transition: { duration: 0.5 },
+  },
+  inactive: {
+    y: '-10vh',
+    scale: 0.95,
+    opacity: 0.5,
+    transition: { duration: 0.5 },
+  },
+}
+
+/* 하단 패널이 상단에 있을 때 40px만 보이도록 (스크롤 힌트) */
+const PAGE1_PEEK_PX = 40
+const GNB_HEIGHT_X2 = 52 * 2 // 104
+const page1Variants = {
+  active: {
+    y: '0%',
+    transition: { type: 'spring' as const, stiffness: 120, damping: 20 },
+  },
+  inactive: {
+    y: `calc(100vh - ${GNB_HEIGHT_X2 + PAGE1_PEEK_PX}px)`,
+    transition: { type: 'spring' as const, stiffness: 120, damping: 20 },
+  },
+}
+
+const WHEEL_THROTTLE_MS = 1000
+
 export default function GelatoApp() {
+  const [page, setPage] = useState(0) // 0: 검색, 1: 추천상품
+  const [isAnimating, setIsAnimating] = useState(false)
   const [isSearchMode, setIsSearchMode] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
-  const containerRef = useRef<HTMLDivElement>(null)
-  const productsRef = useRef<HTMLDivElement>(null)
+  const rootRef = useRef<HTMLDivElement>(null)
+  const productListRef = useRef<HTMLDivElement>(null)
+  const throttleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const pageRef = useRef(page)
+  const isAnimatingRef = useRef(isAnimating)
 
-  // 스크롤 값 추적 (framer-motion의 useScroll 사용)
-  // window 스크롤을 추적하므로 container 옵션 없이 사용
-  const { scrollY } = useScroll()
+  pageRef.current = page
+  isAnimatingRef.current = isAnimating
 
-  // 스크롤 진행도 계산 (0 ~ 1)
-  // 0 ~ 400px 스크롤 구간에서 0 ~ 1로 변환
-  const scrollProgress = useTransform(scrollY, [0, 400], [0, 1], {
-    clamp: true,
-  })
+  useEffect(() => {
+    const container = rootRef.current
+    if (!container) return
 
-  // 중앙 텍스트 필드 표시 여부 (스크롤하면 숨김)
-  const centerSearchBarOpacity = useTransform(scrollProgress, [0, 0.5], [1, 0], {
-    clamp: true,
-  })
+    const handlePageChange = (nextPage: 0 | 1) => {
+      setIsAnimating(true)
+      setPage(nextPage)
+      if (throttleTimerRef.current) clearTimeout(throttleTimerRef.current)
+      throttleTimerRef.current = setTimeout(() => {
+        setIsAnimating(false)
+        throttleTimerRef.current = null
+      }, WHEEL_THROTTLE_MS)
+    }
 
-  // GNB 검색 필드 표시 여부 (스크롤 진행도에 따라)
-  const gnbSearchBarOpacity = useTransform(scrollProgress, [0.3, 1], [0, 1], {
-    clamp: true,
-  })
+    const handleWheel = (e: WheelEvent) => {
+      const currentPage = pageRef.current
+      const animating = isAnimatingRef.current
 
-  // 추천 상품 영역 패럴렉스 효과
-  // 스크롤에 따라 위로 올라오는 효과 - 한 화면에 가득 차도록
-  // 초기 위치를 더 아래로 설정하여 스크롤 시 한 화면에 가득 차도록
-  const productsTranslateY = useTransform(scrollProgress, [0, 1], [400, 0])
-  // 초기에는 약간 보이다가 스크롤하면 완전히 보이도록
-  const productsOpacity = useTransform(scrollProgress, [0, 0.5], [0.5, 1], {
-    clamp: true,
-  })
+      if (animating) {
+        e.preventDefault()
+        return
+      }
 
-  // 제안 칩 표시 여부
-  const suggestionChipsOpacity = useTransform(scrollProgress, [0, 0.5], [1, 0], {
-    clamp: true,
-  })
-  const suggestionChipsDisplay = useTransform(suggestionChipsOpacity, (v) => v > 0 ? 'flex' : 'none')
+      const { deltaY } = e
+      const scrollTop = productListRef.current ? productListRef.current.scrollTop : 0
 
-  // GNB 검색 필드 스타일 값들
-  const stickyBgOpacity = useTransform(scrollProgress, [0.3, 1], [0, 0.9])
-  const stickyBackdropBlur = useTransform(scrollProgress, [0.3, 1], [0, 12])
-  const stickyPaddingTop = useTransform(scrollProgress, [0.3, 1], [0, 12])
-  const stickyPaddingBottom = useTransform(scrollProgress, [0.3, 1], [0, 12])
-  const stickyBoxShadow = useTransform(scrollProgress, [0.3, 1], [0, 0.1])
+      if (currentPage === 0) {
+        if (deltaY > 0) {
+          e.preventDefault()
+          handlePageChange(1)
+        }
+        return
+      }
 
-  const handleChipClick = () => {
-    setIsSearchMode(true)
-  }
+      if (currentPage === 1) {
+        if (deltaY < 0 && scrollTop <= 0) {
+          e.preventDefault()
+          handlePageChange(0)
+        }
+        return
+      }
+    }
 
+    container.addEventListener('wheel', handleWheel, { passive: false })
+    return () => {
+      container.removeEventListener('wheel', handleWheel)
+      if (throttleTimerRef.current) clearTimeout(throttleTimerRef.current)
+    }
+  }, [])
+
+  const handleChipClick = () => setIsSearchMode(true)
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setSearchQuery(value)
-    if (value.trim()) {
-      setIsSearchMode(true)
-    }
+    if (value.trim()) setIsSearchMode(true)
   }
-
   const handleBackToHome = () => {
     setIsSearchMode(false)
     setSearchQuery('')
   }
 
+  const GNB_HEIGHT = 52
+  const miniSearchStripOpacity = page === 1 ? 1 : 0
+
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="fixed left-0 right-0 top-0 z-50 border-b border-border/50 bg-white/80 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-full items-center justify-between px-8">
-          <h1 className="text-2xl font-bold lowercase text-gray-800">gelatto</h1>
-          <div className="flex items-center gap-5">
-            <button className="transition-opacity hover:opacity-70" aria-label="User profile">
-              <User size={22} className="text-gray-700" />
-            </button>
-            <button className="relative transition-opacity hover:opacity-70" aria-label="Shopping cart">
-              <ShoppingCart size={22} className="text-gray-700" />
-              <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
-                0
-              </span>
-            </button>
-          </div>
+    <div className="h-screen overflow-hidden" ref={rootRef}>
+      <Header />
+
+      {/* GNB 바로 아래 고정 영역: 축소형 검색창. GNB와 동일 배경, 스크롤 시 슬라이드+페이드 인 */}
+      <motion.div
+        className="fixed left-0 right-0 z-40 box-border w-full"
+        style={{
+          top: 53,
+          display: 'flex',
+          padding: '4px 16px 16px',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: 4,
+          background: 'var(--background-overlay-lightSecondary, rgba(255, 255, 255, 0.72))',
+          backdropFilter: 'blur(27px)',
+          pointerEvents: miniSearchStripOpacity > 0 ? 'auto' : 'none',
+        }}
+        initial={false}
+        animate={{
+          opacity: miniSearchStripOpacity,
+          y: miniSearchStripOpacity ? 0 : -12,
+        }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+      >
+        {/* 검색창 텍스트필드: 피그마 스펙, 가운데 정렬 */}
+        <div
+          className="flex w-full max-w-[560px] min-w-0 shrink-0 items-center justify-center gap-[var(--4,4px)]"
+          style={{
+            padding: '12px 24px',
+            borderRadius: 999,
+            border: '1px solid var(--neutral-200, #E6E8EB)',
+            background: 'var(--common-white, #FFF)',
+          }}
+        >
+          <span className="shrink-0 w-5 h-5 flex items-center justify-center" aria-hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
+              <path d="M17.5002 17.5L13.9168 13.9166M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z" stroke="#9EA2A8" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+          <input
+            type="text"
+            placeholder="원하는 옷의 스타일을 설명해보세요..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
+                e.preventDefault()
+                setIsSearchMode(true)
+              }
+            }}
+            className="min-w-0 flex-1 bg-transparent border-0 outline-none focus:ring-0 placeholder-[var(--content-placeholder,#9EA2A8)]"
+            style={{
+              display: '-webkit-box',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 1,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+              fontSize: 14,
+              fontStyle: 'normal',
+              fontWeight: 400,
+              lineHeight: '140%',
+              letterSpacing: '-0.14px',
+            }}
+          />
         </div>
-      </header>
+      </motion.div>
 
-      <div className="pt-16">
-        <AnimatePresence mode="wait">
-          {!isSearchMode ? (
-            // Home View
-            <div ref={containerRef} className="relative">
-              {/* 중앙 텍스트 필드 - 처음 메인 홈에 표시되는 큰 텍스트 필드 */}
-              <motion.div
-                className="relative flex flex-col items-center justify-center px-6"
-                style={{
-                  minHeight: '90vh',
-                  opacity: centerSearchBarOpacity,
-                  pointerEvents: useTransform(centerSearchBarOpacity, (v) => v > 0 ? 'auto' : 'none'),
-                }}
-              >
-                <div className="w-full max-w-4xl space-y-8">
-                  <div className="space-y-6">
-                    <div className="relative">
-                      <div className="animate-pulse-glow relative bg-white/50 backdrop-blur-md rounded-3xl">
-                        <textarea
-                          placeholder="원하는 옷의 스타일을 설명해보세요..."
-                          value={searchQuery}
-                          onChange={(e) => setSearchQuery(e.target.value)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
-                              e.preventDefault()
-                              setIsSearchMode(true)
-                            }
-                          }}
-                          style={{
-                            minHeight: '100px',
-                            paddingLeft: '24px',
-                            paddingRight: '64px',
-                            paddingTop: '20px',
-                            paddingBottom: '20px',
-                          }}
-                          className="w-full resize-none border-0 bg-transparent text-base leading-relaxed placeholder:text-gray-500 focus:outline-none focus:ring-0"
-                          rows={1}
-                        />
-                        <div className="absolute right-6 bottom-5 text-blue-600">
-                          <Search size={24} />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Suggestion Chips */}
-                    <motion.div 
-                      className="flex flex-wrap justify-center gap-3 px-4"
-                      style={{
-                        opacity: suggestionChipsOpacity,
-                        display: suggestionChipsDisplay,
-                      }}
-                    >
-                      {suggestionChips.map((chip, index) => (
-                        <motion.button
-                          key={index}
-                          whileHover={{ scale: 1.02, backgroundColor: 'rgba(59, 130, 246, 0.08)' }}
-                          whileTap={{ scale: 0.98 }}
-                          onClick={handleChipClick}
-                          className="rounded-full border border-gray-300 bg-white px-5 py-2.5 text-sm text-gray-700 transition-all hover:border-blue-400"
-                        >
-                          {chip}
-                        </motion.button>
-                      ))}
-                    </motion.div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* GNB 검색 필드 - 스크롤하면 나타나는 작은 검색 필드 */}
-              <motion.div
-                className="fixed left-0 right-0 z-40"
-                style={{
-                  top: '64px', // GNB 바로 아래
-                  opacity: gnbSearchBarOpacity,
-                  pointerEvents: useTransform(gnbSearchBarOpacity, (v) => v > 0 ? 'auto' : 'none'),
-                  backgroundColor: useTransform(stickyBgOpacity, (v) => `rgba(255,255,255,${v})`),
-                  backdropFilter: useTransform(stickyBackdropBlur, (v) => `blur(${v}px)`),
-                  paddingTop: stickyPaddingTop,
-                  paddingBottom: stickyPaddingBottom,
-                  boxShadow: useTransform(stickyBoxShadow, (v) => `0 1px 3px rgba(0,0,0,${v})`),
-                }}
-              >
-                <div className="flex items-center justify-center px-6">
-                  <div className="w-full max-w-[600px]">
-                    <div className="relative">
-                      <div className="relative bg-white/50 backdrop-blur-md rounded-[20px]">
-                        <textarea
-                          placeholder="원하는 옷의 스타일을 설명해보세요..."
-                          value={searchQuery}
-                          onChange={(e) => setSearchQuery(e.target.value)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
-                              e.preventDefault()
-                              setIsSearchMode(true)
-                            }
-                          }}
-                          style={{
-                            minHeight: '50px',
-                            paddingLeft: '16px',
-                            paddingRight: '56px',
-                            paddingTop: '13px',
-                            paddingBottom: '13px',
-                          }}
-                          className="w-full resize-none border-0 bg-transparent text-base leading-relaxed placeholder:text-gray-500 focus:outline-none focus:ring-0"
-                          rows={1}
-                        />
-                        <div className="absolute right-4 bottom-3.5 text-blue-600">
-                          <Search size={20} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Recommendation Section - 패럴렉스 효과 */}
-              <motion.div 
-                ref={productsRef}
-                className="px-4 pt-8"
-                style={{
-                  y: productsTranslateY,
-                  opacity: productsOpacity,
-                  willChange: 'transform, opacity',
-                  backgroundColor: 'transparent',
-                  minHeight: '100vh', // 한 화면에 가득 차도록
-                }}
-              >
-                <div className="min-h-screen space-y-6 pb-12">
-                  <div className="columns-2 gap-3 space-y-3 md:columns-3 lg:columns-4 xl:columns-5">
-                    {mockProducts.map((product, index) => (
-                      <motion.div
-                        key={product.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.05 }}
-                        className="group mb-3 break-inside-avoid overflow-hidden rounded-xl bg-white shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
-                      >
-                        <div className="relative overflow-hidden">
-                          <img
-                            src={product.image || "/placeholder.svg"}
-                            alt={product.title}
-                            style={{ height: `${product.height}px` }}
-                            className="w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                        </div>
-                        <div className="p-3">
-                          <p className="text-sm font-medium text-gray-800">{product.title}</p>
-                          <p className="mt-1 text-xs font-semibold text-blue-600">{product.price}</p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          ) : (
-            // Search Mode - Split View
+      <AnimatePresence mode="wait">
+        {!isSearchMode ? (
+          <div key="fullpage" className="relative h-full w-full overflow-hidden" style={{ height: '100vh' }}>
+            {/* Page 0: 검색 포커스 영역 — 뷰포트 반응형, 피그마 스펙 */}
             <motion.div
-              key="search"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="flex h-[calc(100vh-64px)]"
+              className="absolute inset-0 z-0 flex flex-col items-center justify-center pt-[52px]"
+              style={{
+                paddingLeft: 40,
+                paddingRight: 40,
+                gap: 40,
+                minHeight: '100dvh',
+                boxSizing: 'border-box',
+              }}
+              initial={false}
+              variants={page0Variants}
+              animate={page === 0 ? 'active' : 'inactive'}
             >
-              {/* Left Panel - Chat Context */}
-              <motion.div
-                initial={{ x: -50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.1 }}
-                className="w-[35%] border-r border-gray-200 bg-white"
+              {/* 로고: /public 로고 이미지 */}
+              <img
+                src="/logo_nike.svg"
+                alt="로고"
+                width={125.014}
+                height={44.438}
+                style={{ objectFit: 'contain', filter: 'brightness(0)' }}
+              />
+
+              {/* 검색창 + 칩 감싸는 컨테이너: flex col, gap 32 */}
+              <div
+                className="flex flex-col justify-center items-center self-stretch"
+                style={{ gap: 'var(--32, 32px)' }}
               >
-                <div className="flex h-full flex-col">
-                  {/* Search Input in Chat Panel */}
-                  <div className="border-b border-gray-200 p-4">
-                    <Input
+                {/* 검색창: 피그마 스펙 + 4겹 쉐도우 애니메이션 */}
+                <div className="w-full relative" style={{ maxWidth: 640 }}>
+                  {/* 쉐도우 레이어 4개 — 각각 다른 속도로 진해졌다 연해졌다 */}
+                  <div
+                    className="search-shadow-layer-1 pointer-events-none absolute inset-0 rounded-[20px]"
+                    aria-hidden
+                  />
+                  <div
+                    className="search-shadow-layer-2 pointer-events-none absolute inset-0 rounded-[20px]"
+                    style={{
+                      boxShadow: '0 -8px 60px 0 rgba(198, 151, 255, 0.20)',
+                    }}
+                    aria-hidden
+                  />
+                  <div
+                    className="search-shadow-layer-3 pointer-events-none absolute inset-0 rounded-[20px]"
+                    style={{
+                      boxShadow: '0 -8px 100px 0 rgba(198, 151, 255, 0.12)',
+                    }}
+                    aria-hidden
+                  />
+                  <div
+                    className="pointer-events-none absolute inset-0 rounded-[20px]"
+                    style={{
+                      boxShadow: '0 -8px 250px 0 rgba(234, 217, 255, 0.80)',
+                    }}
+                    aria-hidden
+                  />
+                  <div
+                    className="relative z-10 flex flex-col items-stretch w-full"
+                    style={{
+                      padding: 16,
+                      gap: 4,
+                      borderRadius: 20,
+                      background: 'var(--common-white, #FFF)',
+                    }}
+                  >
+                  {/* 플레이스홀더 + 검색 아이콘 감싸는 컨테이너 */}
+                  <div
+                    className="flex items-center gap-[10px] w-full"
+                    style={{ minHeight: 36, padding: '12px 0' }}
+                  >
+                    <span className="shrink-0" style={{ width: 20, height: 20 }} aria-hidden>
+                      <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
+                        <path
+                          d="M17.5002 17.5L13.9168 13.9166M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z"
+                          stroke="#9EA2A8"
+                          strokeWidth="1.4"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                    <input
                       type="text"
-                      placeholder="Follow-up question..."
+                      placeholder="원하는 옷의 스타일을 설명해보세요..."
                       value={searchQuery}
-                      onChange={handleSearchChange}
-                      className="rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm focus-visible:ring-1 focus-visible:ring-blue-500"
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
+                          e.preventDefault()
+                          setIsSearchMode(true)
+                        }
+                      }}
+                      className="flex-1 min-w-0 bg-transparent border-0 outline-none placeholder:text-[var(--content-placeholder,#9EA2A8)]"
+                      style={{
+                        fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+                        fontSize: 14,
+                        fontWeight: 400,
+                        lineHeight: '140%',
+                        letterSpacing: -0.14,
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        display: '-webkit-box',
+                        WebkitBoxOrient: 'vertical',
+                        WebkitLineClamp: 1,
+                      }}
                     />
                   </div>
 
-                  {/* Chat Messages */}
-                  <div className="flex-1 space-y-4 overflow-y-auto p-4">
-                    {chatMessages.map((msg, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 + index * 0.1 }}
-                        className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
-                      >
-                        <div
-                          className={`max-w-[85%] rounded-2xl px-4 py-2.5 ${
-                            msg.type === 'user'
-                              ? 'bg-blue-600 text-white'
-                              : 'bg-gray-100 text-gray-800'
-                          }`}
-                        >
-                          <p className="text-sm leading-relaxed">{msg.content}</p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Back Button */}
-                  <div className="border-t border-gray-200 p-4">
+                  {/* 검색 아이콘 버튼 */}
+                  <div className="flex justify-end">
                     <button
-                      onClick={handleBackToHome}
-                      className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
+                      type="button"
+                      className="flex justify-center items-center shrink-0 rounded-full text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--button-primaryActivated)]"
+                      style={{
+                        width: 24,
+                        height: 24,
+                        background: 'var(--button-primaryActivated, #111214)',
+                      }}
+                      onClick={() => searchQuery.trim() && setIsSearchMode(true)}
+                      aria-label="검색"
                     >
-                      Back to Home
+                      <Search size={14} strokeWidth={2} />
                     </button>
                   </div>
-                </div>
-              </motion.div>
-
-              {/* Right Panel - Product Results */}
-              <motion.div
-                initial={{ x: 50, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 0.1 }}
-                className="w-[65%] overflow-y-auto"
-              >
-                <div className="p-4">
-                  <h3 className="mb-6 text-xl font-semibold text-gray-800">Search Results</h3>
-                  <div className="columns-2 gap-3 space-y-3 lg:columns-3 xl:columns-4">
-                    {mockProducts.map((product, index) => (
-                      <motion.div
-                        key={product.id}
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: index * 0.03 }}
-                        className="group mb-3 break-inside-avoid overflow-hidden rounded-lg bg-white shadow-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-md"
-                      >
-                        <div className="relative overflow-hidden">
-                          <img
-                            src={product.image || "/placeholder.svg"}
-                            alt={product.title}
-                            style={{ height: `${product.height}px` }}
-                            className="w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                        </div>
-                        <div className="p-3">
-                          <p className="text-sm font-medium text-gray-800">{product.title}</p>
-                          <p className="mt-1 text-xs font-semibold text-blue-600">{product.price}</p>
-                        </div>
-                      </motion.div>
-                    ))}
                   </div>
                 </div>
-              </motion.div>
+
+                {/* 칩들을 감싸는 컨테이너: flex, gap 4 */}
+                <div className="flex items-center" style={{ gap: 'var(--4, 4px)' }}>
+                  {suggestionChips.map((chip, index) => (
+                    <motion.button
+                      key={index}
+                      type="button"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={handleChipClick}
+                      className="flex justify-center items-center shrink-0 rounded-full border bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--content-primary)]"
+                      style={{
+                        paddingTop: 4,
+                        paddingBottom: 4,
+                        paddingLeft: 10,
+                        paddingRight: 10,
+                        gap: 'var(--4, 4px)',
+                        borderColor: 'var(--neutral-200, #E6E8EB)',
+                        borderRadius: 'var(--100, 100px)',
+                      }}
+                    >
+                      <span className="shrink-0 w-[15px] h-[15px] aspect-square flex items-center justify-center" aria-hidden>
+                        {chip.icon}
+                      </span>
+                      <span
+                        className="whitespace-nowrap"
+                        style={{
+                          color: 'var(--content-primary, #111214)',
+                          fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+                          fontSize: 12,
+                          fontWeight: 400,
+                          lineHeight: '120%',
+                          letterSpacing: -0.12,
+                        }}
+                      >
+                        {chip.text}
+                      </span>
+                    </motion.button>
+                  ))}
+                </div>
+              </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+
+            {/* Page 1: 추천 상품 — 축소형 검색창 영역(GNB+52px) 아래에서 올라옴, 그 위로는 올라오지 않음 */}
+            <motion.div
+              className="absolute left-0 right-0 bottom-0 z-30 flex flex-col overflow-hidden bg-background-primary shadow-2xl pt-4 pb-4 px-0"
+              style={{ top: `${GNB_HEIGHT * 2}px`, pointerEvents: page === 0 ? 'none' : 'auto' }}
+              initial={false}
+              variants={page1Variants}
+              animate={page === 0 ? 'inactive' : 'active'}
+            >
+              <div
+                ref={productListRef}
+                className="flex-1 min-h-0 min-w-0 w-full overflow-y-auto overflow-x-hidden pb-8"
+                style={{ overscrollBehavior: 'contain' }}
+              >
+                <div className="recommended-products-grid">
+                  {mockProducts.map((product, index) => (
+                    <motion.div
+                      key={product.id}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.35, delay: index * 0.04, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      className="recommended-products-grid-item"
+                    >
+                      <RecommendedProductItem
+                        id={product.id}
+                        brand={product.brand}
+                        title={product.title}
+                        price={product.price}
+                        image={product.image}
+                        discountRate={product.discountRate}
+                        aspectRatio={product.aspectRatio}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        ) : (
+          <motion.div
+            key="search"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="flex h-screen overflow-hidden"
+          >
+            <motion.div
+              initial={{ x: -50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.1 }}
+              className="w-[35%] border-r border-border-secondary bg-background-primary flex flex-col min-h-0"
+            >
+              <div className="border-b border-border-secondary p-4">
+                <Input
+                  type="text"
+                  placeholder="Follow-up question..."
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  className="rounded-lg border border-border-primary bg-background-input-normal px-4 py-2.5 text-sm focus-visible:ring-1 focus-visible:ring-content-highlighted"
+                />
+              </div>
+              <div className="flex-1 space-y-4 overflow-y-auto p-4 min-h-0">
+                {chatMessages.map((msg, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 + index * 0.1 }}
+                    className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div
+                      className={`max-w-[85%] rounded-2xl px-4 py-2.5 ${
+                        msg.type === 'user'
+                          ? 'bg-button-highlightOutline text-button-highlight'
+                          : 'bg-background-tertiary text-content-primary'
+                      }`}
+                    >
+                      <p className="text-sm leading-relaxed">{msg.content}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+              <div className="border-t border-border-secondary p-4">
+                <button
+                  onClick={handleBackToHome}
+                  className="w-full rounded-lg border border-button-defaultOutlined bg-button-default px-4 py-2.5 text-sm font-medium text-content-secondary transition-colors hover:bg-button-hover"
+                >
+                  Back to Home
+                </button>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ x: 50, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.1 }}
+              className="w-[65%] overflow-y-auto min-h-0"
+            >
+              <div className="p-4">
+                <h3 className="mb-6 text-xl font-semibold text-content-primary">Search Results</h3>
+                <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
+                  {mockProducts.map((product, index) => (
+                    <motion.div
+                      key={product.id}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.03 }}
+                      className="min-w-0"
+                    >
+                      <RecommendedProductItem
+                        id={product.id}
+                        brand={product.brand}
+                        title={product.title}
+                        price={product.price}
+                        image={product.image}
+                        discountRate={product.discountRate}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

@@ -1,28 +1,31 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import './design-tokens.css';
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.97 0.005 320);
-  --foreground: oklch(0.2 0 0);
+  /* Design system mapping for app shell */
+  --background: var(--background-primary);
+  --foreground: var(--content-primary);
+  --border: var(--border-primary);
+  --input: var(--background-input-normal);
+  --ring: var(--kitkat-purple-500);
+  --primary: var(--kitkat-purple-500);
+  --primary-foreground: var(--content-inversePrimary);
+  --secondary: var(--background-secondary);
+  --secondary-foreground: var(--content-primary);
+  --muted: var(--background-tertiary);
+  --muted-foreground: var(--content-tertiary);
+  --accent: var(--button-highlightHover);
+  --accent-foreground: var(--content-highlighted);
+  --destructive: var(--button-destructive);
+  --destructive-foreground: var(--content-inversePrimary);
+  /* Legacy fallbacks (unchanged for card/popover/sidebar if needed) */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.18 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.18 0 0);
-  --primary: oklch(0.52 0.2 264);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.97 0.01 320);
-  --secondary-foreground: oklch(0.18 0 0);
-  --muted: oklch(0.93 0.01 320);
-  --muted-foreground: oklch(0.55 0.05 264);
-  --accent: oklch(0.52 0.2 264);
-  --accent-foreground: oklch(0.99 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.92 0.01 320);
-  --input: oklch(0.98 0.01 320);
-  --ring: oklch(0.52 0.2 264);
   --chart-1: oklch(0.52 0.2 264);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -113,6 +116,121 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Design system - primitive & semantic colors (Tailwind utilities) */
+  --color-kitkat-purple-50: var(--kitkat-purple-50);
+  --color-kitkat-purple-100: var(--kitkat-purple-100);
+  --color-kitkat-purple-200: var(--kitkat-purple-200);
+  --color-kitkat-purple-300: var(--kitkat-purple-300);
+  --color-kitkat-purple-400: var(--kitkat-purple-400);
+  --color-kitkat-purple-500: var(--kitkat-purple-500);
+  --color-kitkat-purple-600: var(--kitkat-purple-600);
+  --color-kitkat-purple-700: var(--kitkat-purple-700);
+  --color-kitkat-purple-800: var(--kitkat-purple-800);
+  --color-kitkat-purple-900: var(--kitkat-purple-900);
+  --color-kitkat-mint-50: var(--kitkat-mint-50);
+  --color-kitkat-mint-100: var(--kitkat-mint-100);
+  --color-kitkat-mint-200: var(--kitkat-mint-200);
+  --color-kitkat-mint-300: var(--kitkat-mint-300);
+  --color-kitkat-mint-400: var(--kitkat-mint-400);
+  --color-kitkat-mint-500: var(--kitkat-mint-500);
+  --color-kitkat-mint-600: var(--kitkat-mint-600);
+  --color-kitkat-mint-700: var(--kitkat-mint-700);
+  --color-kitkat-mint-800: var(--kitkat-mint-800);
+  --color-kitkat-mint-900: var(--kitkat-mint-900);
+  --color-common-black: var(--common-black);
+  --color-common-white: var(--common-white);
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  --color-warm-grey-50: var(--warm-grey-50);
+  --color-warm-grey-100: var(--warm-grey-100);
+  --color-warm-grey-200: var(--warm-grey-200);
+  --color-warm-grey-300: var(--warm-grey-300);
+  --color-warm-grey-400: var(--warm-grey-400);
+  --color-warm-grey-500: var(--warm-grey-500);
+  --color-warm-grey-600: var(--warm-grey-600);
+  --color-warm-grey-700: var(--warm-grey-700);
+  --color-warm-grey-800: var(--warm-grey-800);
+  --color-warm-grey-900: var(--warm-grey-900);
+  --color-content-primary: var(--content-primary);
+  --color-content-secondary: var(--content-secondary);
+  --color-content-tertiary: var(--content-tertiary);
+  --color-content-disabled: var(--content-disabled);
+  --color-content-placeholder: var(--content-placeholder);
+  --color-content-inversePrimary: var(--content-inversePrimary);
+  --color-content-inverseSecondary: var(--content-inverseSecondary);
+  --color-content-inverseDisabled: var(--content-inverseDisabled);
+  --color-content-highlighted: var(--content-highlighted);
+  --color-content-discount: var(--content-discount);
+  --color-content-critical: var(--content-critical);
+  --color-background-primary: var(--background-primary);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary: var(--background-tertiary);
+  --color-background-primary-main: var(--background-primary-main);
+  --color-background-inverse: var(--background-inverse);
+  --color-border-primary: var(--border-primary);
+  --color-border-secondary: var(--border-secondary);
+  --color-button-primary: var(--button-primary);
+  --color-button-primaryActivated: var(--button-primaryActivated);
+  --color-button-highlight: var(--button-highlight);
+  --color-button-highlightOutline: var(--button-highlightOutline);
+  --color-button-highlightHover: var(--button-highlightHover);
+  --color-button-secondary: var(--button-secondary);
+  --color-button-destructive: var(--button-destructive);
+  --color-button-disabled: var(--button-disabled);
+  --color-button-default: var(--button-default);
+  --color-support-positive: var(--support-positive);
+  --color-support-warning: var(--support-warning);
+  --color-support-critical: var(--support-critical);
+  --color-support-sucess: var(--support-sucess);
+  --color-red-500: var(--red-500);
+  --color-blue-50: var(--blue-50);
+  --color-blue-500: var(--blue-500);
+  --color-yellow-500: var(--yellow-500);
+  --color-green-500: var(--green-500);
+  --color-background-overlay-lightPrimary: var(--background-overlay-lightPrimary);
+  --color-background-input-normal: var(--background-input-normal);
+  --color-button-hover: var(--button-hover);
+  --color-button-defaultOutlined: var(--button-defaultOutlined);
+
+  /* Design system - spacing (Mode 1) */
+  --spacing-0: 0px;
+  --spacing-2: 2px;
+  --spacing-4: 4px;
+  --spacing-6: 6px;
+  --spacing-8: 8px;
+  --spacing-10: 10px;
+  --spacing-12: 12px;
+  --spacing-14: 14px;
+  --spacing-16: 16px;
+  --spacing-18: 18px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-28: 28px;
+  --spacing-32: 32px;
+  --spacing-36: 36px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-54: 54px;
+  --spacing-64: 64px;
+  --spacing-72: 72px;
+  --spacing-80: 80px;
+  --spacing-92: 92px;
+  --spacing-100: 100px;
+  --spacing-120: 120px;
+  --spacing-160: 160px;
+  --spacing-200: 200px;
+  --spacing-240: 240px;
+  --spacing-360: 360px;
+  --spacing-400: 400px;
 }
 
 @layer base {
@@ -121,7 +239,7 @@
   }
   body {
     @apply text-foreground;
-    background: linear-gradient(135deg, oklch(0.98 0.005 320) 0%, oklch(0.96 0.01 300) 100%);
+    background: var(--background-primary-main);
     min-height: 100vh;
   }
 }
@@ -180,4 +298,87 @@
   animation: glow-tight 4s ease-in-out infinite;
   pointer-events: none;
   z-index: -1;
+}
+
+/* 검색창 4겹 쉐도우 — 각 레이어가 서로 다른 속도로 진해졌다 연해졌다 (많이 진했다 연했다) */
+/* 1번(가장 좁은 쉐도우): 진해질 때 더 진하게, 살짝 더 넓게 퍼지도록 */
+@keyframes search-shadow-pulse-1 {
+  0%, 100% { box-shadow: 0 -1px 18px 0 rgba(176, 67, 255, 0.08); }
+  50% { box-shadow: 0 -1px 18px 0 rgba(176, 67, 255, 0.38); }
+}
+@keyframes search-shadow-pulse-2 {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 1; }
+}
+@keyframes search-shadow-pulse-3 {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 1; }
+}
+@keyframes search-shadow-pulse-4 {
+  0%, 100% { opacity: 0.18; }
+  50% { opacity: 1; }
+}
+.search-shadow-layer-1 {
+  box-shadow: 0 -1px 18px 0 rgba(176, 67, 255, 0.08);
+  animation: search-shadow-pulse-1 5.8s ease-in-out infinite;
+}
+.search-shadow-layer-2 {
+  animation: search-shadow-pulse-2 4.2s ease-in-out infinite;
+}
+.search-shadow-layer-3 {
+  animation: search-shadow-pulse-3 5s ease-in-out infinite;
+}
+.search-shadow-layer-4 {
+  animation: search-shadow-pulse-4 5.8s ease-in-out infinite;
+}
+
+/* 추천 상품: 핀터레스트 스타일 그리드 (좌우 24px만, 나머지 전부 아이템) */
+.recommended-products-grid {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 24px;
+  box-sizing: border-box;
+  column-count: 6;
+  column-gap: 16px;
+  column-fill: balance;
+  transition: padding 0.3s ease, column-gap 0.3s ease;
+}
+
+.recommended-products-grid-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  transition: transform 0.25s ease, opacity 0.3s ease;
+}
+
+.recommended-products-grid-item:hover .recommended-product-item {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 1200px) {
+  .recommended-products-grid {
+    column-count: 5;
+  }
+}
+
+@media (max-width: 960px) {
+  .recommended-products-grid {
+    column-count: 4;
+  }
+}
+
+@media (max-width: 720px) {
+  .recommended-products-grid {
+    column-count: 3;
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .recommended-products-grid {
+    column-count: 2;
+    padding: 0 24px;
+    column-gap: 16px;
+  }
 }

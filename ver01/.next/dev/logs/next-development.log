@@ -106,3 +106,467 @@
 [00:07:54.049] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
 [00:07:54.049] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
 [00:07:54.049] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770191990381}
+[15:11:51.120] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[15:11:51.120] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[15:11:51.120] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770246227494}
+[15:12:21.391] Server  LOG      ✓ Compiled in 611ms
+[15:12:28.073] Server  LOG      ✓ Compiled in 147ms
+[15:12:34.596] Server  LOG      ✓ Compiled in 176ms
+[15:12:49.890] Server  LOG      ✓ Compiled in 42ms
+[15:12:55.751] Server  LOG      ✓ Compiled in 119ms
+[15:14:24.024] Server  LOG      ✓ Compiled in 102ms
+[15:14:32.429] Server  LOG      ✓ Compiled in 29ms
+[15:14:32.520] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[15:14:41.260] Server  LOG      ✓ Compiled in 38ms
+[15:15:34.301] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[15:15:34.301] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[15:15:34.301] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[15:15:34.301] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770246450676}
+[15:18:46.481] Server  LOG      ✓ Compiled in 89ms
+[15:18:46.611] Browser ERROR   uncaughtError: ReferenceError: centerSearchBarOpacity is not defined
+[15:18:51.552] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[15:18:51.673] Server  LOG      ✓ Compiled in 25ms
+[15:18:51.777] Server  ERROR    ⨯ ReferenceError: centerSearchBarOpacity is not defined
+[15:18:51.785] Browser ERROR   uncaughtError: ReferenceError: centerSearchBarOpacity is not defined
+[15:18:52.049] Browser ERROR   uncaughtError: ReferenceError: centerSearchBarOpacity is not defined
+[15:19:07.537] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[15:19:07.560] Server  LOG      ✓ Compiled in 107ms
+[15:19:07.770] Browser ERROR   unhandledRejection: Error: No link element found for chunk /_next/static/chunks/%5Broot-of-the-server%5D__51d697a8._.css
+[15:19:08.109] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[15:19:08.109] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[15:19:08.109] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[15:19:08.109] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770246664486}
+[15:19:13.605] Server  LOG      ✓ Compiled in 94ms
+[15:19:23.753] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[15:19:23.753] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[15:19:23.753] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770246680125}
+[15:19:23.753] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[15:20:10.906] Server  LOG      ✓ Compiled in 260ms
+[15:20:11.010] Browser ERROR   ./app/page.tsx:130:15
+Parsing ecmascript source code failed
+  128 |             {/* 풀페이지 스크롤: 살짝만 내려도 다음 페이지가 촥 붙음 */}
+  129 |             <div
+> 130 |               ref={containerRef}
+      |               ^^^
+  131 |               className="relative flex-1 overflow-y-auto overflow-x-hidden scroll-smooth"
+  132 |               style={{
+  133 |                 height: 'calc(100vh - 64px)',
+
+Expected '</', got 'ref'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[15:20:12.840] Browser ERROR   ./app/page.tsx:130:15
+Parsing ecmascript source code failed
+  128 |             {/* 풀페이지 스크롤: 살짝만 내려도 다음 페이지가 촥 붙음 */}
+  129 |             <div
+> 130 |               ref={containerRef}
+      |               ^^^
+  131 |               className="relative flex-1 overflow-y-auto overflow-x-hidden scroll-smooth"
+  132 |               style={{
+  133 |                 height: 'calc(100vh - 64px)',
+
+Expected '</', got 'ref'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[15:20:22.352] Server  ERROR    ⨯ ./app/page.tsx:130:15
+Parsing ecmascript source code failed
+  128 |             {/* 풀페이지 스크롤: 살짝만 내려도 다음 페이지가 촥 붙음 */}
+  129 |             <div
+> 130 |               ref={containerRef}
+      |               ^^^
+  131 |               className="relative flex-1 overflow-y-auto overflow-x-hidden scroll-smooth"
+  132 |               style={{
+  133 |                 height: 'calc(100vh - 64px)',
+
+Expected '</', got 'ref'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+
+[15:20:22.466] Browser ERROR   ./app/page.tsx:130:15
+Parsing ecmascript source code failed
+  128 |             {/* 풀페이지 스크롤: 살짝만 내려도 다음 페이지가 촥 붙음 */}
+  129 |             <div
+> 130 |               ref={containerRef}
+      |               ^^^
+  131 |               className="relative flex-1 overflow-y-auto overflow-x-hidden scroll-smooth"
+  132 |               style={{
+  133 |                 height: 'calc(100vh - 64px)',
+
+Expected '</', got 'ref'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[15:20:23.287] Browser ERROR   ./app/page.tsx:130:15
+Parsing ecmascript source code failed
+  128 |             {/* 풀페이지 스크롤: 살짝만 내려도 다음 페이지가 촥 붙음 */}
+  129 |             <div
+> 130 |               ref={containerRef}
+      |               ^^^
+  131 |               className="relative flex-1 overflow-y-auto overflow-x-hidden scroll-smooth"
+  132 |               style={{
+  133 |                 height: 'calc(100vh - 64px)',
+
+Expected '</', got 'ref'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[15:20:23.287] Browser ERROR   ./app/page.tsx:130:15
+Parsing ecmascript source code failed
+  128 |             {/* 풀페이지 스크롤: 살짝만 내려도 다음 페이지가 촥 붙음 */}
+  129 |             <div
+> 130 |               ref={containerRef}
+      |               ^^^
+  131 |               className="relative flex-1 overflow-y-auto overflow-x-hidden scroll-smooth"
+  132 |               style={{
+  133 |                 height: 'calc(100vh - 64px)',
+
+Expected '</', got 'ref'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[15:20:23.387] Browser ERROR   ./app/page.tsx:130:15
+Parsing ecmascript source code failed
+  128 |             {/* 풀페이지 스크롤: 살짝만 내려도 다음 페이지가 촥 붙음 */}
+  129 |             <div
+> 130 |               ref={containerRef}
+      |               ^^^
+  131 |               className="relative flex-1 overflow-y-auto overflow-x-hidden scroll-smooth"
+  132 |               style={{
+  133 |                 height: 'calc(100vh - 64px)',
+
+Expected '</', got 'ref'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[15:20:23.613] Browser ERROR   uncaughtError: Error: ./app/page.tsx:130:15
+Parsing ecmascript source code failed
+  128 |             {/* 풀페이지 스크롤: 살짝만 내려도 다음 페이지가 촥 붙음 */}
+  129 |             <div
+> 130 |               ref={containerRef}
+      |               ^^^
+  131 |               className="relative flex-1 overflow-y-auto overflow-x-hidden scroll-smooth"
+  132 |               style={{
+  133 |                 height: 'calc(100vh - 64px)',
+
+Expected '</', got 'ref'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+
+[15:20:23.794] Browser ERROR   ./app/page.tsx:130:15
+Parsing ecmascript source code failed
+  128 |             {/* 풀페이지 스크롤: 살짝만 내려도 다음 페이지가 촥 붙음 */}
+  129 |             <div
+> 130 |               ref={containerRef}
+      |               ^^^
+  131 |               className="relative flex-1 overflow-y-auto overflow-x-hidden scroll-smooth"
+  132 |               style={{
+  133 |                 height: 'calc(100vh - 64px)',
+
+Expected '</', got 'ref'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[15:20:23.794] Browser ERROR   ./app/page.tsx:130:15
+Parsing ecmascript source code failed
+  128 |             {/* 풀페이지 스크롤: 살짝만 내려도 다음 페이지가 촥 붙음 */}
+  129 |             <div
+> 130 |               ref={containerRef}
+      |               ^^^
+  131 |               className="relative flex-1 overflow-y-auto overflow-x-hidden scroll-smooth"
+  132 |               style={{
+  133 |                 height: 'calc(100vh - 64px)',
+
+Expected '</', got 'ref'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[15:20:44.420] Browser ERROR   ./app/page.tsx:336:12
+Parsing ecmascript source code failed
+  334 |               </motion.div>
+  335 |             </motion.div>
+> 336 |           )}
+      |            ^
+  337 |         </AnimatePresence>
+  338 |       </div>
+  339 |     </div>
+
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[15:20:47.245] Server  LOG      ✓ Compiled in 60ms
+[15:20:47.725] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[15:20:47.725] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[15:20:47.725] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[15:20:47.725] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770246764102}
+[15:24:58.993] Server  LOG      ✓ Compiled in 263ms
+[15:25:07.942] Server  LOG      ✓ Compiled in 103ms
+[15:25:40.391] Browser WARN    Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.
+[15:25:40.391] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[15:25:40.391] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[15:25:40.391] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770247056771}
+[15:25:52.289] Server  LOG      ✓ Compiled in 306ms
+[15:26:02.106] Server  LOG      ✓ Compiled in 71ms
+[15:26:02.983] Server  LOG      ✓ Compiled in 37ms
+[15:26:03.090] Browser ERROR   ./app/page.tsx:351:7
+Parsing ecmascript source code failed
+  349 |         )}
+  350 |       </AnimatePresence>
+> 351 |     </>
+      |       ^
+  352 |   )
+  353 | }
+  354 |
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[15:26:20.415] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[15:26:20.416] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[15:26:20.416] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770247096795}
+[15:29:59.168] Server  LOG      ✓ Compiled in 196ms
+[15:30:06.607] Server  LOG      ✓ Compiled in 73ms
+[15:30:12.746] Server  LOG      ✓ Compiled in 153ms
+[15:32:06.870] Server  LOG      ✓ Compiled in 98ms
+[15:32:06.960] Browser ERROR   uncaughtError: ReferenceError: springBack is not defined
+[15:32:08.825] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[15:32:08.851] Server  LOG      ✓ Compiled in 31ms
+[15:32:09.287] Server  ERROR    ⨯ ReferenceError: springPage is not defined
+[15:32:09.297] Browser ERROR   uncaughtError: ReferenceError: springPage is not defined
+[15:32:09.795] Browser ERROR   uncaughtError: ReferenceError: springPage is not defined
+[15:32:10.956] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[15:32:11.005] Server  LOG      ✓ Compiled in 94ms
+[15:32:11.072] Browser ERROR   unhandledRejection: Error: No link element found for chunk /_next/static/chunks/%5Broot-of-the-server%5D__51d697a8._.css
+[15:32:11.491] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[15:32:11.491] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[15:32:11.491] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770247447874}
+[15:32:34.710] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[15:32:34.710] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[15:32:34.710] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770247471093}
+[15:33:32.310] Server  LOG      ✓ Compiled in 149ms
+[15:34:44.634] Server  LOG      ✓ Compiled in 104ms
+[15:34:50.439] Server  LOG      ✓ Compiled in 114ms
+[15:36:36.002] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[15:36:36.003] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[15:36:36.003] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770247712380}
+[15:38:00.596] Server  LOG      ✓ Compiled in 314ms
+[15:38:13.487] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[15:38:13.488] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[15:38:13.488] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770247809864}
+[15:49:28.285] Server  LOG      ✓ Compiled in 363ms
+[15:50:16.653] Server  LOG      ✓ Compiled in 1010ms
+[15:50:26.435] Server  LOG      ✓ Compiled in 752ms
+[15:50:48.702] Server  LOG      ✓ Compiled in 699ms
+[15:50:54.129] Server  LOG      ✓ Compiled in 405ms
+[15:50:55.244] Server  LOG      ✓ Compiled in 670ms
+[15:50:58.889] Server  LOG      ✓ Compiled in 2s
+[15:50:59.877] Server  LOG      ✓ Compiled in 431ms
+[15:51:02.386] Server  LOG      ✓ Compiled in 1388ms
+[15:51:04.938] Server  LOG      ✓ Compiled in 1260ms
+[15:51:07.314] Server  LOG      ✓ Compiled in 1786ms
+[15:51:08.109] Server  LOG      ✓ Compiled in 435ms
+[15:51:11.157] Server  LOG      ✓ Compiled in 170ms
+[15:51:17.535] Server  LOG      ✓ Compiled in 2.5s
+[15:51:19.750] Server  LOG      ✓ Compiled in 486ms
+[15:51:23.290] Server  LOG      ✓ Compiled in 2.1s
+[15:51:25.079] Server  LOG      ✓ Compiled in 248ms
+[15:51:26.955] Server  LOG      ✓ Compiled in 685ms
+[15:51:35.136] Server  LOG      ✓ Compiled in 888ms
+[16:28:54.310] Server  LOG      ✓ Compiled in 237ms
+[16:29:07.171] Server  LOG      ✓ Compiled in 1388ms
+[16:29:07.304] Browser ERROR   uncaughtError: ReferenceError: User is not defined
+[16:29:23.998] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[16:29:23.999] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770250880355}
+[16:29:24.687] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[16:29:24.687] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[16:29:24.687] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770250881056}
+[16:29:27.119] Server  LOG      ✓ Compiled in 116ms
+[16:29:32.993] Server  LOG      ✓ Compiled in 2.5s
+[16:29:37.720] Server  LOG      ✓ Compiled in 64ms
+[16:30:59.651] Server  LOG      ✓ Compiled in 185ms
+[16:32:51.247] Server  LOG      ✓ Compiled in 727ms
+[16:32:53.000] Server  LOG      ✓ Compiled in 137ms
+[16:39:23.336] Server  LOG      ✓ Compiled in 702ms
+[16:39:39.403] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[16:39:39.403] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[16:39:39.403] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770251495771}
+[16:39:40.255] Server  LOG      ✓ Compiled in 51ms
+[16:42:56.019] Server  LOG      ✓ Compiled in 157ms
+[16:42:56.156] Browser ERROR   uncaughtError: Error: Objects are not valid as a React child (found: object with keys {text, icon}). If you meant to render a collection of children, use an array instead.
+[16:43:15.063] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[16:43:15.083] Server  LOG      ✓ Compiled in 226ms
+[16:43:15.491] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770251711573}
+[16:43:15.761] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[16:43:15.761] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[16:43:15.762] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770251712212}
+[16:48:54.726] Server  LOG      ✓ Compiled in 384ms
+[16:49:00.322] Server  LOG      ✓ Compiled in 188ms
+[16:49:00.432] Browser ERROR   ./app/page.tsx:388:26
+Parsing ecmascript source code failed
+  386 |                 </div>
+  387 |               </div>
+> 388 |             </motion.div>
+      |                          ^
+> 389 |
+      | ^
+> 390 |             {/* Page 1: 추천 상품 — 축소형 검색창 영역(GNB+52px) 아래에서 올라옴, 그 위로는 올라오지 않음 */}
+      | ^^^^^^^^^^^^^
+  391 |             <motion.div
+  392 |               className="absolute left-0 right-0 bottom-0 z-30 flex flex-col overflow-hidden bg-background-primary shadow-2xl pt-4 pb-4 px-4"
+  393 |               style={{ top: `${GNB_HEIGHT * 2}px`, pointerEvents: page === 0 ? 'none' : 'auto' }}
+
+Expected '</', got 'jsx text (
+
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[16:49:23.339] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[16:49:23.339] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[16:49:23.339] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770252079706}
+[16:50:01.778] Server  LOG      ✓ Compiled in 139ms
+[16:50:18.046] Server  LOG      ✓ Compiled in 159ms
+[16:50:57.098] Server  LOG      ✓ Compiled in 66ms
+[16:51:45.607] Server  LOG      ✓ Compiled in 218ms
+[16:51:46.204] Server  LOG      ✓ Compiled in 76ms
+[16:51:47.332] Server  LOG      ✓ Compiled in 36ms
+[16:51:51.477] Server  LOG      ✓ Compiled in 207ms
+[16:52:21.327] Server  LOG      ✓ Compiled in 308ms
+[16:52:38.875] Server  LOG      ✓ Compiled in 123ms
+[16:52:49.427] Server  LOG      ✓ Compiled in 232ms
+[16:52:54.710] Server  LOG      ✓ Compiled in 180ms
+[16:53:39.639] Server  LOG      ✓ Compiled in 86ms
+[16:59:12.545] Server  LOG      ✓ Compiled in 1236ms
+[16:59:22.580] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[16:59:22.580] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[16:59:22.580] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770252678943}
+[16:59:49.596] Server  LOG      ✓ Compiled in 106ms
+[16:59:58.358] Server  LOG      ✓ Compiled in 392ms
+[17:00:03.947] Server  LOG      ✓ Compiled in 394ms
+[17:00:08.053] Server  LOG      ✓ Compiled in 56ms
+[17:08:21.514] Server  LOG      ✓ Compiled in 1342ms
+[17:08:48.705] Server  LOG      ✓ Compiled in 70ms
+[17:09:29.393] Server  LOG      ✓ Compiled in 136ms
+[17:09:33.684] Server  LOG      ✓ Compiled in 39ms
+[17:09:38.617] Server  LOG      ✓ Compiled in 116ms
+[17:51:05.165] Server  LOG      ✓ Compiled in 729ms
+[17:52:25.914] Server  LOG      ✓ Compiled in 405ms
+[17:53:47.895] Server  LOG      ✓ Compiled in 740ms
+[17:53:51.981] Server  LOG      ✓ Compiled in 103ms
+[17:59:06.866] Server  LOG      ✓ Compiled in 448ms
+[17:59:10.255] Server  LOG      ✓ Compiled in 74ms
+[17:59:20.950] Server  LOG      ✓ Compiled in 1456ms
+[17:59:28.546] Server  LOG      ✓ Compiled in 74ms
+[17:59:36.964] Server  LOG      ✓ Compiled in 654ms
+[17:59:37.809] Server  LOG      ✓ Compiled in 79ms
+[17:59:47.554] Server  LOG      ✓ Compiled in 98ms
+[17:59:50.386] Server  LOG      ✓ Compiled in 58ms
+[17:59:53.607] Server  LOG      ✓ Compiled in 49ms
+[18:00:12.543] Server  LOG      ✓ Compiled in 467ms
+[18:02:59.232] Server  LOG      ✓ Compiled in 471ms
+[18:03:07.173] Server  LOG      ✓ Compiled in 510ms
+[18:04:15.208] Server  LOG      ✓ Compiled in 421ms
+[18:04:15.369] Browser ERROR   uncaughtError: ReferenceError: SlidersHorizontal is not defined
+[18:04:18.689] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[18:04:18.710] Server  LOG      ✓ Compiled in 77ms
+[18:04:19.361] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770256575463}
+[18:04:20.133] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[18:04:20.133] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[18:04:20.133] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770256576508}
+[18:04:24.326] Server  LOG      ✓ Compiled in 2.3s
+[18:04:31.003] Server  LOG      ✓ Compiled in 123ms
+[18:04:31.094] Browser ERROR   uncaughtError: TypeError: Failed to construct 'Image': Please use the 'new' operator, this DOM object constructor cannot be called as a function.
+[18:04:31.908] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[18:04:32.021] Server  LOG      ✓ Compiled in 39ms
+[18:04:32.220] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770256588533}
+[18:04:32.949] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[18:04:32.949] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[18:04:32.949] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770256589323}
+[18:04:37.032] Server  LOG      ✓ Compiled in 839ms
+[18:06:55.041] Server  LOG      ✓ Compiled in 256ms
+[18:07:39.630] Server  LOG      ✓ Compiled in 104ms
