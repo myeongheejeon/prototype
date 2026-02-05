@@ -3,6 +3,12 @@
 import React from 'react'
 import Image from 'next/image'
 
+// basePath를 포함한 이미지 경로 처리 (GitHub Pages 등 서브경로 배포 대응)
+const getImagePath = (path: string) => {
+  const basePath = process.env.NODE_ENV === 'production' ? '/prototype' : ''
+  return `${basePath}${path}`
+}
+
 const GelatoLogoSvg = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +78,7 @@ export function Header({ children }: { children?: React.ReactNode }) {
             }}
             aria-label="찜하기"
           >
-            <Image src="/bookmark.svg" alt="" width={24} height={24} />
+            <Image src={getImagePath("/bookmark.svg")} alt="" width={24} height={24} />
           </button>
           <button
             type="button"
@@ -85,7 +91,7 @@ export function Header({ children }: { children?: React.ReactNode }) {
             }}
             aria-label="프로필"
           >
-            <Image src="/profile.svg" alt="" width={40} height={40} />
+            <Image src={getImagePath("/profile.svg")} alt="" width={40} height={40} />
           </button>
         </div>
 
