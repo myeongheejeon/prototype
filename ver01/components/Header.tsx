@@ -31,11 +31,13 @@ export function Header({ children }: { children?: React.ReactNode }) {
       }}
     >
       <div
-        className="relative mx-auto flex max-w-full items-center justify-between px-0"
+        className="relative mx-auto flex max-w-full items-center justify-between"
         style={{
           width: '100%',
           maxWidth: '1437px',
           height: '52px',
+          paddingLeft: 24,
+          paddingRight: 24,
         }}
       >
         {/* Left spacer for balance */}

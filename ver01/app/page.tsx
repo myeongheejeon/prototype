@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { Search, ChevronRight } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Header } from '@/components/Header'
@@ -38,18 +39,25 @@ const baseProducts: Product[] = [
   { id: 10, brand: 'NIKE', title: 'Product 10', price: 120000, image: '/product10.png', aspectRatio: '1:1' },
 ]
 
+// Hydration 일치를 위해 시드 기반 의사 난수 사용 (서버/클라이언트 동일 결과)
+function seededRandom(seed: number) {
+  const x = Math.sin(seed) * 10000
+  return x - Math.floor(x)
+}
+
 const mockProducts: Product[] = (() => {
   const list: Product[] = []
   const images = baseProducts.map(p => p.image)
-  
-  // 이미지 배열을 랜덤하게 섞기
+  let seed = 12345
+
+  // 이미지 배열을 시드 기반으로 섞기 (서버/클라이언트 동일)
   const shuffledImages = [...images]
   for (let i = shuffledImages.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledImages[i], shuffledImages[j]] = [shuffledImages[j], shuffledImages[i]]
+    const j = Math.floor(seededRandom(seed++) * (i + 1))
+    ;[shuffledImages[i], shuffledImages[j]] = [shuffledImages[j], shuffledImages[i]]
   }
-  
-  // 60개 상품 생성 시 이미지를 랜덤하게 배치
+
+  // 60개 상품 생성 시 이미지를 배치
   for (let i = 0; i < 60; i++) {
     const baseIndex = i % baseProducts.length
     const base = baseProducts[baseIndex]
@@ -63,13 +71,13 @@ const mockProducts: Product[] = (() => {
       aspectRatio: '1:1',
     })
   }
-  
-  // 최종 리스트도 랜덤하게 섞기
+
+  // 최종 리스트도 시드 기반으로 섞기 (서버/클라이언트 동일)
   for (let i = list.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [list[i], list[j]] = [list[j], list[i]]
+    const j = Math.floor(seededRandom(seed++) * (i + 1))
+    ;[list[i], list[j]] = [list[j], list[i]]
   }
-  
+
   return list
 })()
 
@@ -79,6 +87,9 @@ const placeholders = [
   '재생소재 패딩 보여줘',
   '성수동에 입고 가고 싶은 모자 보여줘.',
 ]
+
+// 섹션 타이틀 클릭 시 축약형 검색창 위에 뜨는 제안 질문 칩
+const suggestionQuestionChips = ['10만원 이하 상품 보여줘', '20대 친구 선물용으로 보여줘']
 
 const suggestionChips = [
   {
@@ -181,6 +192,7 @@ export default function GelatoApp() {
   const [selectedQuickStartItem, setSelectedQuickStartItem] = useState<number | null>(null)
   const [selectedSectionChip, setSelectedSectionChip] = useState<string | null>(null)
   const [placeholderIndex, setPlaceholderIndex] = useState(0)
+  const [mounted, setMounted] = useState(false)
   const rootRef = useRef<HTMLDivElement>(null)
   const productListRef = useRef<HTMLDivElement>(null)
   const throttleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -189,6 +201,10 @@ export default function GelatoApp() {
 
   pageRef.current = page
   isAnimatingRef.current = isAnimating
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const container = rootRef.current
@@ -321,26 +337,71 @@ export default function GelatoApp() {
     <div className="h-screen overflow-hidden" ref={rootRef}>
       <Header />
 
-      {/* 하단 고정 플로팅 검색창: 스크롤 시 하단에 작게 고정되어 떠 있음 */}
-      <motion.div
-        className="fixed left-0 right-0 z-40 box-border w-full"
-        style={{
-          bottom: 20,
-          display: 'flex',
-          padding: '0 16px',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: 4,
-          pointerEvents: miniSearchStripOpacity > 0 ? 'auto' : 'none',
-        }}
-        initial={false}
-        animate={{
-          opacity: miniSearchStripOpacity,
-          y: miniSearchStripOpacity ? 0 : 20,
-          scale: miniSearchStripOpacity ? 1 : 0.95,
-        }}
-        transition={{ duration: 0.3, ease: 'easeOut' }}
-      >
+      {/* 하단 고정 플로팅 검색창: body에 포탈해 칩 영역이 root overflow에 잘리지 않도록 */}
+      {mounted &&
+        typeof document !== 'undefined' &&
+        createPortal(
+          <motion.div
+            className="fixed left-0 right-0 z-40 box-border w-full"
+            style={{
+              bottom: 20,
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '0 16px',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: 6,
+              pointerEvents: miniSearchStripOpacity > 0 ? 'auto' : 'none',
+              overflow: 'visible',
+            }}
+            initial={false}
+            animate={{
+              opacity: miniSearchStripOpacity,
+              y: miniSearchStripOpacity ? 0 : 20,
+              scale: miniSearchStripOpacity ? 1 : 0.95,
+            }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+          >
+            {/* 제안 질문 칩: 섹션 칩 선택 시 축약형 검색창 위에 뿅 하고 등장 */}
+            <AnimatePresence>
+              {selectedSectionChip && (
+                <motion.div
+                  className="flex flex-nowrap justify-start min-[640px]:justify-center gap-2 w-full max-w-[560px] overflow-x-auto"
+                  style={{ padding: '4px 0', minHeight: 40, overflowY: 'visible' }}
+                  initial={{ opacity: 0, y: 12, scale: 0.85 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.9 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                >
+              {suggestionQuestionChips.map((text, i) => (
+                <motion.button
+                  key={text}
+                  type="button"
+                  initial={{ opacity: 0, y: 8, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 25, delay: i * 0.06 }}
+                  onClick={() => setSearchQuery(text)}
+                  className="shrink-0"
+                  style={{
+                    padding: '8px 16px',
+                    borderRadius: 999,
+                    border: '1px solid var(--neutral-200, #E6E8EB)',
+                    background: 'var(--common-white, #FFF)',
+                    boxShadow: '0 2px 12px rgba(0, 0, 0, 0.06)',
+                    cursor: 'pointer',
+                    fontFamily: '"Noto Sans KR", sans-serif',
+                    fontSize: 13,
+                    fontWeight: 400,
+                    lineHeight: '140%',
+                    color: 'var(--content-primary, #111214)',
+                  }}
+                >
+                  {text}
+                </motion.button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
         {/* 검색창 텍스트필드: 플로팅 스타일, 그림자 효과 */}
         <div
           className="flex w-full max-w-[560px] min-w-0 shrink-0 items-center justify-center"
@@ -428,31 +489,67 @@ export default function GelatoApp() {
             />
             {!searchQuery && (
               <div className="absolute inset-0 pointer-events-none flex items-center">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={placeholderIndex}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    style={{
-                      color: 'var(--content-placeholder, #9EA2A8)',
-                      fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
-                      fontSize: 14,
-                      fontStyle: 'normal',
-                      fontWeight: 400,
-                      lineHeight: '140%',
-                      letterSpacing: '-0.14px',
-                    }}
-                  >
-                    {selectedSectionChip ? '찾고 싶은걸 입력해 보세요.' : placeholders[placeholderIndex]}
-                  </motion.span>
-                </AnimatePresence>
+                {/* 모바일: 플레이스홀더 "입력하세요" 고정 */}
+                <span
+                  className="min-[640px]:hidden"
+                  style={{
+                    color: 'var(--content-placeholder, #9EA2A8)',
+                    fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+                    fontSize: 14,
+                    fontStyle: 'normal',
+                    fontWeight: 400,
+                    lineHeight: '140%',
+                    letterSpacing: '-0.14px',
+                  }}
+                >
+                  입력하세요
+                </span>
+                {/* 데스크톱: 칩 있으면 플레이스홀더 고정, 없으면 로테이션 애니메이션 */}
+                <span className="hidden min-[640px]:inline">
+                  {selectedSectionChip ? (
+                    <span
+                      style={{
+                        color: 'var(--content-placeholder, #9EA2A8)',
+                        fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+                        fontSize: 14,
+                        fontStyle: 'normal',
+                        fontWeight: 400,
+                        lineHeight: '140%',
+                        letterSpacing: '-0.14px',
+                      }}
+                    >
+                      찾고 싶은걸 입력해 보세요.
+                    </span>
+                  ) : (
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={placeholderIndex}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3 }}
+                        style={{
+                          color: 'var(--content-placeholder, #9EA2A8)',
+                          fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+                          fontSize: 14,
+                          fontStyle: 'normal',
+                          fontWeight: 400,
+                          lineHeight: '140%',
+                          letterSpacing: '-0.14px',
+                        }}
+                      >
+                        {placeholders[placeholderIndex]}
+                      </motion.span>
+                    </AnimatePresence>
+                  )}
+                </span>
               </div>
             )}
           </div>
         </div>
-      </motion.div>
+          </motion.div>,
+          document.body
+        )}
 
       {/* 하단 고정 "더 많은 영감 보기" 칩: 홈 화면에서만 표시 */}
       <motion.div
@@ -540,8 +637,8 @@ export default function GelatoApp() {
             <motion.div
               className="absolute inset-0 z-0 flex flex-col items-center justify-center pt-[52px]"
               style={{
-                paddingLeft: 40,
-                paddingRight: 40,
+                paddingLeft: 24,
+                paddingRight: 24,
                 gap: 40,
                 minHeight: '100dvh',
                 boxSizing: 'border-box',
@@ -759,23 +856,23 @@ export default function GelatoApp() {
                     Start a Conversation with...
                   </h2>
 
-                  {/* 빠른 스타트 아이템 컨테이너 */}
-                  <div
-                    className="flex items-start justify-center"
-                    style={{
-                      gap: 16,
-                    }}
-                  >
+                  {/* 빠른 스타트 아이템 컨테이너 - 모바일에서만 풀폭 스크롤(첫 아이템만 왼쪽 마진) */}
+                  <div className="quick-start-scroll-wrap w-full">
+                    <div
+                      className="quick-start-scroll-inner flex items-start w-full overflow-x-auto overflow-y-hidden"
+                      style={{
+                        gap: 16,
+                        WebkitOverflowScrolling: 'touch',
+                        paddingBottom: 4,
+                      }}
+                    >
                     {quickStartItems.map((item) => {
                       const isSelected = selectedQuickStartItem === item.id
                       return (
                         <div
                           key={item.id}
-                          className="relative"
+                          className="quick-start-item relative shrink-0 rounded-2xl"
                           style={{
-                            width: 148,
-                            height: 148,
-                            aspectRatio: '1/1',
                             background: `url(${getImagePath(item.image)}) lightgray 50% / cover no-repeat`,
                             borderRadius: 16,
                             cursor: 'pointer',
@@ -785,15 +882,12 @@ export default function GelatoApp() {
                           onClick={() => handleQuickStartItemClick(item.id)}
                         >
                           <span
-                            className="absolute"
+                            className="absolute left-0 bottom-0 right-0"
                             style={{
-                              left: 0,
-                              bottom: 0,
-                              width: '102.947px',
                               padding: '0 0 12px 12px',
                               color: '#FFF',
                               fontFamily: '"Noto Sans KR", sans-serif',
-                              fontSize: 16,
+                              fontSize: 'clamp(12px, 3.5vw, 16px)',
                               fontStyle: 'normal',
                               fontWeight: 700,
                               lineHeight: '120%',
@@ -813,6 +907,7 @@ export default function GelatoApp() {
                         </div>
                       )
                     })}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -911,10 +1006,9 @@ export default function GelatoApp() {
                     loop
                     muted
                     playsInline
-                    className="w-full"
+                    className="w-full video-section-height"
                     style={{
                       maxWidth: 1216,
-                      height: 700,
                       borderRadius: 40,
                       overflow: 'hidden',
                       objectFit: 'cover',
@@ -929,7 +1023,7 @@ export default function GelatoApp() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 16 }}>
                       <h2
                         onClick={() => {
-                          setSelectedSectionChip('10만원 이하 상품 내에서')
+                          setSelectedSectionChip('New Runner 상품 내에서')
                           setSearchQuery('')
                         }}
                         style={{
@@ -949,7 +1043,7 @@ export default function GelatoApp() {
                       <button
                         type="button"
                         onClick={() => {
-                          setSelectedSectionChip('10만원 이하 상품 내에서')
+                          setSelectedSectionChip('New Runner 상품 내에서')
                           setSearchQuery('')
                         }}
                         style={{
@@ -1015,7 +1109,7 @@ export default function GelatoApp() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 16 }}>
                       <h2
                         onClick={() => {
-                          setSelectedSectionChip('친구 선물용 상품 내에서')
+                          setSelectedSectionChip('Discovery 상품 내에서')
                           setSearchQuery('')
                         }}
                         style={{
@@ -1035,7 +1129,7 @@ export default function GelatoApp() {
                       <button
                         type="button"
                         onClick={() => {
-                          setSelectedSectionChip('친구 선물용 상품 내에서')
+                          setSelectedSectionChip('Discovery 상품 내에서')
                           setSearchQuery('')
                         }}
                         style={{

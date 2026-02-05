@@ -380,3 +380,44 @@
     column-gap: 16px;
   }
 }
+
+/* 빠른 스타트 아이템: 모바일 2.5개 노출(풀폭 스크롤 시 100vw 기준), 데스크톱 148px 고정 */
+.quick-start-item {
+  width: calc((100vw - 2rem) / 2.5);
+  min-width: calc((100vw - 2rem) / 2.5);
+  height: calc((100vw - 2rem) / 2.5);
+  aspect-ratio: 1/1;
+}
+@media (min-width: 640px) {
+  .quick-start-item {
+    width: 148px;
+    min-width: 148px;
+    height: 148px;
+  }
+}
+
+/* 동영상 영역: 모바일 350px, 데스크톱 700px */
+.video-section-height {
+  height: 350px;
+}
+@media (min-width: 640px) {
+  .video-section-height {
+    height: 700px;
+  }
+}
+
+/* 모바일: 빠른 스타트 스크롤 영역만 좌우 마진 없이 풀폭 스크롤, 첫 아이템만 왼쪽 마진 유지 */
+.quick-start-scroll-wrap {
+  width: 100%;
+}
+@media (max-width: 639px) {
+  .quick-start-scroll-wrap {
+    margin-left: -24px;
+    margin-right: -24px;
+    width: calc(100% + 48px);
+  }
+  .quick-start-scroll-inner {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}

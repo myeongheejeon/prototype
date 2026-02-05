@@ -807,3 +807,415 @@ https://react.dev/link/hydration-mismatch
 [24:06:16.194] Server  LOG      ✓ Compiled in 135ms
 [24:06:16.858] Server  LOG      ✓ Compiled in 191ms
 [24:06:19.225] Server  LOG      ✓ Compiled in 99ms
+[39:06:13.287] Server  LOG      ✓ Compiled in 1572ms
+[39:06:23.049] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <div className="relative h..." style={{height:"100vh"}}>
+      <motion.div>
+      <motion.div className="absolute l..." style={{top:"52px", ...}} initial={false} variants={{...}} animate="inactive">
+        <div className="absolute l..." style={{top:"52px", ...}} ref={function useMotionRef.useCallback}>
+          <div ref={{current:null}} className="flex-1 min..." style={{...}}>
+            <div>
+            <div className="w-full fle..." style={{paddingLeft:24, ...}}>
+              <div style={{width:"100%", ...}}>
+                <div>
+                <div className="recommende..." style={{maxWidth:1216}}>
+                  <motion.div initial={{opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{duration:0.35, ...}} ...>
+                    <div className="recommende..." style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                      <RecommendedProductItem id={9} brand="NIKE" title="Product 9" price={100000} image="/product3.png" ...>
+                        <article className="recommende..." style={{...}}>
+                          <div className="relative f..." style={{...}}>
+                            <img
+                              src="/product3.png"
++                             alt="Product 9"
+-                             alt="Product 5 2"
+                              className="h-full w-full object-cover object-center"
+                            >
+                            ...
+                          <div className="flex flex-..." style={{padding:"1...", ...}}>
+                            <p>
+                            <p
+                              className="w-full overflow-hidden text-ellipsis self-stretch"
+                              style={{display:"-webkit-box",WebkitBoxOrient:"vertical",WebkitLineClamp:2,overflow:"hidden",color:"var(-...", ...}}
+                            >
++                             Product 9
+-                             Product 5 2
+                            ...
+                  ...
+              ...
+
+[39:06:23.049] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[39:06:23.049] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[39:06:23.049] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[39:06:23.049] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770332299518}
+[39:06:23.049] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770332299519}
+[39:06:56.062] Server  LOG      ✓ Compiled in 350ms
+[39:06:56.168] Browser ERROR   ./app/page.tsx:164:45
+Parsing ecmascript source code failed
+  162 |   {
+  163 |     id: 3,
+> 164 |     text: '나이키', '테크 윈드러너',
+      |                                             ^
+  165 |     color: '#F59E0B',
+  166 |     image: '/item3.png',
+  167 |   },
+
+Unexpected token `,`. Expected identifier
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[39:07:52.108] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <div className="relative h..." style={{height:"100vh"}}>
+      <motion.div>
+      <motion.div className="absolute l..." style={{top:"52px", ...}} initial={false} variants={{...}} animate="inactive">
+        <div className="absolute l..." style={{top:"52px", ...}} ref={function useMotionRef.useCallback}>
+          <div ref={{current:null}} className="flex-1 min..." style={{...}}>
+            <div>
+            <div className="w-full fle..." style={{paddingLeft:24, ...}}>
+              <div style={{width:"100%", ...}}>
+                <div>
+                <div className="recommende..." style={{maxWidth:1216}}>
+                  <motion.div initial={{opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{duration:0.35, ...}} ...>
+                    <div className="recommende..." style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                      <RecommendedProductItem id={42} brand="NIKE" title="Product 2 5" price={131000} ...>
+                        <article className="recommende..." style={{...}}>
+                          <div className="relative f..." style={{...}}>
+                            <img
++                             src="/product9.png"
+-                             src="/product6.png"
++                             alt="Product 2 5"
+-                             alt="Product 7 5"
+                              className="h-full w-full object-cover object-center"
+                            >
+                            ...
+                          <div className="flex flex-..." style={{padding:"1...", ...}}>
+                            <p>
+                            <p
+                              className="w-full overflow-hidden text-ellipsis self-stretch"
+                              style={{display:"-webkit-box",WebkitBoxOrient:"vertical",WebkitLineClamp:2,overflow:"hidden",color:"var(-...", ...}}
+                            >
++                             Product 2 5
+-                             Product 7 5
+                            ...
+                  ...
+              ...
+
+[39:07:52.108] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[39:07:52.108] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[39:07:52.108] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[39:07:52.108] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770332388578}
+[39:07:52.108] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770332388578}
+[39:08:01.348] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <div className="relative h..." style={{height:"100vh"}}>
+      <motion.div>
+      <motion.div className="absolute l..." style={{top:"52px", ...}} initial={false} variants={{...}} animate="inactive">
+        <div className="absolute l..." style={{top:"52px", ...}} ref={function useMotionRef.useCallback}>
+          <div ref={{current:null}} className="flex-1 min..." style={{...}}>
+            <div>
+            <div className="w-full fle..." style={{paddingLeft:24, ...}}>
+              <div style={{width:"100%", ...}}>
+                <div>
+                <div className="recommende..." style={{maxWidth:1216}}>
+                  <motion.div initial={{opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{duration:0.35, ...}} ...>
+                    <div className="recommende..." style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                      <RecommendedProductItem id={18} brand="NIKE" title="Product 8 2" price={138000} ...>
+                        <article className="recommende..." style={{...}}>
+                          <div className="relative f..." style={{...}}>
+                            <img
++                             src="/product5.png"
+-                             src="/product6.png"
++                             alt="Product 8 2"
+-                             alt="Product 7 5"
+                              className="h-full w-full object-cover object-center"
+                            >
+                            ...
+                          <div className="flex flex-..." style={{padding:"1...", ...}}>
+                            <p>
+                            <p
+                              className="w-full overflow-hidden text-ellipsis self-stretch"
+                              style={{display:"-webkit-box",WebkitBoxOrient:"vertical",WebkitLineClamp:2,overflow:"hidden",color:"var(-...", ...}}
+                            >
++                             Product 8 2
+-                             Product 7 5
+                            ...
+                  ...
+              ...
+
+[39:08:01.350] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[39:08:01.350] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[39:08:01.350] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[39:08:01.350] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770332397820}
+[39:08:01.350] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770332397821}
+[39:08:58.458] Server  LOG      ✓ Compiled in 533ms
+[39:12:42.285] Server  LOG      ✓ Compiled in 704ms
+[39:12:49.354] Server  LOG      ✓ Compiled in 249ms
+[39:12:58.448] Server  LOG      ✓ Compiled in 188ms
+[39:14:21.626] Server  LOG      ✓ Compiled in 130ms
+[39:14:51.856] Server  LOG      ✓ Compiled in 326ms
+[39:17:03.048] Server  LOG      ✓ Compiled in 237ms
+[39:17:05.842] Server  LOG      ✓ Compiled in 299ms
+[39:17:22.905] Server  LOG      ✓ Compiled in 145ms
+[39:17:40.362] Server  LOG      ✓ Compiled in 196ms
+[39:17:40.578] Browser ERROR   ./app/page.tsx:512:7
+Parsing ecmascript source code failed
+  510 |       </motion.div>
+  511 |
+> 512 |       {/* 하단 고정 "더 많은 영감 보기" 칩: 홈 화면에서만 표시 */}
+      |       ^
+  513 |       <motion.div
+  514 |         className="fixed left-0 right-0 z-40 box-border w-full"
+  515 |         style={{
+
+Expected '</', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[39:17:51.324] Server  LOG      ✓ Compiled in 562ms
+[39:18:09.641] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <LoadingBoundary name="/" loading={null}>
+      <HTTPAccessFallbackBoundary notFound={<SegmentViewNode>} forbidden={undefined} unauthorized={undefined}>
+        <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<SegmentViewNode>} forbidden={undefined} ...>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{lazyData:null, ...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="page.tsx">
+                  <SegmentTrieNode>
+                  <ClientPageRoot Component={function GelatoApp} serverProvidedParams={{...}}>
+                    <GelatoApp params={Promise} searchParams={Promise}>
+                      <div className="h-screen o..." ref={{current:null}}>
+                        <Header>
+                        <motion.div className="fixed left..." style={{bottom:20, ...}} initial={false} ...>
+                          <div
+                            className="fixed left-0 right-0 z-40 box-border w-full"
+                            style={{
++                             bottom: 20
+-                             bottom: "20px"
++                             display: "flex"
+-                             display: "flex"
++                             flexDirection: "column"
++                             padding: "0 16px"
++                             justifyContent: "center"
++                             alignItems: "center"
++                             gap: 12
++                             pointerEvents: "none"
++                             overflow: "visible"
++                             opacity: 0
+-                             opacity: "1"
++                             transform: "translateY(20px) scale(0.95)"
+-                             transform: "none"
+-                             padding-top: "0px"
+-                             padding-right: "16px"
+-                             padding-bottom: "0px"
+-                             padding-left: "16px"
+-                             justify-content: "center"
+-                             align-items: "center"
+-                             pointer-events: "auto"
+                            }}
+                            ref={function useMotionRef.useCallback}
+                          >
+                            <AnimatePresence>
+                            <div
++                             className="flex w-full max-w-[560px] min-w-0 shrink-0 items-center justify-center"
+-                             className="flex items-center gap-2 shrink-0"
+                              style={{
++                               padding: "12px 24px"
++                               borderRadius: 999
++                               border: "1px solid var(--neutral-200, #E6E8EB)"
++                               background: "var(--common-white, #FFF)"
++                               boxShadow: "0 4px 20px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04)"
++                               gap: 8
+-                               padding-top: "10px"
+-                               padding-right: "20px"
+-                               padding-bottom: "10px"
+-                               padding-left: "20px"
+-                               border-top-left-radius: "999px"
+-                               border-top-right-radius: "999px"
+-                               border-bottom-right-radius: "999px"
+-                               border-bottom-left-radius: "999px"
+-                               border-top-color: ""
+-                               border-top-style: ""
+-                               border-top-width: ""
+-                               border-right-color: ""
+-                               border-right-style: ""
+-                               border-right-width: ""
+-                               border-bottom-color: ""
+-                               border-bottom-style: ""
+-                               border-bottom-width: ""
+-                               border-left-color: ""
+-                               border-left-style: ""
+-                               border-left-width: ""
+-                               border-image-source: ""
+-                               border-image-slice: ""
+-                               border-image-width: ""
+-                               border-image-outset: ""
+-                               border-image-repeat: ""
+-                               background-image: ""
+-                               background-position-x: ""
+-                               background-position-y: ""
+-                               background-size: ""
+-                               background-repeat: ""
+-                               background-attachment: ""
+-                               background-origin: ""
+-                               background-clip: ""
+-                               background-color: ""
+-                               box-shadow: "rgba(0, 0, 0, 0.08) 0px 4px 20px, rgba(0, 0, 0, 0.04) 0px 2px 8px"
+-                               cursor: "pointer"
+                              }}
+                            >
+                              <span
++                               className="shrink-0 w-5 h-5 flex items-center justify-center"
+-                               className={null}
++                               aria-hidden={true}
+-                               aria-hidden={null}
+-                               style={{font-family:"var(--font...",font-size:"14px",font-style:"normal",font-weight:"400", ...}}
+                              >
++                               <svg
++                                 xmlns="http://www.w3.org/2000/svg"
++                                 width={20}
++                                 height={20}
++                                 viewBox="0 0 20 20"
++                                 fill="none"
++                               >
+-                               더 많은 영감 보기
+                              ...
+                        ...
+                ...
+              ...
+
+[39:18:09.745] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[39:18:09.745] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[39:18:09.745] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[39:18:09.745] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770333006114}
+[39:18:09.745] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770333006114}
+[39:18:57.612] Server  LOG      ✓ Compiled in 177ms
+[39:18:58.413] Server  LOG      ✓ Compiled in 158ms
+[39:18:59.686] Server  LOG      ✓ Compiled in 287ms
+[39:19:03.291] Server  LOG      ✓ Compiled in 66ms
+[39:19:25.598] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[39:19:25.598] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[39:19:25.598] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770333081961}
+[39:20:18.906] Server  LOG      ✓ Compiled in 76ms
+[39:22:13.940] Server  LOG      ✓ Compiled in 380ms
+[39:22:25.683] Server  LOG      ✓ Compiled in 248ms
+[39:22:27.407] Server  LOG      ✓ Compiled in 82ms
+[39:22:34.069] Server  LOG      ✓ Compiled in 188ms
+[39:22:43.168] Server  LOG      ✓ Compiled in 86ms
+[39:24:04.625] Server  LOG      ✓ Compiled in 263ms
+[39:24:04.757] Browser ERROR   ./app/page.tsx:879:26
+Parsing ecmascript source code failed
+  877 |                 </div>
+  878 |               </div>
+> 879 |             </motion.div>
+      |                          ^
+> 880 |
+      | ^
+> 881 |             {/* Page 1: 추천 상품 — GNB 아래에서 올라옴 */}
+      | ^^^^^^^^^^^^^
+  882 |             <motion.div
+  883 |               className="absolute left-0 right-0 bottom-0 z-30 flex flex-col overflow-hidden bg-background-primary shadow-2xl pt-4 pb-4 px-0"
+  884 |               style={{ top: `${GNB_HEIGHT}px`, pointerEvents: page === 0 ? 'none' : 'auto' }}
+
+Expected '</', got 'jsx text (
+
+            )'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[39:24:05.533] Server  LOG      ✓ Compiled in 145ms
+[39:24:07.493] Server  LOG      ✓ Compiled in 237ms
+[39:24:30.877] Server  LOG      ✓ Compiled in 212ms
+[39:25:56.371] Server  LOG      ✓ Compiled in 193ms
+[39:25:56.503] Browser ERROR   ./components/Header.tsx:38:16
+Parsing ecmascript source code failed
+  36 |           paddingLeft: 24,
+  37 |           paddingRight: 24,
+> 38 |         style={{
+     |                ^
+  39 |           width: '100%',
+  40 |           maxWidth: '1437px',
+  41 |           height: '52px',
+
+Expected '</', got '{'
+
+Import traces:
+  Client Component Browser:
+    ./components/Header.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/Header.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[39:26:00.254] Server  LOG      ✓ Compiled in 56ms
+[39:26:01.253] Server  LOG      ✓ Compiled in 347ms
+[39:27:01.528] Server  LOG      ✓ Compiled in 280ms
+[39:27:04.055] Server  LOG      ✓ Compiled in 158ms
+[39:28:37.737] Server  LOG      ✓ Compiled in 295ms
+[39:29:34.170] Server  LOG      ✓ Compiled in 143ms
+[39:30:17.670] Server  LOG      ✓ Compiled in 222ms
