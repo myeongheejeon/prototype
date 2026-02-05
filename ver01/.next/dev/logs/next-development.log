@@ -573,3 +573,232 @@ Import traces:
 [18:10:48.814] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
 [18:10:48.814] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
 [18:10:48.814] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770256965193}
+[22:47:38.601] Server  LOG      ✓ Compiled in 2.3s
+[22:48:29.576] Server  LOG      ✓ Compiled in 156ms
+[22:48:53.561] Server  LOG      ✓ Compiled in 351ms
+[22:48:57.764] Server  LOG      ✓ Compiled in 37ms
+[22:49:35.268] Server  LOG      ✓ Compiled in 77ms
+[22:51:26.261] Server  LOG      ✓ Compiled in 109ms
+[22:51:32.076] Server  LOG      ✓ Compiled in 161ms
+[22:51:43.134] Server  LOG      ✓ Compiled in 178ms
+[22:51:46.725] Server  LOG      ✓ Compiled in 106ms
+[22:51:46.838] Browser ERROR   uncaughtError: ReferenceError: shadowColor is not defined
+[22:51:50.687] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[22:51:50.713] Server  LOG      ✓ Compiled in 54ms
+[22:51:51.283] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770273827237}
+[22:51:51.972] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[22:51:51.972] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[22:51:51.972] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770273828349}
+[22:51:58.353] Server  LOG      ✓ Compiled in 229ms
+[22:55:22.389] Server  LOG      ✓ Compiled in 730ms
+[22:56:57.302] Server  LOG      ✓ Compiled in 992ms
+[22:58:30.610] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[22:58:30.610] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[22:58:30.610] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770274226988}
+[22:58:51.531] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[22:58:51.531] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[22:58:51.531] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770274247909}
+[22:59:21.915] Server  LOG      ✓ Compiled in 299ms
+[22:59:32.473] Server  LOG      ✓ Compiled in 117ms
+[22:59:35.555] Server  LOG      ✓ Compiled in 95ms
+[23:01:36.394] Server  LOG      ✓ Compiled in 239ms
+[23:01:38.296] Server  LOG      ✓ Compiled in 126ms
+[23:01:55.678] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[23:01:55.679] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[23:01:55.679] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770274432057}
+[23:02:38.180] Server  LOG      ✓ Compiled in 97ms
+[23:33:33.324] Server  LOG      ✓ Compiled in 687ms
+[23:34:17.280] Server  LOG      ✓ Compiled in 160ms
+[23:34:24.295] Server  LOG      ✓ Compiled in 109ms
+[23:34:25.573] Server  ERROR    ⨯ ReferenceError: GNB_HEIGHT is not defined
+[23:34:26.059] Browser ERROR   uncaughtError: ReferenceError: GNB_HEIGHT is not defined
+[23:34:53.889] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[23:34:53.889] Server  WARN     ⚠ Fast Refresh had to perform a full reload when ./app/page.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[23:34:53.889] Server  WARN     ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+[23:34:53.908] Server  LOG      ✓ Compiled in 104ms
+[23:34:54.942] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[23:34:54.942] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[23:34:54.975] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770276411244}
+[23:34:57.784] Server  LOG      ✓ Compiled in 390ms
+[23:35:39.726] Server  LOG      ✓ Compiled in 256ms
+[23:37:09.069] Server  LOG      ✓ Compiled in 360ms
+[23:37:13.423] Server  LOG      ✓ Compiled in 103ms
+[23:37:53.062] Server  LOG      ✓ Compiled in 89ms
+[23:37:59.685] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[23:37:59.685] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[23:37:59.685] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770276596041}
+[23:39:36.964] Server  LOG      ✓ Compiled in 202ms
+[23:40:07.567] Server  LOG      ✓ Compiled in 108ms
+[23:40:30.879] Server  LOG      ✓ Compiled in 214ms
+[23:40:35.522] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[23:40:35.522] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[23:40:35.522] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770276751877}
+[23:44:04.328] Server  LOG      ✓ Compiled in 183ms
+[23:44:24.942] Server  LOG      ✓ Compiled in 124ms
+[23:45:44.792] Server  LOG      ✓ Compiled in 147ms
+[23:45:46.159] Server  LOG      ✓ Compiled in 318ms
+[23:45:46.294] Browser ERROR   ./app/page.tsx:745:26
+Parsing ecmascript source code failed
+  743 |                 </div>
+  744 |               </div>
+> 745 |             </motion.div>
+      |                          ^
+> 746 |           </div>
+      | ^^^^^^^^^^^
+  747 |         ) : (
+  748 |           <motion.div
+  749 |             key="search"
+
+Expected '</', got 'jsx text (
+          )'
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+[23:45:51.913] Server  LOG      ✓ Compiled in 137ms
+[23:46:00.688] Server  LOG      ✓ Compiled in 575ms
+[23:46:01.347] Server  LOG      ✓ Compiled in 293ms
+[23:46:43.225] Server  LOG      ✓ Compiled in 135ms
+[23:47:12.931] Server  LOG      ✓ Compiled in 587ms
+[23:48:21.502] Server  LOG      ✓ Compiled in 126ms
+[23:48:42.535] Server  LOG      ✓ Compiled in 72ms
+[23:48:45.123] Server  LOG      ✓ Compiled in 97ms
+[23:49:12.541] Server  LOG      ✓ Compiled in 144ms
+[23:50:18.502] Server  LOG      ✓ Compiled in 143ms
+[23:51:39.130] Server  LOG      ✓ Compiled in 7s
+[23:51:42.048] Server  LOG      ✓ Compiled in 142ms
+[23:52:05.754] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <div className="relative h..." style={{height:"100vh"}}>
+      <motion.div>
+      <motion.div className="absolute l..." style={{top:"52px", ...}} initial={false} variants={{...}} animate="inactive">
+        <div className="absolute l..." style={{top:"52px", ...}} ref={function useMotionRef.useCallback}>
+          <div ref={{current:null}} className="flex-1 min..." style={{...}}>
+            <div>
+            <div className="w-full fle..." style={{paddingLeft:24, ...}}>
+              <div style={{width:"100%", ...}}>
+                <div>
+                <div className="recommende..." style={{maxWidth:1216}}>
+                  <motion.div initial={{opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{duration:0.35, ...}} ...>
+                    <div className="recommende..." style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                      <RecommendedProductItem id={15} brand="NIKE" title="Product 5 2" price={95000} ...>
+                        <article className="recommende..." style={{...}}>
+                          <div className="relative f..." style={{...}}>
+                            <img
++                             src="/product8.png"
+-                             src="/product1.png"
++                             alt="Product 5 2"
+-                             alt="Product 1 5"
+                              className="h-full w-full object-cover object-center"
+                            >
+                            ...
+                          <div className="flex flex-..." style={{padding:"1...", ...}}>
+                            <p>
+                            <p
+                              className="w-full overflow-hidden text-ellipsis self-stretch"
+                              style={{display:"-webkit-box",WebkitBoxOrient:"vertical",WebkitLineClamp:2,overflow:"hidden",color:"var(-...", ...}}
+                            >
++                             Product 5 2
+-                             Product 1 5
+                            ...
+                  ...
+              ...
+
+[23:52:05.754] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[23:52:05.754] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[23:52:05.754] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[23:52:05.754] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770277442093}
+[23:52:05.754] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770277442093}
+[23:52:40.567] Server  LOG      ✓ Compiled in 270ms
+[23:52:47.573] Server  LOG      ✓ Compiled in 138ms
+[23:52:52.416] Server  LOG      ✓ Compiled in 160ms
+[23:54:22.054] Server  LOG      ✓ Compiled in 252ms
+[23:54:25.173] Server  LOG      ✓ Compiled in 104ms
+[23:54:28.961] Server  LOG      ✓ Compiled in 102ms
+[23:55:04.151] Server  LOG      ✓ Compiled in 199ms
+[23:55:07.884] Server  LOG      ✓ Compiled in 145ms
+[23:55:12.876] Server  LOG      ✓ Compiled in 759ms
+[23:56:56.741] Server  LOG      ✓ Compiled in 99ms
+[23:57:01.611] Server  LOG      ✓ Compiled in 84ms
+[23:57:05.330] Server  LOG      ✓ Compiled in 85ms
+[23:58:35.255] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <div className="relative h..." style={{height:"100vh"}}>
+      <motion.div>
+      <motion.div className="absolute l..." style={{top:"52px", ...}} initial={false} variants={{...}} animate="inactive">
+        <div className="absolute l..." style={{top:"52px", ...}} ref={function useMotionRef.useCallback}>
+          <div ref={{current:null}} className="flex-1 min..." style={{...}}>
+            <div>
+            <div className="w-full fle..." style={{paddingLeft:24, ...}}>
+              <div style={{width:"100%", ...}}>
+                <div>
+                <div className="recommende..." style={{maxWidth:1216}}>
+                  <motion.div initial={{opacity:0,y:12}} animate={{opacity:1,y:0}} transition={{duration:0.35, ...}} ...>
+                    <div className="recommende..." style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                      <RecommendedProductItem id={5} brand="NIKE" title="Product 5" price={99000} image="/product2.png" ...>
+                        <article className="recommende..." style={{...}}>
+                          <div className="relative f..." style={{...}}>
+                            <img
++                             src="/product2.png"
+-                             src="/product8.png"
++                             alt="Product 5"
+-                             alt="Product 6 4"
+                              className="h-full w-full object-cover object-center"
+                            >
+                            ...
+                          <div className="flex flex-..." style={{padding:"1...", ...}}>
+                            <p>
+                            <p
+                              className="w-full overflow-hidden text-ellipsis self-stretch"
+                              style={{display:"-webkit-box",WebkitBoxOrient:"vertical",WebkitLineClamp:2,overflow:"hidden",color:"var(-...", ...}}
+                            >
++                             Product 5
+-                             Product 6 4
+                            ...
+                  ...
+              ...
+
+[23:58:35.255] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[23:58:35.255] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[23:58:35.255] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[23:58:35.255] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770277831597}
+[23:58:35.255] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1770277831597}
+[23:58:37.538] Server  LOG      ✓ Compiled in 89ms
+[23:58:39.744] Server  LOG      ✓ Compiled in 66ms
+[23:58:49.369] Server  LOG      ✓ Compiled in 132ms
+[23:58:53.858] Server  LOG      ✓ Compiled in 116ms
+[23:58:57.647] Server  LOG      ✓ Compiled in 40ms
+[23:59:02.367] Server  LOG      ✓ Compiled in 298ms
+[23:59:56.143] Server  LOG      ✓ Compiled in 106ms
+[24:01:42.547] Server  LOG      ✓ Compiled in 224ms
+[24:01:44.936] Server  LOG      ✓ Compiled in 153ms
+[24:01:48.177] Server  LOG      ✓ Compiled in 88ms
+[24:01:54.454] Server  LOG      ✓ Compiled in 147ms
+[24:02:00.451] Server  LOG      ✓ Compiled in 144ms

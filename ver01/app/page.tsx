@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
-import { Search } from 'lucide-react'
+import { Search, ChevronRight } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Header } from '@/components/Header'
 import { RecommendedProductItem } from '@/components/RecommendedProductItem'
@@ -20,35 +20,59 @@ export interface Product {
 }
 
 const baseProducts: Product[] = [
-  { id: 1, brand: 'NIKE', title: 'Oversized Hoodie', price: 89000, discountRate: 10, image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=500&fit=crop', aspectRatio: '1:2' },
-  { id: 2, brand: 'LEVI\'S', title: 'Denim Jacket', price: 125000, image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=350&fit=crop', aspectRatio: '2:1' },
-  { id: 3, brand: 'CARHARTT', title: 'Cargo Pants', price: 68000, discountRate: 15, image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=400&h=450&fit=crop', aspectRatio: '1:1' },
-  { id: 4, brand: 'CONVERSE', title: 'White Sneakers', price: 145000, image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=320&fit=crop', aspectRatio: '1:2' },
-  { id: 5, brand: 'COACH', title: 'Leather Bag', price: 210000, discountRate: 20, image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=480&fit=crop', aspectRatio: '1:1' },
-  { id: 6, brand: 'UNIQLO', title: 'Striped Shirt', price: 55000, image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=380&fit=crop', aspectRatio: '2:1' },
-  { id: 7, brand: 'NEW ERA', title: 'Black Cap', price: 32000, discountRate: 5, image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=400&fit=crop', aspectRatio: '1:1' },
-  { id: 8, brand: 'COS', title: 'Wide Pants', price: 78000, image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=520&fit=crop', aspectRatio: '1:2' },
-  { id: 9, brand: '&OTHER STORIES', title: 'Knit Sweater', price: 95000, discountRate: 12, image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=460&fit=crop', aspectRatio: '2:1' },
-  { id: 10, brand: 'DR. MARTENS', title: 'Chelsea Boots', price: 168000, image: 'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=400&h=340&fit=crop', aspectRatio: '1:1' },
-  { id: 11, brand: 'MAX MARA', title: 'Wool Coat', price: 285000, discountRate: 30, image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=400&h=550&fit=crop', aspectRatio: '1:2' },
-  { id: 12, brand: 'BASIC', title: 'Basic Tee', price: 29000, image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=360&fit=crop', aspectRatio: '1:1' },
+  { id: 1, brand: 'NIKE', title: 'Product 1', price: 89000, discountRate: 10, image: '/product1.png', aspectRatio: '1:1' },
+  { id: 2, brand: 'NIKE', title: 'Product 2', price: 125000, image: '/product2.png', aspectRatio: '1:1' },
+  { id: 3, brand: 'NIKE', title: 'Product 3', price: 68000, discountRate: 15, image: '/product3.png', aspectRatio: '1:1' },
+  { id: 4, brand: 'NIKE', title: 'Product 4', price: 145000, image: '/product4.png', aspectRatio: '1:1' },
+  { id: 5, brand: 'NIKE', title: 'Product 5', price: 95000, discountRate: 12, image: '/product5.png', aspectRatio: '1:1' },
+  { id: 6, brand: 'NIKE', title: 'Product 6', price: 78000, image: '/product6.png', aspectRatio: '1:1' },
+  { id: 7, brand: 'NIKE', title: 'Product 7', price: 110000, discountRate: 5, image: '/product7.png', aspectRatio: '1:1' },
+  { id: 8, brand: 'NIKE', title: 'Product 8', price: 135000, image: '/product8.png', aspectRatio: '1:1' },
+  { id: 9, brand: 'NIKE', title: 'Product 9', price: 99000, discountRate: 20, image: '/product9.png', aspectRatio: '1:1' },
+  { id: 10, brand: 'NIKE', title: 'Product 10', price: 120000, image: '/product10.png', aspectRatio: '1:1' },
 ]
 
-const aspectRatios: AspectRatioType[] = ['1:1', '2:1', '1:2']
 const mockProducts: Product[] = (() => {
   const list: Product[] = []
+  const images = baseProducts.map(p => p.image)
+  
+  // 이미지 배열을 랜덤하게 섞기
+  const shuffledImages = [...images]
+  for (let i = shuffledImages.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledImages[i], shuffledImages[j]] = [shuffledImages[j], shuffledImages[i]]
+  }
+  
+  // 60개 상품 생성 시 이미지를 랜덤하게 배치
   for (let i = 0; i < 60; i++) {
-    const base = baseProducts[i % baseProducts.length]
+    const baseIndex = i % baseProducts.length
+    const base = baseProducts[baseIndex]
+    const imageIndex = i % shuffledImages.length
     list.push({
       ...base,
       id: i + 1,
       title: base.title + (i >= baseProducts.length ? ` ${Math.floor(i / baseProducts.length) + 1}` : ''),
       price: base.price + (i % 7) * 1000,
-      aspectRatio: aspectRatios[i % aspectRatios.length],
+      image: shuffledImages[imageIndex],
+      aspectRatio: '1:1',
     })
   }
+  
+  // 최종 리스트도 랜덤하게 섞기
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [list[i], list[j]] = [list[j], list[i]]
+  }
+  
   return list
 })()
+
+const placeholders = [
+  '러닝할 때 무릎 안다칠 러닝화 보여줘.',
+  '겨울에 러닝할 때 입기 좋은 자켓 보여줘.',
+  '재생소재 패딩 보여줘',
+  '성수동에 입고 가고 싶은 모자 보여줘.',
+]
 
 const suggestionChips = [
   {
@@ -101,27 +125,56 @@ const page0Variants = {
   },
 }
 
-/* 하단 패널이 상단에 있을 때 40px만 보이도록 (스크롤 힌트) */
-const PAGE1_PEEK_PX = 40
-const GNB_HEIGHT_X2 = 52 * 2 // 104
+const GNB_HEIGHT = 52
 const page1Variants = {
   active: {
     y: '0%',
     transition: { type: 'spring' as const, stiffness: 120, damping: 20 },
   },
   inactive: {
-    y: `calc(100vh - ${GNB_HEIGHT_X2 + PAGE1_PEEK_PX}px)`,
+    y: '100%',
     transition: { type: 'spring' as const, stiffness: 120, damping: 20 },
   },
 }
 
 const WHEEL_THROTTLE_MS = 1000
 
+// 빠른 스타트 아이템 데이터
+const quickStartItems = [
+  {
+    id: 1,
+    text: '나이키 팬텀 6 로우 엘레트',
+    color: '#00C9D6',
+    image: '/item1.png',
+  },
+  {
+    id: 2,
+    text: ['사브리나', '농구 후디'],
+    color: '#F87171',
+    image: '/item2.png',
+  },
+  {
+    id: 3,
+    text: ['나이키', '테크 윈드러너'],
+    color: '#F59E0B',
+    image: '/item3.png',
+  },
+  {
+    id: 4,
+    text: ['나이키', '재생 소재'],
+    color: '#16A34A',
+    image: '/item4.png',
+  },
+]
+
 export default function GelatoApp() {
   const [page, setPage] = useState(0) // 0: 검색, 1: 추천상품
   const [isAnimating, setIsAnimating] = useState(false)
   const [isSearchMode, setIsSearchMode] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [selectedQuickStartItem, setSelectedQuickStartItem] = useState<number | null>(null)
+  const [selectedSectionChip, setSelectedSectionChip] = useState<string | null>(null)
+  const [placeholderIndex, setPlaceholderIndex] = useState(0)
   const rootRef = useRef<HTMLDivElement>(null)
   const productListRef = useRef<HTMLDivElement>(null)
   const throttleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -156,6 +209,14 @@ export default function GelatoApp() {
 
       const { deltaY } = e
       const scrollTop = productListRef.current ? productListRef.current.scrollTop : 0
+      const scrollHeight = productListRef.current ? productListRef.current.scrollHeight : 0
+      const clientHeight = productListRef.current ? productListRef.current.clientHeight : 0
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1
+      const isAtTop = scrollTop <= 0
+
+      // wheel 이벤트가 productListRef 내부에서 발생하는지 확인
+      const target = e.target as HTMLElement
+      const isInsideProductList = productListRef.current?.contains(target) || false
 
       if (currentPage === 0) {
         if (deltaY > 0) {
@@ -166,10 +227,23 @@ export default function GelatoApp() {
       }
 
       if (currentPage === 1) {
-        if (deltaY < 0 && scrollTop <= 0) {
+        // productListRef 내부에서 스크롤하는 경우
+        if (isInsideProductList) {
+          // 위로 스크롤하고 맨 위에 있을 때만 페이지 전환
+          if (deltaY < 0 && isAtTop) {
+            e.preventDefault()
+            handlePageChange(0)
+          }
+          // 아래로 스크롤하고 맨 아래에 있을 때는 아무것도 하지 않음 (스크롤 허용)
+          return
+        }
+        
+        // productListRef 외부에서 스크롤하는 경우
+        if (deltaY < 0 && isAtTop) {
           e.preventDefault()
           handlePageChange(0)
         }
+        // 아래로 스크롤할 때는 preventDefault 하지 않음
         return
       }
     }
@@ -179,6 +253,14 @@ export default function GelatoApp() {
       container.removeEventListener('wheel', handleWheel)
       if (throttleTimerRef.current) clearTimeout(throttleTimerRef.current)
     }
+  }, [])
+
+  // 플레이스홀더 자동 변경
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPlaceholderIndex((prev) => (prev + 1) % placeholders.length)
+    }, 5000)
+    return () => clearInterval(interval)
   }, [])
 
   const handleChipClick = () => setIsSearchMode(true)
@@ -192,42 +274,77 @@ export default function GelatoApp() {
     setSearchQuery('')
   }
 
-  const GNB_HEIGHT = 52
+  const handleQuickStartItemClick = (itemId: number) => {
+    if (selectedQuickStartItem === itemId) {
+      // 이미 선택된 아이템을 클릭하면 해제
+      setSelectedQuickStartItem(null)
+    } else {
+      setSelectedQuickStartItem(itemId)
+    }
+  }
+
+  const handleChipRemove = () => {
+    setSelectedQuickStartItem(null)
+  }
+
+  const handleSectionChipRemove = () => {
+    setSelectedSectionChip(null)
+  }
+
+  // Hex 색상을 rgba로 변환하는 헬퍼 함수
+  const hexToRgba = (hex: string, alpha: number) => {
+    const r = parseInt(hex.slice(1, 3), 16)
+    const g = parseInt(hex.slice(3, 5), 16)
+    const b = parseInt(hex.slice(5, 7), 16)
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`
+  }
+
+  const selectedItem = selectedQuickStartItem ? quickStartItems.find(item => item.id === selectedQuickStartItem) : null
+  const baseShadowColor = selectedItem ? selectedItem.color : '#B043FF' // 기본 보라색
+  
+  // 쉐도우 색상 (낮은 opacity)
+  const shadowColor1 = selectedItem ? hexToRgba(selectedItem.color, 0.04) : 'rgba(176, 67, 255, 0.08)'
+  const shadowColor2 = selectedItem ? hexToRgba(selectedItem.color, 0.10) : 'rgba(198, 151, 255, 0.20)'
+  const shadowColor3 = selectedItem ? hexToRgba(selectedItem.color, 0.06) : 'rgba(198, 151, 255, 0.12)'
+  const shadowColor4 = selectedItem ? hexToRgba(selectedItem.color, 0.40) : 'rgba(234, 217, 255, 0.80)'
+
   const miniSearchStripOpacity = page === 1 ? 1 : 0
+  const inspirationChipOpacity = page === 0 ? 1 : 0
 
   return (
     <div className="h-screen overflow-hidden" ref={rootRef}>
       <Header />
 
-      {/* GNB 바로 아래 고정 영역: 축소형 검색창. GNB와 동일 배경, 스크롤 시 슬라이드+페이드 인 */}
+      {/* 하단 고정 플로팅 검색창: 스크롤 시 하단에 작게 고정되어 떠 있음 */}
       <motion.div
         className="fixed left-0 right-0 z-40 box-border w-full"
         style={{
-          top: 53,
+          bottom: 20,
           display: 'flex',
-          padding: '4px 16px 16px',
+          padding: '0 16px',
           justifyContent: 'center',
           alignItems: 'center',
           gap: 4,
-          background: 'var(--background-overlay-lightSecondary, rgba(255, 255, 255, 0.72))',
-          backdropFilter: 'blur(27px)',
           pointerEvents: miniSearchStripOpacity > 0 ? 'auto' : 'none',
         }}
         initial={false}
         animate={{
           opacity: miniSearchStripOpacity,
-          y: miniSearchStripOpacity ? 0 : -12,
+          y: miniSearchStripOpacity ? 0 : 20,
+          scale: miniSearchStripOpacity ? 1 : 0.95,
         }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
       >
-        {/* 검색창 텍스트필드: 피그마 스펙, 가운데 정렬 */}
+        {/* 검색창 텍스트필드: 플로팅 스타일, 그림자 효과 */}
         <div
-          className="flex w-full max-w-[560px] min-w-0 shrink-0 items-center justify-center gap-[var(--4,4px)]"
+          className="flex w-full max-w-[560px] min-w-0 shrink-0 items-center justify-center"
           style={{
             padding: '12px 24px',
             borderRadius: 999,
             border: '1px solid var(--neutral-200, #E6E8EB)',
             background: 'var(--common-white, #FFF)',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04)',
+            gap: 8,
           }}
         >
           <span className="shrink-0 w-5 h-5 flex items-center justify-center" aria-hidden>
@@ -235,32 +352,178 @@ export default function GelatoApp() {
               <path d="M17.5002 17.5L13.9168 13.9166M15.8333 9.16667C15.8333 12.8486 12.8486 15.8333 9.16667 15.8333C5.48477 15.8333 2.5 12.8486 2.5 9.16667C2.5 5.48477 5.48477 2.5 9.16667 2.5C12.8486 2.5 15.8333 5.48477 15.8333 9.16667Z" stroke="#9EA2A8" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </span>
-          <input
-            type="text"
-            placeholder="원하는 옷의 스타일을 설명해보세요..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
-                e.preventDefault()
-                setIsSearchMode(true)
-              }
-            }}
-            className="min-w-0 flex-1 bg-transparent border-0 outline-none focus:ring-0 placeholder-[var(--content-placeholder,#9EA2A8)]"
+          {/* 섹션 칩 */}
+          {selectedSectionChip && (
+            <div
+              className="flex items-center gap-1 shrink-0 rounded-full"
+              style={{
+                background: '#111214',
+                padding: '4px 8px',
+              }}
+            >
+              <span
+                style={{
+                  color: '#FFF',
+                  fontFamily: '"Noto Sans KR", sans-serif',
+                  fontSize: 12,
+                  fontWeight: 400,
+                  lineHeight: '120%',
+                }}
+              >
+                {selectedSectionChip}
+              </span>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleSectionChipRemove()
+                }}
+                className="flex items-center justify-center"
+                style={{
+                  width: 14,
+                  height: 14,
+                  color: '#FFF',
+                }}
+                aria-label="칩 삭제"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width={14} height={14} viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M10.5 3.5L3.5 10.5M3.5 3.5L10.5 10.5"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          )}
+          <div className="min-w-0 flex-1 relative" style={{ minHeight: 20 }}>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
+                  e.preventDefault()
+                  setIsSearchMode(true)
+                }
+              }}
+              className="w-full bg-transparent border-0 outline-none focus:ring-0"
+              style={{
+                fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+                fontSize: 14,
+                fontStyle: 'normal',
+                fontWeight: 400,
+                lineHeight: '140%',
+                letterSpacing: '-0.14px',
+                color: searchQuery ? 'var(--content-primary, #111214)' : 'transparent',
+              }}
+            />
+            {!searchQuery && (
+              <div className="absolute inset-0 pointer-events-none flex items-center">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={placeholderIndex}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    style={{
+                      color: 'var(--content-placeholder, #9EA2A8)',
+                      fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+                      fontSize: 14,
+                      fontStyle: 'normal',
+                      fontWeight: 400,
+                      lineHeight: '140%',
+                      letterSpacing: '-0.14px',
+                    }}
+                  >
+                    {selectedSectionChip ? '찾고 싶은걸 입력해 보세요.' : placeholders[placeholderIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+            )}
+          </div>
+        </div>
+      </motion.div>
+
+      {/* 하단 고정 "더 많은 영감 보기" 칩: 홈 화면에서만 표시 */}
+      <motion.div
+        className="fixed left-0 right-0 z-40 box-border w-full"
+        style={{
+          bottom: 20,
+          display: 'flex',
+          padding: '0 16px',
+          justifyContent: 'center',
+          alignItems: 'center',
+          pointerEvents: inspirationChipOpacity > 0 ? 'auto' : 'none',
+        }}
+        initial={false}
+        animate={{
+          opacity: inspirationChipOpacity,
+          y: inspirationChipOpacity ? 0 : 20,
+          scale: inspirationChipOpacity ? 1 : 0.95,
+        }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
+      >
+        <div
+          className="flex items-center gap-2 shrink-0"
+          style={{
+            padding: '10px 20px',
+            borderRadius: 999,
+            border: '1px solid var(--neutral-200, #E6E8EB)',
+            background: 'var(--common-white, #FFF)',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04)',
+            cursor: 'pointer',
+          }}
+          onClick={() => {
+            if (page === 0) {
+              setIsAnimating(true)
+              setPage(1)
+            }
+          }}
+        >
+          <span
             style={{
-              display: '-webkit-box',
-              WebkitBoxOrient: 'vertical',
-              WebkitLineClamp: 1,
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
               fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
               fontSize: 14,
               fontStyle: 'normal',
               fontWeight: 400,
               lineHeight: '140%',
               letterSpacing: '-0.14px',
+              color: 'var(--content-primary, #111214)',
             }}
-          />
+          >
+            더 많은 영감 보기
+          </span>
+          <motion.div
+            animate={{
+              y: [0, 4, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+            style={{ display: 'flex', alignItems: 'center' }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={16}
+              height={16}
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <path
+                d="M4 6L8 10L12 6"
+                stroke="#111214"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </motion.div>
         </div>
       </motion.div>
 
@@ -300,26 +563,33 @@ export default function GelatoApp() {
                   {/* 쉐도우 레이어 4개 — 각각 다른 속도로 진해졌다 연해졌다 */}
                   <div
                     className="search-shadow-layer-1 pointer-events-none absolute inset-0 rounded-[20px]"
+                    style={{
+                      boxShadow: `0 -1px 18px 0 ${shadowColor1}`,
+                      animation: selectedItem ? 'none' : undefined,
+                    }}
                     aria-hidden
                   />
                   <div
                     className="search-shadow-layer-2 pointer-events-none absolute inset-0 rounded-[20px]"
                     style={{
-                      boxShadow: '0 -8px 60px 0 rgba(198, 151, 255, 0.20)',
+                      boxShadow: `0 -8px 60px 0 ${shadowColor2}`,
+                      animation: selectedItem ? 'none' : undefined,
                     }}
                     aria-hidden
                   />
                   <div
                     className="search-shadow-layer-3 pointer-events-none absolute inset-0 rounded-[20px]"
                     style={{
-                      boxShadow: '0 -8px 100px 0 rgba(198, 151, 255, 0.12)',
+                      boxShadow: `0 -8px 100px 0 ${shadowColor3}`,
+                      animation: selectedItem ? 'none' : undefined,
                     }}
                     aria-hidden
                   />
                   <div
                     className="pointer-events-none absolute inset-0 rounded-[20px]"
                     style={{
-                      boxShadow: '0 -8px 250px 0 rgba(234, 217, 255, 0.80)',
+                      boxShadow: `0 -8px 250px 0 ${shadowColor4}`,
+                      animation: selectedItem ? 'none' : undefined,
                     }}
                     aria-hidden
                   />
@@ -348,31 +618,97 @@ export default function GelatoApp() {
                         />
                       </svg>
                     </span>
-                    <input
-                      type="text"
-                      placeholder="원하는 옷의 스타일을 설명해보세요..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
-                          e.preventDefault()
-                          setIsSearchMode(true)
-                        }
-                      }}
-                      className="flex-1 min-w-0 bg-transparent border-0 outline-none placeholder:text-[var(--content-placeholder,#9EA2A8)]"
-                      style={{
-                        fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
-                        fontSize: 14,
-                        fontWeight: 400,
-                        lineHeight: '140%',
-                        letterSpacing: -0.14,
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        display: '-webkit-box',
-                        WebkitBoxOrient: 'vertical',
-                        WebkitLineClamp: 1,
-                      }}
-                    />
+                    {/* 선택된 아이템 칩 */}
+                    {selectedItem && (
+                      <div
+                        className="flex items-center gap-1 shrink-0 rounded-full"
+                        style={{
+                          background: selectedItem.color,
+                          padding: '4px 8px',
+                        }}
+                      >
+                        <span
+                          style={{
+                            color: '#FFF',
+                            fontFamily: '"Noto Sans KR", sans-serif',
+                            fontSize: 12,
+                            fontWeight: 400,
+                            lineHeight: '120%',
+                          }}
+                        >
+                          {Array.isArray(selectedItem.text) ? selectedItem.text.join(' ') : selectedItem.text}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            handleChipRemove()
+                          }}
+                          className="flex items-center justify-center"
+                          style={{
+                            width: 14,
+                            height: 14,
+                            color: '#FFF',
+                          }}
+                          aria-label="칩 삭제"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width={14} height={14} viewBox="0 0 14 14" fill="none">
+                            <path
+                              d="M10.5 3.5L3.5 10.5M3.5 3.5L10.5 10.5"
+                              stroke="currentColor"
+                              strokeWidth="1.4"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0 relative" style={{ minHeight: 20 }}>
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
+                            e.preventDefault()
+                            setIsSearchMode(true)
+                          }
+                        }}
+                        className="w-full bg-transparent border-0 outline-none"
+                        style={{
+                          fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+                          fontSize: 14,
+                          fontWeight: 400,
+                          lineHeight: '140%',
+                          letterSpacing: -0.14,
+                          color: searchQuery ? 'var(--content-primary, #111214)' : 'transparent',
+                        }}
+                      />
+                      {!searchQuery && (
+                        <div className="absolute inset-0 pointer-events-none flex items-center">
+                          <AnimatePresence mode="wait">
+                            <motion.span
+                              key={placeholderIndex}
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0, y: -10 }}
+                              transition={{ duration: 0.3 }}
+                              style={{
+                                color: 'var(--content-placeholder, #9EA2A8)',
+                                fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+                                fontSize: 14,
+                                fontWeight: 400,
+                                lineHeight: '140%',
+                                letterSpacing: -0.14,
+                              }}
+                            >
+                              {selectedItem ? '' : placeholders[placeholderIndex]}
+                            </motion.span>
+                          </AnimatePresence>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   {/* 검색 아이콘 버튼 */}
@@ -394,52 +730,92 @@ export default function GelatoApp() {
                   </div>
                 </div>
 
-                {/* 칩들을 감싸는 컨테이너: flex, gap 4 */}
-                <div className="flex items-center" style={{ gap: 'var(--4, 4px)' }}>
-                  {suggestionChips.map((chip, index) => (
-                    <motion.button
-                      key={index}
-                      type="button"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={handleChipClick}
-                      className="flex justify-center items-center shrink-0 rounded-full border bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--content-primary)]"
-                      style={{
-                        paddingTop: 4,
-                        paddingBottom: 4,
-                        paddingLeft: 10,
-                        paddingRight: 10,
-                        gap: 'var(--4, 4px)',
-                        borderColor: 'var(--neutral-200, #E6E8EB)',
-                        borderRadius: 'var(--100, 100px)',
-                      }}
-                    >
-                      <span className="shrink-0 w-[15px] h-[15px] aspect-square flex items-center justify-center" aria-hidden>
-                        {chip.icon}
-                      </span>
-                      <span
-                        className="whitespace-nowrap"
-                        style={{
-                          color: 'var(--content-primary, #111214)',
-                          fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
-                          fontSize: 12,
-                          fontWeight: 400,
-                          lineHeight: '120%',
-                          letterSpacing: -0.12,
-                        }}
-                      >
-                        {chip.text}
-                      </span>
-                    </motion.button>
-                  ))}
+                {/* 빠른 스타트 영역 */}
+                <div
+                  className="flex flex-col items-start w-full"
+                  style={{
+                    maxWidth: 640,
+                    gap: 16,
+                  }}
+                >
+                  {/* 타이틀 */}
+                  <h2
+                    style={{
+                      color: 'var(--content-primary, #111214)',
+                      fontFamily: '"Noto Sans KR", sans-serif',
+                      fontSize: 16,
+                      fontStyle: 'normal',
+                      fontWeight: 700,
+                      lineHeight: '120%',
+                      letterSpacing: '-0.16px',
+                    }}
+                  >
+                    Start a Conversation with...
+                  </h2>
+
+                  {/* 빠른 스타트 아이템 컨테이너 */}
+                  <div
+                    className="flex items-start justify-center"
+                    style={{
+                      gap: 16,
+                    }}
+                  >
+                    {quickStartItems.map((item) => {
+                      const isSelected = selectedQuickStartItem === item.id
+                      return (
+                        <div
+                          key={item.id}
+                          className="relative"
+                          style={{
+                            width: 148,
+                            height: 148,
+                            aspectRatio: '1/1',
+                            background: `url(${item.image}) lightgray 50% / cover no-repeat`,
+                            borderRadius: 16,
+                            cursor: 'pointer',
+                            border: isSelected ? `3px solid ${item.color}` : 'none',
+                            transition: 'border 0.2s ease',
+                          }}
+                          onClick={() => handleQuickStartItemClick(item.id)}
+                        >
+                          <span
+                            className="absolute"
+                            style={{
+                              left: 0,
+                              bottom: 0,
+                              width: '102.947px',
+                              padding: '0 0 12px 12px',
+                              color: '#FFF',
+                              fontFamily: '"Noto Sans KR", sans-serif',
+                              fontSize: 16,
+                              fontStyle: 'normal',
+                              fontWeight: 700,
+                              lineHeight: '120%',
+                              letterSpacing: '-0.16px',
+                            }}
+                          >
+                            {Array.isArray(item.text) ? (
+                              <>
+                                {item.text[0]}
+                                <br />
+                                {item.text[1]}
+                              </>
+                            ) : (
+                              item.text
+                            )}
+                          </span>
+                        </div>
+                      )
+                    })}
+                  </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Page 1: 추천 상품 — 축소형 검색창 영역(GNB+52px) 아래에서 올라옴, 그 위로는 올라오지 않음 */}
+            {/* Page 1: 추천 상품 — GNB 아래에서 올라옴 */}
             <motion.div
               className="absolute left-0 right-0 bottom-0 z-30 flex flex-col overflow-hidden bg-background-primary shadow-2xl pt-4 pb-4 px-0"
-              style={{ top: `${GNB_HEIGHT * 2}px`, pointerEvents: page === 0 ? 'none' : 'auto' }}
+              style={{ top: `${GNB_HEIGHT}px`, pointerEvents: page === 0 ? 'none' : 'auto' }}
               initial={false}
               variants={page1Variants}
               animate={page === 0 ? 'inactive' : 'active'}
@@ -449,8 +825,251 @@ export default function GelatoApp() {
                 className="flex-1 min-h-0 min-w-0 w-full overflow-y-auto overflow-x-hidden pb-8"
                 style={{ overscrollBehavior: 'contain' }}
               >
-                <div className="recommended-products-grid">
-                  {mockProducts.map((product, index) => (
+                {/* 동영상 영역 */}
+                <div
+                  className="w-full flex flex-col items-center"
+                  style={{
+                    marginTop: 24,
+                    marginBottom: 0,
+                    paddingLeft: 24,
+                    paddingRight: 24,
+                  }}
+                >
+                  <div style={{ width: '100%', maxWidth: 1216 }}>
+                    {/* ACG 모델 타이틀 */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 16 }}>
+                      <h2
+                        onClick={() => {
+                          setSelectedSectionChip('ACG 상품 내에서')
+                          setSearchQuery('')
+                        }}
+                        style={{
+                          color: 'var(--content-primary, #111214)',
+                          fontFamily: '"Noto Sans KR", sans-serif',
+                          fontSize: 16,
+                          fontStyle: 'normal',
+                          fontWeight: 700,
+                          lineHeight: '120%',
+                          letterSpacing: '-0.16px',
+                          margin: 0,
+                          cursor: 'pointer',
+                        }}
+                      >
+                        ACG 모델
+                      </h2>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedSectionChip('ACG 상품 내에서')
+                          setSearchQuery('')
+                        }}
+                        style={{
+                          display: 'flex',
+                          width: 'var(--spacing-13, 36px)',
+                          height: 'var(--spacing-13, 36px)',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderRadius: 'var(--spacing-15, 99px)',
+                          border: 'none',
+                          background: 'transparent',
+                          cursor: 'pointer',
+                          padding: 0,
+                        }}
+                        aria-label="더보기"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16.667"
+                          height="16.667"
+                          viewBox="0 0 19 19"
+                          fill="none"
+                          style={{
+                            strokeWidth: '1.68px',
+                            stroke: 'var(--neutral-700-secondary, #404040)',
+                          }}
+                        >
+                          <path
+                            d="M14.1733 6.67336H15.84C16.282 6.67336 16.7059 6.84896 17.0185 7.16152C17.3311 7.47408 17.5067 7.898 17.5067 8.34003V17.5067L14.1733 14.1734H9.17333C8.7313 14.1734 8.30738 13.9978 7.99482 13.6852C7.68226 13.3726 7.50666 12.9487 7.50666 12.5067V11.6734M10.84 6.67336C10.84 7.11539 10.6644 7.53931 10.3518 7.85187C10.0393 8.16443 9.61536 8.34003 9.17333 8.34003H4.17333L0.839996 11.6734V2.50669C0.839996 1.59003 1.59 0.840027 2.50666 0.840027H9.17333C9.61536 0.840027 10.0393 1.01562 10.3518 1.32818C10.6644 1.64074 10.84 2.06467 10.84 2.50669V6.67336Z"
+                            stroke="var(--neutral-700-secondary, #404040)"
+                            strokeWidth="1.68"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <video
+                    src="/화면 기록 2026-02-05 오후 3.24.08.mov"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full"
+                    style={{
+                      maxWidth: 1216,
+                      height: 700,
+                      borderRadius: 40,
+                      overflow: 'hidden',
+                      objectFit: 'cover',
+                    }}
+                  >
+                    브라우저가 동영상 태그를 지원하지 않습니다.
+                  </video>
+                </div>
+                <div className="w-full flex flex-col items-center" style={{ paddingLeft: 24, paddingRight: 24, marginTop: 40 }}>
+                  {/* New Runner 섹션 */}
+                  <div style={{ width: '100%', maxWidth: 1216, marginBottom: 40 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 16 }}>
+                      <h2
+                        onClick={() => {
+                          setSelectedSectionChip('10만원 이하 상품 내에서')
+                          setSearchQuery('')
+                        }}
+                        style={{
+                          color: 'var(--content-primary, #111214)',
+                          fontFamily: '"Noto Sans KR", sans-serif',
+                          fontSize: 16,
+                          fontStyle: 'normal',
+                          fontWeight: 700,
+                          lineHeight: '120%',
+                          letterSpacing: '-0.16px',
+                          margin: 0,
+                          cursor: 'pointer',
+                        }}
+                      >
+                        New Runner
+                      </h2>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedSectionChip('10만원 이하 상품 내에서')
+                          setSearchQuery('')
+                        }}
+                        style={{
+                          display: 'flex',
+                          width: 'var(--spacing-13, 36px)',
+                          height: 'var(--spacing-13, 36px)',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderRadius: 'var(--spacing-15, 99px)',
+                          border: 'none',
+                          background: 'transparent',
+                          cursor: 'pointer',
+                          padding: 0,
+                        }}
+                        aria-label="더보기"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16.667"
+                          height="16.667"
+                          viewBox="0 0 19 19"
+                          fill="none"
+                          style={{
+                            strokeWidth: '1.68px',
+                            stroke: 'var(--neutral-700-secondary, #404040)',
+                          }}
+                        >
+                          <path
+                            d="M14.1733 6.67336H15.84C16.282 6.67336 16.7059 6.84896 17.0185 7.16152C17.3311 7.47408 17.5067 7.898 17.5067 8.34003V17.5067L14.1733 14.1734H9.17333C8.7313 14.1734 8.30738 13.9978 7.99482 13.6852C7.68226 13.3726 7.50666 12.9487 7.50666 12.5067V11.6734M10.84 6.67336C10.84 7.11539 10.6644 7.53931 10.3518 7.85187C10.0393 8.16443 9.61536 8.34003 9.17333 8.34003H4.17333L0.839996 11.6734V2.50669C0.839996 1.59003 1.59 0.840027 2.50666 0.840027H9.17333C9.61536 0.840027 10.0393 1.01562 10.3518 1.32818C10.6644 1.64074 10.84 2.06467 10.84 2.50669V6.67336Z"
+                            stroke="var(--neutral-700-secondary, #404040)"
+                            strokeWidth="1.68"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <div className="recommended-products-grid" style={{ maxWidth: 1216 }}>
+                      {mockProducts.slice(0, 12).map((product, index) => (
+                        <motion.div
+                          key={`new-runner-${product.id}`}
+                          initial={{ opacity: 0, y: 12 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.35, delay: index * 0.04, ease: [0.25, 0.46, 0.45, 0.94] }}
+                          className="recommended-products-grid-item"
+                        >
+                          <RecommendedProductItem
+                            id={product.id}
+                            brand={product.brand}
+                            title={product.title}
+                            price={product.price}
+                            image={product.image}
+                            discountRate={product.discountRate}
+                            aspectRatio={product.aspectRatio}
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div style={{ width: '100%', maxWidth: 1216 }}>
+                    {/* Discovery 타이틀 */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 16 }}>
+                      <h2
+                        onClick={() => {
+                          setSelectedSectionChip('친구 선물용 상품 내에서')
+                          setSearchQuery('')
+                        }}
+                        style={{
+                          color: 'var(--content-primary, #111214)',
+                          fontFamily: '"Noto Sans KR", sans-serif',
+                          fontSize: 16,
+                          fontStyle: 'normal',
+                          fontWeight: 700,
+                          lineHeight: '120%',
+                          letterSpacing: '-0.16px',
+                          margin: 0,
+                          cursor: 'pointer',
+                        }}
+                      >
+                        Discovery
+                      </h2>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedSectionChip('친구 선물용 상품 내에서')
+                          setSearchQuery('')
+                        }}
+                        style={{
+                          display: 'flex',
+                          width: 'var(--spacing-13, 36px)',
+                          height: 'var(--spacing-13, 36px)',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          borderRadius: 'var(--spacing-15, 99px)',
+                          border: 'none',
+                          background: 'transparent',
+                          cursor: 'pointer',
+                          padding: 0,
+                        }}
+                        aria-label="더보기"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16.667"
+                          height="16.667"
+                          viewBox="0 0 19 19"
+                          fill="none"
+                          style={{
+                            strokeWidth: '1.68px',
+                            stroke: 'var(--neutral-700-secondary, #404040)',
+                          }}
+                        >
+                          <path
+                            d="M14.1733 6.67336H15.84C16.282 6.67336 16.7059 6.84896 17.0185 7.16152C17.3311 7.47408 17.5067 7.898 17.5067 8.34003V17.5067L14.1733 14.1734H9.17333C8.7313 14.1734 8.30738 13.9978 7.99482 13.6852C7.68226 13.3726 7.50666 12.9487 7.50666 12.5067V11.6734M10.84 6.67336C10.84 7.11539 10.6644 7.53931 10.3518 7.85187C10.0393 8.16443 9.61536 8.34003 9.17333 8.34003H4.17333L0.839996 11.6734V2.50669C0.839996 1.59003 1.59 0.840027 2.50666 0.840027H9.17333C9.61536 0.840027 10.0393 1.01562 10.3518 1.32818C10.6644 1.64074 10.84 2.06467 10.84 2.50669V6.67336Z"
+                            stroke="var(--neutral-700-secondary, #404040)"
+                            strokeWidth="1.68"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div className="recommended-products-grid" style={{ maxWidth: 1216 }}>
+                    {mockProducts.map((product, index) => (
                     <motion.div
                       key={product.id}
                       initial={{ opacity: 0, y: 12 }}
@@ -469,6 +1088,7 @@ export default function GelatoApp() {
                       />
                     </motion.div>
                   ))}
+                  </div>
                 </div>
               </div>
             </motion.div>

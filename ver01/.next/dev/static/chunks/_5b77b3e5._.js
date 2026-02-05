@@ -468,125 +468,133 @@ const baseProducts = [
     {
         id: 1,
         brand: 'NIKE',
-        title: 'Oversized Hoodie',
+        title: 'Product 1',
         price: 89000,
         discountRate: 10,
-        image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=500&fit=crop',
-        aspectRatio: '1:2'
+        image: '/product1.png',
+        aspectRatio: '1:1'
     },
     {
         id: 2,
-        brand: 'LEVI\'S',
-        title: 'Denim Jacket',
+        brand: 'NIKE',
+        title: 'Product 2',
         price: 125000,
-        image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=350&fit=crop',
-        aspectRatio: '2:1'
+        image: '/product2.png',
+        aspectRatio: '1:1'
     },
     {
         id: 3,
-        brand: 'CARHARTT',
-        title: 'Cargo Pants',
+        brand: 'NIKE',
+        title: 'Product 3',
         price: 68000,
         discountRate: 15,
-        image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=400&h=450&fit=crop',
+        image: '/product3.png',
         aspectRatio: '1:1'
     },
     {
         id: 4,
-        brand: 'CONVERSE',
-        title: 'White Sneakers',
+        brand: 'NIKE',
+        title: 'Product 4',
         price: 145000,
-        image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=320&fit=crop',
-        aspectRatio: '1:2'
+        image: '/product4.png',
+        aspectRatio: '1:1'
     },
     {
         id: 5,
-        brand: 'COACH',
-        title: 'Leather Bag',
-        price: 210000,
-        discountRate: 20,
-        image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=480&fit=crop',
+        brand: 'NIKE',
+        title: 'Product 5',
+        price: 95000,
+        discountRate: 12,
+        image: '/product5.png',
         aspectRatio: '1:1'
     },
     {
         id: 6,
-        brand: 'UNIQLO',
-        title: 'Striped Shirt',
-        price: 55000,
-        image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=380&fit=crop',
-        aspectRatio: '2:1'
+        brand: 'NIKE',
+        title: 'Product 6',
+        price: 78000,
+        image: '/product6.png',
+        aspectRatio: '1:1'
     },
     {
         id: 7,
-        brand: 'NEW ERA',
-        title: 'Black Cap',
-        price: 32000,
+        brand: 'NIKE',
+        title: 'Product 7',
+        price: 110000,
         discountRate: 5,
-        image: 'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=400&fit=crop',
+        image: '/product7.png',
         aspectRatio: '1:1'
     },
     {
         id: 8,
-        brand: 'COS',
-        title: 'Wide Pants',
-        price: 78000,
-        image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=520&fit=crop',
-        aspectRatio: '1:2'
+        brand: 'NIKE',
+        title: 'Product 8',
+        price: 135000,
+        image: '/product8.png',
+        aspectRatio: '1:1'
     },
     {
         id: 9,
-        brand: '&OTHER STORIES',
-        title: 'Knit Sweater',
-        price: 95000,
-        discountRate: 12,
-        image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=460&fit=crop',
-        aspectRatio: '2:1'
+        brand: 'NIKE',
+        title: 'Product 9',
+        price: 99000,
+        discountRate: 20,
+        image: '/product9.png',
+        aspectRatio: '1:1'
     },
     {
         id: 10,
-        brand: 'DR. MARTENS',
-        title: 'Chelsea Boots',
-        price: 168000,
-        image: 'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=400&h=340&fit=crop',
-        aspectRatio: '1:1'
-    },
-    {
-        id: 11,
-        brand: 'MAX MARA',
-        title: 'Wool Coat',
-        price: 285000,
-        discountRate: 30,
-        image: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=400&h=550&fit=crop',
-        aspectRatio: '1:2'
-    },
-    {
-        id: 12,
-        brand: 'BASIC',
-        title: 'Basic Tee',
-        price: 29000,
-        image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=360&fit=crop',
+        brand: 'NIKE',
+        title: 'Product 10',
+        price: 120000,
+        image: '/product10.png',
         aspectRatio: '1:1'
     }
 ];
-const aspectRatios = [
-    '1:1',
-    '2:1',
-    '1:2'
-];
 const mockProducts = (()=>{
     const list = [];
+    const images = baseProducts.map((p)=>p.image);
+    // 이미지 배열을 랜덤하게 섞기
+    const shuffledImages = [
+        ...images
+    ];
+    for(let i = shuffledImages.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffledImages[i], shuffledImages[j]] = [
+            shuffledImages[j],
+            shuffledImages[i]
+        ];
+    }
+    // 60개 상품 생성 시 이미지를 랜덤하게 배치
     for(let i = 0; i < 60; i++){
-        const base = baseProducts[i % baseProducts.length];
+        const baseIndex = i % baseProducts.length;
+        const base = baseProducts[baseIndex];
+        const imageIndex = i % shuffledImages.length;
         list.push({
             ...base,
             id: i + 1,
             title: base.title + (i >= baseProducts.length ? ` ${Math.floor(i / baseProducts.length) + 1}` : ''),
             price: base.price + i % 7 * 1000,
-            aspectRatio: aspectRatios[i % aspectRatios.length]
+            image: shuffledImages[imageIndex],
+            aspectRatio: '1:1'
         });
+    }
+    // 최종 리스트도 랜덤하게 섞기
+    for(let i = list.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [list[i], list[j]] = [
+            list[j],
+            list[i]
+        ];
     }
     return list;
 })();
+const placeholders = [
+    '러닝할 때 무릎 안다칠 러닝화 보여줘.',
+    '겨울에 러닝할 때 입기 좋은 자켓 보여줘.',
+    '재생소재 패딩 보여줘',
+    '성수동에 입고 가고 싶은 모자 보여줘.'
+];
 const suggestionChips = [
     {
         text: '성수동 팝업 갈 때 힙한 느낌 내고 싶어',
@@ -604,12 +612,12 @@ const suggestionChips = [
                 strokeLinejoin: "round"
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 58,
+                lineNumber: 82,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         }, void 0, false, {
             fileName: "[project]/app/page.tsx",
-            lineNumber: 57,
+            lineNumber: 81,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0))
     },
@@ -629,12 +637,12 @@ const suggestionChips = [
                 strokeLinejoin: "round"
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 72,
+                lineNumber: 96,
                 columnNumber: 9
             }, ("TURBOPACK compile-time value", void 0))
         }, void 0, false, {
             fileName: "[project]/app/page.tsx",
-            lineNumber: 71,
+            lineNumber: 95,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0))
     }
@@ -667,9 +675,7 @@ const page0Variants = {
         }
     }
 };
-/* 하단 패널이 상단에 있을 때 40px만 보이도록 (스크롤 힌트) */ const PAGE1_PEEK_PX = 40;
-const GNB_HEIGHT_X2 = 52 * 2 // 104
-;
+const GNB_HEIGHT = 52;
 const page1Variants = {
     active: {
         y: '0%',
@@ -680,7 +686,7 @@ const page1Variants = {
         }
     },
     inactive: {
-        y: `calc(100vh - ${GNB_HEIGHT_X2 + PAGE1_PEEK_PX}px)`,
+        y: '100%',
         transition: {
             type: 'spring',
             stiffness: 120,
@@ -689,6 +695,42 @@ const page1Variants = {
     }
 };
 const WHEEL_THROTTLE_MS = 1000;
+// 빠른 스타트 아이템 데이터
+const quickStartItems = [
+    {
+        id: 1,
+        text: '나이키 팬텀 6 로우 엘레트',
+        color: '#00C9D6',
+        image: '/item1.png'
+    },
+    {
+        id: 2,
+        text: [
+            '사브리나',
+            '농구 후디'
+        ],
+        color: '#F87171',
+        image: '/item2.png'
+    },
+    {
+        id: 3,
+        text: [
+            '나이키',
+            '테크 윈드러너'
+        ],
+        color: '#F59E0B',
+        image: '/item3.png'
+    },
+    {
+        id: 4,
+        text: [
+            '나이키',
+            '재생 소재'
+        ],
+        color: '#16A34A',
+        image: '/item4.png'
+    }
+];
 function GelatoApp() {
     _s();
     const [page, setPage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0) // 0: 검색, 1: 추천상품
@@ -696,6 +738,9 @@ function GelatoApp() {
     const [isAnimating, setIsAnimating] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [isSearchMode, setIsSearchMode] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [searchQuery, setSearchQuery] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])('');
+    const [selectedQuickStartItem, setSelectedQuickStartItem] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [selectedSectionChip, setSelectedSectionChip] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [placeholderIndex, setPlaceholderIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     const rootRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const productListRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const throttleTimerRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
@@ -730,6 +775,13 @@ function GelatoApp() {
                     }
                     const { deltaY } = e;
                     const scrollTop = productListRef.current ? productListRef.current.scrollTop : 0;
+                    const scrollHeight = productListRef.current ? productListRef.current.scrollHeight : 0;
+                    const clientHeight = productListRef.current ? productListRef.current.clientHeight : 0;
+                    const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+                    const isAtTop = scrollTop <= 0;
+                    // wheel 이벤트가 productListRef 내부에서 발생하는지 확인
+                    const target = e.target;
+                    const isInsideProductList = productListRef.current?.contains(target) || false;
                     if (currentPage === 0) {
                         if (deltaY > 0) {
                             e.preventDefault();
@@ -738,10 +790,22 @@ function GelatoApp() {
                         return;
                     }
                     if (currentPage === 1) {
-                        if (deltaY < 0 && scrollTop <= 0) {
+                        // productListRef 내부에서 스크롤하는 경우
+                        if (isInsideProductList) {
+                            // 위로 스크롤하고 맨 위에 있을 때만 페이지 전환
+                            if (deltaY < 0 && isAtTop) {
+                                e.preventDefault();
+                                handlePageChange(0);
+                            }
+                            // 아래로 스크롤하고 맨 아래에 있을 때는 아무것도 하지 않음 (스크롤 허용)
+                            return;
+                        }
+                        // productListRef 외부에서 스크롤하는 경우
+                        if (deltaY < 0 && isAtTop) {
                             e.preventDefault();
                             handlePageChange(0);
                         }
+                        // 아래로 스크롤할 때는 preventDefault 하지 않음
                         return;
                     }
                 }
@@ -757,6 +821,21 @@ function GelatoApp() {
             })["GelatoApp.useEffect"];
         }
     }["GelatoApp.useEffect"], []);
+    // 플레이스홀더 자동 변경
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "GelatoApp.useEffect": ()=>{
+            const interval = setInterval({
+                "GelatoApp.useEffect.interval": ()=>{
+                    setPlaceholderIndex({
+                        "GelatoApp.useEffect.interval": (prev)=>(prev + 1) % placeholders.length
+                    }["GelatoApp.useEffect.interval"]);
+                }
+            }["GelatoApp.useEffect.interval"], 5000);
+            return ({
+                "GelatoApp.useEffect": ()=>clearInterval(interval)
+            })["GelatoApp.useEffect"];
+        }
+    }["GelatoApp.useEffect"], []);
     const handleChipClick = ()=>setIsSearchMode(true);
     const handleSearchChange = (e)=>{
         const value = e.target.value;
@@ -767,46 +846,76 @@ function GelatoApp() {
         setIsSearchMode(false);
         setSearchQuery('');
     };
-    const GNB_HEIGHT = 52;
+    const handleQuickStartItemClick = (itemId)=>{
+        if (selectedQuickStartItem === itemId) {
+            // 이미 선택된 아이템을 클릭하면 해제
+            setSelectedQuickStartItem(null);
+        } else {
+            setSelectedQuickStartItem(itemId);
+        }
+    };
+    const handleChipRemove = ()=>{
+        setSelectedQuickStartItem(null);
+    };
+    const handleSectionChipRemove = ()=>{
+        setSelectedSectionChip(null);
+    };
+    // Hex 색상을 rgba로 변환하는 헬퍼 함수
+    const hexToRgba = (hex, alpha)=>{
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    };
+    const selectedItem = selectedQuickStartItem ? quickStartItems.find((item)=>item.id === selectedQuickStartItem) : null;
+    const baseShadowColor = selectedItem ? selectedItem.color : '#B043FF' // 기본 보라색
+    ;
+    // 쉐도우 색상 (낮은 opacity)
+    const shadowColor1 = selectedItem ? hexToRgba(selectedItem.color, 0.04) : 'rgba(176, 67, 255, 0.08)';
+    const shadowColor2 = selectedItem ? hexToRgba(selectedItem.color, 0.10) : 'rgba(198, 151, 255, 0.20)';
+    const shadowColor3 = selectedItem ? hexToRgba(selectedItem.color, 0.06) : 'rgba(198, 151, 255, 0.12)';
+    const shadowColor4 = selectedItem ? hexToRgba(selectedItem.color, 0.40) : 'rgba(234, 217, 255, 0.80)';
     const miniSearchStripOpacity = page === 1 ? 1 : 0;
+    const inspirationChipOpacity = page === 0 ? 1 : 0;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "h-screen overflow-hidden",
         ref: rootRef,
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Header$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Header"], {}, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 200,
+                lineNumber: 316,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
                 className: "fixed left-0 right-0 z-40 box-border w-full",
                 style: {
-                    top: 53,
+                    bottom: 20,
                     display: 'flex',
-                    padding: '4px 16px 16px',
+                    padding: '0 16px',
                     justifyContent: 'center',
                     alignItems: 'center',
                     gap: 4,
-                    background: 'var(--background-overlay-lightSecondary, rgba(255, 255, 255, 0.72))',
-                    backdropFilter: 'blur(27px)',
                     pointerEvents: miniSearchStripOpacity > 0 ? 'auto' : 'none'
                 },
                 initial: false,
                 animate: {
                     opacity: miniSearchStripOpacity,
-                    y: miniSearchStripOpacity ? 0 : -12
+                    y: miniSearchStripOpacity ? 0 : 20,
+                    scale: miniSearchStripOpacity ? 1 : 0.95
                 },
                 transition: {
                     duration: 0.3,
                     ease: 'easeOut'
                 },
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex w-full max-w-[560px] min-w-0 shrink-0 items-center justify-center gap-[var(--4,4px)]",
+                    className: "flex w-full max-w-[560px] min-w-0 shrink-0 items-center justify-center",
                     style: {
                         padding: '12px 24px',
                         borderRadius: 999,
                         border: '1px solid var(--neutral-200, #E6E8EB)',
-                        background: 'var(--common-white, #FFF)'
+                        background: 'var(--common-white, #FFF)',
+                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04)',
+                        gap: 8
                     },
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -826,58 +935,285 @@ function GelatoApp() {
                                     strokeLinejoin: "round"
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 235,
+                                    lineNumber: 352,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 234,
+                                lineNumber: 351,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 233,
+                            lineNumber: 350,
                             columnNumber: 11
                         }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                            type: "text",
-                            placeholder: "원하는 옷의 스타일을 설명해보세요...",
-                            value: searchQuery,
-                            onChange: (e)=>setSearchQuery(e.target.value),
-                            onKeyDown: (e)=>{
-                                if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
-                                    e.preventDefault();
-                                    setIsSearchMode(true);
-                                }
-                            },
-                            className: "min-w-0 flex-1 bg-transparent border-0 outline-none focus:ring-0 placeholder-[var(--content-placeholder,#9EA2A8)]",
+                        selectedSectionChip && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "flex items-center gap-1 shrink-0 rounded-full",
                             style: {
-                                display: '-webkit-box',
-                                WebkitBoxOrient: 'vertical',
-                                WebkitLineClamp: 1,
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis',
-                                fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
-                                fontSize: 14,
-                                fontStyle: 'normal',
-                                fontWeight: 400,
-                                lineHeight: '140%',
-                                letterSpacing: '-0.14px'
-                            }
-                        }, void 0, false, {
+                                background: '#111214',
+                                padding: '4px 8px'
+                            },
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                    style: {
+                                        color: '#FFF',
+                                        fontFamily: '"Noto Sans KR", sans-serif',
+                                        fontSize: 12,
+                                        fontWeight: 400,
+                                        lineHeight: '120%'
+                                    },
+                                    children: selectedSectionChip
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 364,
+                                    columnNumber: 15
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    type: "button",
+                                    onClick: (e)=>{
+                                        e.stopPropagation();
+                                        handleSectionChipRemove();
+                                    },
+                                    className: "flex items-center justify-center",
+                                    style: {
+                                        width: 14,
+                                        height: 14,
+                                        color: '#FFF'
+                                    },
+                                    "aria-label": "칩 삭제",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        width: 14,
+                                        height: 14,
+                                        viewBox: "0 0 14 14",
+                                        fill: "none",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                            d: "M10.5 3.5L3.5 10.5M3.5 3.5L10.5 10.5",
+                                            stroke: "currentColor",
+                                            strokeWidth: "1.4",
+                                            strokeLinecap: "round",
+                                            strokeLinejoin: "round"
+                                        }, void 0, false, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 390,
+                                            columnNumber: 19
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/page.tsx",
+                                        lineNumber: 389,
+                                        columnNumber: 17
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 375,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 238,
+                            lineNumber: 357,
+                            columnNumber: 13
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "min-w-0 flex-1 relative",
+                            style: {
+                                minHeight: 20
+                            },
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                    type: "text",
+                                    value: searchQuery,
+                                    onChange: (e)=>setSearchQuery(e.target.value),
+                                    onKeyDown: (e)=>{
+                                        if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
+                                            e.preventDefault();
+                                            setIsSearchMode(true);
+                                        }
+                                    },
+                                    className: "w-full bg-transparent border-0 outline-none focus:ring-0",
+                                    style: {
+                                        fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+                                        fontSize: 14,
+                                        fontStyle: 'normal',
+                                        fontWeight: 400,
+                                        lineHeight: '140%',
+                                        letterSpacing: '-0.14px',
+                                        color: searchQuery ? 'var(--content-primary, #111214)' : 'transparent'
+                                    }
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 402,
+                                    columnNumber: 13
+                                }, this),
+                                !searchQuery && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "absolute inset-0 pointer-events-none flex items-center",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AnimatePresence"], {
+                                        mode: "wait",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].span, {
+                                            initial: {
+                                                opacity: 0,
+                                                y: 10
+                                            },
+                                            animate: {
+                                                opacity: 1,
+                                                y: 0
+                                            },
+                                            exit: {
+                                                opacity: 0,
+                                                y: -10
+                                            },
+                                            transition: {
+                                                duration: 0.3
+                                            },
+                                            style: {
+                                                color: 'var(--content-placeholder, #9EA2A8)',
+                                                fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+                                                fontSize: 14,
+                                                fontStyle: 'normal',
+                                                fontWeight: 400,
+                                                lineHeight: '140%',
+                                                letterSpacing: '-0.14px'
+                                            },
+                                            children: selectedSectionChip ? '찾고 싶은걸 입력해 보세요.' : placeholders[placeholderIndex]
+                                        }, placeholderIndex, false, {
+                                            fileName: "[project]/app/page.tsx",
+                                            lineNumber: 426,
+                                            columnNumber: 19
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/page.tsx",
+                                        lineNumber: 425,
+                                        columnNumber: 17
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 424,
+                                    columnNumber: 15
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/app/page.tsx",
+                            lineNumber: 401,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 224,
+                    lineNumber: 339,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 203,
+                lineNumber: 319,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                className: "fixed left-0 right-0 z-40 box-border w-full",
+                style: {
+                    bottom: 20,
+                    display: 'flex',
+                    padding: '0 16px',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    pointerEvents: inspirationChipOpacity > 0 ? 'auto' : 'none'
+                },
+                initial: false,
+                animate: {
+                    opacity: inspirationChipOpacity,
+                    y: inspirationChipOpacity ? 0 : 20,
+                    scale: inspirationChipOpacity ? 1 : 0.95
+                },
+                transition: {
+                    duration: 0.3,
+                    ease: 'easeOut'
+                },
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "flex items-center gap-2 shrink-0",
+                    style: {
+                        padding: '10px 20px',
+                        borderRadius: 999,
+                        border: '1px solid var(--neutral-200, #E6E8EB)',
+                        background: 'var(--common-white, #FFF)',
+                        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04)',
+                        cursor: 'pointer'
+                    },
+                    onClick: ()=>{
+                        if (page === 0) {
+                            setIsAnimating(true);
+                            setPage(1);
+                        }
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            style: {
+                                fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+                                fontSize: 14,
+                                fontStyle: 'normal',
+                                fontWeight: 400,
+                                lineHeight: '140%',
+                                letterSpacing: '-0.14px',
+                                color: 'var(--content-primary, #111214)'
+                            },
+                            children: "더 많은 영감 보기"
+                        }, void 0, false, {
+                            fileName: "[project]/app/page.tsx",
+                            lineNumber: 487,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                            animate: {
+                                y: [
+                                    0,
+                                    4,
+                                    0
+                                ]
+                            },
+                            transition: {
+                                duration: 1.5,
+                                repeat: Infinity,
+                                ease: 'easeInOut'
+                            },
+                            style: {
+                                display: 'flex',
+                                alignItems: 'center'
+                            },
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                width: 16,
+                                height: 16,
+                                viewBox: "0 0 16 16",
+                                fill: "none",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                    d: "M4 6L8 10L12 6",
+                                    stroke: "#111214",
+                                    strokeWidth: "1.5",
+                                    strokeLinecap: "round",
+                                    strokeLinejoin: "round"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/page.tsx",
+                                    lineNumber: 518,
+                                    columnNumber: 15
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "[project]/app/page.tsx",
+                                lineNumber: 511,
+                                columnNumber: 13
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "[project]/app/page.tsx",
+                            lineNumber: 500,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/app/page.tsx",
+                    lineNumber: 470,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/app/page.tsx",
+                lineNumber: 452,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AnimatePresence"], {
@@ -912,7 +1248,7 @@ function GelatoApp() {
                                     }
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 285,
+                                    lineNumber: 548,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -929,43 +1265,50 @@ function GelatoApp() {
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "search-shadow-layer-1 pointer-events-none absolute inset-0 rounded-[20px]",
+                                                    style: {
+                                                        boxShadow: `0 -1px 18px 0 ${shadowColor1}`,
+                                                        animation: selectedItem ? 'none' : undefined
+                                                    },
                                                     "aria-hidden": true
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 301,
+                                                    lineNumber: 564,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "search-shadow-layer-2 pointer-events-none absolute inset-0 rounded-[20px]",
                                                     style: {
-                                                        boxShadow: '0 -8px 60px 0 rgba(198, 151, 255, 0.20)'
+                                                        boxShadow: `0 -8px 60px 0 ${shadowColor2}`,
+                                                        animation: selectedItem ? 'none' : undefined
                                                     },
                                                     "aria-hidden": true
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 305,
+                                                    lineNumber: 572,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "search-shadow-layer-3 pointer-events-none absolute inset-0 rounded-[20px]",
                                                     style: {
-                                                        boxShadow: '0 -8px 100px 0 rgba(198, 151, 255, 0.12)'
+                                                        boxShadow: `0 -8px 100px 0 ${shadowColor3}`,
+                                                        animation: selectedItem ? 'none' : undefined
                                                     },
                                                     "aria-hidden": true
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 312,
+                                                    lineNumber: 580,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "pointer-events-none absolute inset-0 rounded-[20px]",
                                                     style: {
-                                                        boxShadow: '0 -8px 250px 0 rgba(234, 217, 255, 0.80)'
+                                                        boxShadow: `0 -8px 250px 0 ${shadowColor4}`,
+                                                        animation: selectedItem ? 'none' : undefined
                                                     },
                                                     "aria-hidden": true
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 319,
+                                                    lineNumber: 588,
                                                     columnNumber: 19
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1005,52 +1348,170 @@ function GelatoApp() {
                                                                             strokeLinejoin: "round"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/app/page.tsx",
-                                                                            lineNumber: 342,
+                                                                            lineNumber: 612,
                                                                             columnNumber: 25
                                                                         }, this)
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/page.tsx",
-                                                                        lineNumber: 341,
+                                                                        lineNumber: 611,
                                                                         columnNumber: 23
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/page.tsx",
-                                                                    lineNumber: 340,
+                                                                    lineNumber: 610,
                                                                     columnNumber: 21
                                                                 }, this),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                                                                    type: "text",
-                                                                    placeholder: "원하는 옷의 스타일을 설명해보세요...",
-                                                                    value: searchQuery,
-                                                                    onChange: (e)=>setSearchQuery(e.target.value),
-                                                                    onKeyDown: (e)=>{
-                                                                        if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
-                                                                            e.preventDefault();
-                                                                            setIsSearchMode(true);
-                                                                        }
-                                                                    },
-                                                                    className: "flex-1 min-w-0 bg-transparent border-0 outline-none placeholder:text-[var(--content-placeholder,#9EA2A8)]",
+                                                                selectedItem && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "flex items-center gap-1 shrink-0 rounded-full",
                                                                     style: {
-                                                                        fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
-                                                                        fontSize: 14,
-                                                                        fontWeight: 400,
-                                                                        lineHeight: '140%',
-                                                                        letterSpacing: -0.14,
-                                                                        overflow: 'hidden',
-                                                                        textOverflow: 'ellipsis',
-                                                                        display: '-webkit-box',
-                                                                        WebkitBoxOrient: 'vertical',
-                                                                        WebkitLineClamp: 1
-                                                                    }
-                                                                }, void 0, false, {
+                                                                        background: selectedItem.color,
+                                                                        padding: '4px 8px'
+                                                                    },
+                                                                    children: [
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                            style: {
+                                                                                color: '#FFF',
+                                                                                fontFamily: '"Noto Sans KR", sans-serif',
+                                                                                fontSize: 12,
+                                                                                fontWeight: 400,
+                                                                                lineHeight: '120%'
+                                                                            },
+                                                                            children: Array.isArray(selectedItem.text) ? selectedItem.text.join(' ') : selectedItem.text
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/app/page.tsx",
+                                                                            lineNumber: 630,
+                                                                            columnNumber: 25
+                                                                        }, this),
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                            type: "button",
+                                                                            onClick: (e)=>{
+                                                                                e.stopPropagation();
+                                                                                handleChipRemove();
+                                                                            },
+                                                                            className: "flex items-center justify-center",
+                                                                            style: {
+                                                                                width: 14,
+                                                                                height: 14,
+                                                                                color: '#FFF'
+                                                                            },
+                                                                            "aria-label": "칩 삭제",
+                                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                                xmlns: "http://www.w3.org/2000/svg",
+                                                                                width: 14,
+                                                                                height: 14,
+                                                                                viewBox: "0 0 14 14",
+                                                                                fill: "none",
+                                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                                    d: "M10.5 3.5L3.5 10.5M3.5 3.5L10.5 10.5",
+                                                                                    stroke: "currentColor",
+                                                                                    strokeWidth: "1.4",
+                                                                                    strokeLinecap: "round",
+                                                                                    strokeLinejoin: "round"
+                                                                                }, void 0, false, {
+                                                                                    fileName: "[project]/app/page.tsx",
+                                                                                    lineNumber: 656,
+                                                                                    columnNumber: 29
+                                                                                }, this)
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/app/page.tsx",
+                                                                                lineNumber: 655,
+                                                                                columnNumber: 27
+                                                                            }, this)
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/app/page.tsx",
+                                                                            lineNumber: 641,
+                                                                            columnNumber: 25
+                                                                        }, this)
+                                                                    ]
+                                                                }, void 0, true, {
                                                                     fileName: "[project]/app/page.tsx",
-                                                                    lineNumber: 351,
+                                                                    lineNumber: 623,
+                                                                    columnNumber: 23
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "flex-1 min-w-0 relative",
+                                                                    style: {
+                                                                        minHeight: 20
+                                                                    },
+                                                                    children: [
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                                                                            type: "text",
+                                                                            value: searchQuery,
+                                                                            onChange: (e)=>setSearchQuery(e.target.value),
+                                                                            onKeyDown: (e)=>{
+                                                                                if (e.key === 'Enter' && !e.shiftKey && searchQuery.trim()) {
+                                                                                    e.preventDefault();
+                                                                                    setIsSearchMode(true);
+                                                                                }
+                                                                            },
+                                                                            className: "w-full bg-transparent border-0 outline-none",
+                                                                            style: {
+                                                                                fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+                                                                                fontSize: 14,
+                                                                                fontWeight: 400,
+                                                                                lineHeight: '140%',
+                                                                                letterSpacing: -0.14,
+                                                                                color: searchQuery ? 'var(--content-primary, #111214)' : 'transparent'
+                                                                            }
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/app/page.tsx",
+                                                                            lineNumber: 668,
+                                                                            columnNumber: 23
+                                                                        }, this),
+                                                                        !searchQuery && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                            className: "absolute inset-0 pointer-events-none flex items-center",
+                                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AnimatePresence"], {
+                                                                                mode: "wait",
+                                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].span, {
+                                                                                    initial: {
+                                                                                        opacity: 0,
+                                                                                        y: 10
+                                                                                    },
+                                                                                    animate: {
+                                                                                        opacity: 1,
+                                                                                        y: 0
+                                                                                    },
+                                                                                    exit: {
+                                                                                        opacity: 0,
+                                                                                        y: -10
+                                                                                    },
+                                                                                    transition: {
+                                                                                        duration: 0.3
+                                                                                    },
+                                                                                    style: {
+                                                                                        color: 'var(--content-placeholder, #9EA2A8)',
+                                                                                        fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
+                                                                                        fontSize: 14,
+                                                                                        fontWeight: 400,
+                                                                                        lineHeight: '140%',
+                                                                                        letterSpacing: -0.14
+                                                                                    },
+                                                                                    children: selectedItem ? '' : placeholders[placeholderIndex]
+                                                                                }, placeholderIndex, false, {
+                                                                                    fileName: "[project]/app/page.tsx",
+                                                                                    lineNumber: 691,
+                                                                                    columnNumber: 29
+                                                                                }, this)
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/app/page.tsx",
+                                                                                lineNumber: 690,
+                                                                                columnNumber: 27
+                                                                            }, this)
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/app/page.tsx",
+                                                                            lineNumber: 689,
+                                                                            columnNumber: 25
+                                                                        }, this)
+                                                                    ]
+                                                                }, void 0, true, {
+                                                                    fileName: "[project]/app/page.tsx",
+                                                                    lineNumber: 667,
                                                                     columnNumber: 21
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 336,
+                                                            lineNumber: 606,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1070,108 +1531,138 @@ function GelatoApp() {
                                                                     strokeWidth: 2
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/page.tsx",
-                                                                    lineNumber: 391,
+                                                                    lineNumber: 727,
                                                                     columnNumber: 23
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/page.tsx",
-                                                                lineNumber: 380,
+                                                                lineNumber: 716,
                                                                 columnNumber: 21
                                                             }, this)
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 379,
+                                                            lineNumber: 715,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 326,
+                                                    lineNumber: 596,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 299,
+                                            lineNumber: 562,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "flex items-center",
+                                            className: "flex flex-col items-start w-full",
                                             style: {
-                                                gap: 'var(--4, 4px)'
+                                                maxWidth: 640,
+                                                gap: 16
                                             },
-                                            children: suggestionChips.map((chip, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].button, {
-                                                    type: "button",
-                                                    whileHover: {
-                                                        scale: 1.02
-                                                    },
-                                                    whileTap: {
-                                                        scale: 0.98
-                                                    },
-                                                    onClick: handleChipClick,
-                                                    className: "flex justify-center items-center shrink-0 rounded-full border bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--content-primary)]",
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                                     style: {
-                                                        paddingTop: 4,
-                                                        paddingBottom: 4,
-                                                        paddingLeft: 10,
-                                                        paddingRight: 10,
-                                                        gap: 'var(--4, 4px)',
-                                                        borderColor: 'var(--neutral-200, #E6E8EB)',
-                                                        borderRadius: 'var(--100, 100px)'
+                                                        color: 'var(--content-primary, #111214)',
+                                                        fontFamily: '"Noto Sans KR", sans-serif',
+                                                        fontSize: 16,
+                                                        fontStyle: 'normal',
+                                                        fontWeight: 700,
+                                                        lineHeight: '120%',
+                                                        letterSpacing: '-0.16px'
                                                     },
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "shrink-0 w-[15px] h-[15px] aspect-square flex items-center justify-center",
-                                                            "aria-hidden": true,
-                                                            children: chip.icon
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 417,
-                                                            columnNumber: 23
-                                                        }, this),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                            className: "whitespace-nowrap",
-                                                            style: {
-                                                                color: 'var(--content-primary, #111214)',
-                                                                fontFamily: 'var(--font-noto-sans-kr), "Noto Sans KR", sans-serif',
-                                                                fontSize: 12,
-                                                                fontWeight: 400,
-                                                                lineHeight: '120%',
-                                                                letterSpacing: -0.12
-                                                            },
-                                                            children: chip.text
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/app/page.tsx",
-                                                            lineNumber: 420,
-                                                            columnNumber: 23
-                                                        }, this)
-                                                    ]
-                                                }, index, true, {
+                                                    children: "Start a Conversation with..."
+                                                }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 400,
-                                                    columnNumber: 21
-                                                }, this))
-                                        }, void 0, false, {
+                                                    lineNumber: 742,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "flex items-start justify-center",
+                                                    style: {
+                                                        gap: 16
+                                                    },
+                                                    children: quickStartItems.map((item)=>{
+                                                        const isSelected = selectedQuickStartItem === item.id;
+                                                        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "relative",
+                                                            style: {
+                                                                width: 148,
+                                                                height: 148,
+                                                                aspectRatio: '1/1',
+                                                                background: `url(${item.image}) lightgray 50% / cover no-repeat`,
+                                                                borderRadius: 16,
+                                                                cursor: 'pointer',
+                                                                border: isSelected ? `3px solid ${item.color}` : 'none',
+                                                                transition: 'border 0.2s ease'
+                                                            },
+                                                            onClick: ()=>handleQuickStartItemClick(item.id),
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                className: "absolute",
+                                                                style: {
+                                                                    left: 0,
+                                                                    bottom: 0,
+                                                                    width: '102.947px',
+                                                                    padding: '0 0 12px 12px',
+                                                                    color: '#FFF',
+                                                                    fontFamily: '"Noto Sans KR", sans-serif',
+                                                                    fontSize: 16,
+                                                                    fontStyle: 'normal',
+                                                                    fontWeight: 700,
+                                                                    lineHeight: '120%',
+                                                                    letterSpacing: '-0.16px'
+                                                                },
+                                                                children: Array.isArray(item.text) ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                                                    children: [
+                                                                        item.text[0],
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("br", {}, void 0, false, {
+                                                                            fileName: "[project]/app/page.tsx",
+                                                                            lineNumber: 800,
+                                                                            columnNumber: 33
+                                                                        }, this),
+                                                                        item.text[1]
+                                                                    ]
+                                                                }, void 0, true) : item.text
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/page.tsx",
+                                                                lineNumber: 781,
+                                                                columnNumber: 27
+                                                            }, this)
+                                                        }, item.id, false, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 766,
+                                                            columnNumber: 25
+                                                        }, this);
+                                                    })
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 757,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 398,
+                                            lineNumber: 734,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 294,
+                                    lineNumber: 557,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 271,
+                            lineNumber: 534,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
                             className: "absolute left-0 right-0 bottom-0 z-30 flex flex-col overflow-hidden bg-background-primary shadow-2xl pt-4 pb-4 px-0",
                             style: {
-                                top: `${GNB_HEIGHT * 2}px`,
+                                top: `${GNB_HEIGHT}px`,
                                 pointerEvents: page === 0 ? 'none' : 'auto'
                             },
                             initial: false,
@@ -1183,65 +1674,458 @@ function GelatoApp() {
                                 style: {
                                     overscrollBehavior: 'contain'
                                 },
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "recommended-products-grid",
-                                    children: mockProducts.map((product, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
-                                            initial: {
-                                                opacity: 0,
-                                                y: 12
-                                            },
-                                            animate: {
-                                                opacity: 1,
-                                                y: 0
-                                            },
-                                            transition: {
-                                                duration: 0.35,
-                                                delay: index * 0.04,
-                                                ease: [
-                                                    0.25,
-                                                    0.46,
-                                                    0.45,
-                                                    0.94
-                                                ]
-                                            },
-                                            className: "recommended-products-grid-item",
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$RecommendedProductItem$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RecommendedProductItem"], {
-                                                id: product.id,
-                                                brand: product.brand,
-                                                title: product.title,
-                                                price: product.price,
-                                                image: product.image,
-                                                discountRate: product.discountRate,
-                                                aspectRatio: product.aspectRatio
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "w-full flex flex-col items-center",
+                                        style: {
+                                            marginTop: 24,
+                                            marginBottom: 0,
+                                            paddingLeft: 24,
+                                            paddingRight: 24
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                style: {
+                                                    width: '100%',
+                                                    maxWidth: 1216
+                                                },
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    style: {
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: 4,
+                                                        marginBottom: 16
+                                                    },
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                                            onClick: ()=>{
+                                                                setSelectedSectionChip('ACG 상품 내에서');
+                                                                setSearchQuery('');
+                                                            },
+                                                            style: {
+                                                                color: 'var(--content-primary, #111214)',
+                                                                fontFamily: '"Noto Sans KR", sans-serif',
+                                                                fontSize: 16,
+                                                                fontStyle: 'normal',
+                                                                fontWeight: 700,
+                                                                lineHeight: '120%',
+                                                                letterSpacing: '-0.16px',
+                                                                margin: 0,
+                                                                cursor: 'pointer'
+                                                            },
+                                                            children: "ACG 모델"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 841,
+                                                            columnNumber: 23
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                            type: "button",
+                                                            onClick: ()=>{
+                                                                setSelectedSectionChip('ACG 상품 내에서');
+                                                                setSearchQuery('');
+                                                            },
+                                                            style: {
+                                                                display: 'flex',
+                                                                width: 'var(--spacing-13, 36px)',
+                                                                height: 'var(--spacing-13, 36px)',
+                                                                justifyContent: 'center',
+                                                                alignItems: 'center',
+                                                                borderRadius: 'var(--spacing-15, 99px)',
+                                                                border: 'none',
+                                                                background: 'transparent',
+                                                                cursor: 'pointer',
+                                                                padding: 0
+                                                            },
+                                                            "aria-label": "더보기",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                xmlns: "http://www.w3.org/2000/svg",
+                                                                width: "16.667",
+                                                                height: "16.667",
+                                                                viewBox: "0 0 19 19",
+                                                                fill: "none",
+                                                                style: {
+                                                                    strokeWidth: '1.68px',
+                                                                    stroke: 'var(--neutral-700-secondary, #404040)'
+                                                                },
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                    d: "M14.1733 6.67336H15.84C16.282 6.67336 16.7059 6.84896 17.0185 7.16152C17.3311 7.47408 17.5067 7.898 17.5067 8.34003V17.5067L14.1733 14.1734H9.17333C8.7313 14.1734 8.30738 13.9978 7.99482 13.6852C7.68226 13.3726 7.50666 12.9487 7.50666 12.5067V11.6734M10.84 6.67336C10.84 7.11539 10.6644 7.53931 10.3518 7.85187C10.0393 8.16443 9.61536 8.34003 9.17333 8.34003H4.17333L0.839996 11.6734V2.50669C0.839996 1.59003 1.59 0.840027 2.50666 0.840027H9.17333C9.61536 0.840027 10.0393 1.01562 10.3518 1.32818C10.6644 1.64074 10.84 2.06467 10.84 2.50669V6.67336Z",
+                                                                    stroke: "var(--neutral-700-secondary, #404040)",
+                                                                    strokeWidth: "1.68",
+                                                                    strokeLinecap: "round",
+                                                                    strokeLinejoin: "round"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/app/page.tsx",
+                                                                    lineNumber: 891,
+                                                                    columnNumber: 27
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/page.tsx",
+                                                                lineNumber: 880,
+                                                                columnNumber: 25
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 860,
+                                                            columnNumber: 23
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 840,
+                                                    columnNumber: 21
+                                                }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 461,
-                                                columnNumber: 23
+                                                lineNumber: 838,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("video", {
+                                                src: "/화면 기록 2026-02-05 오후 3.24.08.mov",
+                                                autoPlay: true,
+                                                loop: true,
+                                                muted: true,
+                                                playsInline: true,
+                                                className: "w-full",
+                                                style: {
+                                                    maxWidth: 1216,
+                                                    height: 700,
+                                                    borderRadius: 40,
+                                                    overflow: 'hidden',
+                                                    objectFit: 'cover'
+                                                },
+                                                children: "브라우저가 동영상 태그를 지원하지 않습니다."
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/page.tsx",
+                                                lineNumber: 902,
+                                                columnNumber: 19
                                             }, this)
-                                        }, product.id, false, {
-                                            fileName: "[project]/app/page.tsx",
-                                            lineNumber: 454,
-                                            columnNumber: 21
-                                        }, this))
-                                }, void 0, false, {
-                                    fileName: "[project]/app/page.tsx",
-                                    lineNumber: 452,
-                                    columnNumber: 17
-                                }, this)
-                            }, void 0, false, {
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/page.tsx",
+                                        lineNumber: 829,
+                                        columnNumber: 17
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "w-full flex flex-col items-center",
+                                        style: {
+                                            paddingLeft: 24,
+                                            paddingRight: 24,
+                                            marginTop: 40
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                style: {
+                                                    width: '100%',
+                                                    maxWidth: 1216,
+                                                    marginBottom: 40
+                                                },
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        style: {
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            gap: 4,
+                                                            marginBottom: 16
+                                                        },
+                                                        children: [
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                                                onClick: ()=>{
+                                                                    setSelectedSectionChip('10만원 이하 상품 내에서');
+                                                                    setSearchQuery('');
+                                                                },
+                                                                style: {
+                                                                    color: 'var(--content-primary, #111214)',
+                                                                    fontFamily: '"Noto Sans KR", sans-serif',
+                                                                    fontSize: 16,
+                                                                    fontStyle: 'normal',
+                                                                    fontWeight: 700,
+                                                                    lineHeight: '120%',
+                                                                    letterSpacing: '-0.16px',
+                                                                    margin: 0,
+                                                                    cursor: 'pointer'
+                                                                },
+                                                                children: "New Runner"
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/page.tsx",
+                                                                lineNumber: 924,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                type: "button",
+                                                                onClick: ()=>{
+                                                                    setSelectedSectionChip('10만원 이하 상품 내에서');
+                                                                    setSearchQuery('');
+                                                                },
+                                                                style: {
+                                                                    display: 'flex',
+                                                                    width: 'var(--spacing-13, 36px)',
+                                                                    height: 'var(--spacing-13, 36px)',
+                                                                    justifyContent: 'center',
+                                                                    alignItems: 'center',
+                                                                    borderRadius: 'var(--spacing-15, 99px)',
+                                                                    border: 'none',
+                                                                    background: 'transparent',
+                                                                    cursor: 'pointer',
+                                                                    padding: 0
+                                                                },
+                                                                "aria-label": "더보기",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                    xmlns: "http://www.w3.org/2000/svg",
+                                                                    width: "16.667",
+                                                                    height: "16.667",
+                                                                    viewBox: "0 0 19 19",
+                                                                    fill: "none",
+                                                                    style: {
+                                                                        strokeWidth: '1.68px',
+                                                                        stroke: 'var(--neutral-700-secondary, #404040)'
+                                                                    },
+                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                        d: "M14.1733 6.67336H15.84C16.282 6.67336 16.7059 6.84896 17.0185 7.16152C17.3311 7.47408 17.5067 7.898 17.5067 8.34003V17.5067L14.1733 14.1734H9.17333C8.7313 14.1734 8.30738 13.9978 7.99482 13.6852C7.68226 13.3726 7.50666 12.9487 7.50666 12.5067V11.6734M10.84 6.67336C10.84 7.11539 10.6644 7.53931 10.3518 7.85187C10.0393 8.16443 9.61536 8.34003 9.17333 8.34003H4.17333L0.839996 11.6734V2.50669C0.839996 1.59003 1.59 0.840027 2.50666 0.840027H9.17333C9.61536 0.840027 10.0393 1.01562 10.3518 1.32818C10.6644 1.64074 10.84 2.06467 10.84 2.50669V6.67336Z",
+                                                                        stroke: "var(--neutral-700-secondary, #404040)",
+                                                                        strokeWidth: "1.68",
+                                                                        strokeLinecap: "round",
+                                                                        strokeLinejoin: "round"
+                                                                    }, void 0, false, {
+                                                                        fileName: "[project]/app/page.tsx",
+                                                                        lineNumber: 974,
+                                                                        columnNumber: 27
+                                                                    }, this)
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/app/page.tsx",
+                                                                    lineNumber: 963,
+                                                                    columnNumber: 25
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/page.tsx",
+                                                                lineNumber: 943,
+                                                                columnNumber: 23
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "[project]/app/page.tsx",
+                                                        lineNumber: 923,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "recommended-products-grid",
+                                                        style: {
+                                                            maxWidth: 1216
+                                                        },
+                                                        children: mockProducts.slice(0, 12).map((product, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                                                                initial: {
+                                                                    opacity: 0,
+                                                                    y: 12
+                                                                },
+                                                                animate: {
+                                                                    opacity: 1,
+                                                                    y: 0
+                                                                },
+                                                                transition: {
+                                                                    duration: 0.35,
+                                                                    delay: index * 0.04,
+                                                                    ease: [
+                                                                        0.25,
+                                                                        0.46,
+                                                                        0.45,
+                                                                        0.94
+                                                                    ]
+                                                                },
+                                                                className: "recommended-products-grid-item",
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$RecommendedProductItem$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RecommendedProductItem"], {
+                                                                    id: product.id,
+                                                                    brand: product.brand,
+                                                                    title: product.title,
+                                                                    price: product.price,
+                                                                    image: product.image,
+                                                                    discountRate: product.discountRate,
+                                                                    aspectRatio: product.aspectRatio
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/app/page.tsx",
+                                                                    lineNumber: 993,
+                                                                    columnNumber: 27
+                                                                }, this)
+                                                            }, `new-runner-${product.id}`, false, {
+                                                                fileName: "[project]/app/page.tsx",
+                                                                lineNumber: 986,
+                                                                columnNumber: 25
+                                                            }, this))
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/app/page.tsx",
+                                                        lineNumber: 984,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/app/page.tsx",
+                                                lineNumber: 922,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                style: {
+                                                    width: '100%',
+                                                    maxWidth: 1216
+                                                },
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    style: {
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: 4,
+                                                        marginBottom: 16
+                                                    },
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                                            onClick: ()=>{
+                                                                setSelectedSectionChip('친구 선물용 상품 내에서');
+                                                                setSearchQuery('');
+                                                            },
+                                                            style: {
+                                                                color: 'var(--content-primary, #111214)',
+                                                                fontFamily: '"Noto Sans KR", sans-serif',
+                                                                fontSize: 16,
+                                                                fontStyle: 'normal',
+                                                                fontWeight: 700,
+                                                                lineHeight: '120%',
+                                                                letterSpacing: '-0.16px',
+                                                                margin: 0,
+                                                                cursor: 'pointer'
+                                                            },
+                                                            children: "Discovery"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 1010,
+                                                            columnNumber: 23
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                            type: "button",
+                                                            onClick: ()=>{
+                                                                setSelectedSectionChip('친구 선물용 상품 내에서');
+                                                                setSearchQuery('');
+                                                            },
+                                                            style: {
+                                                                display: 'flex',
+                                                                width: 'var(--spacing-13, 36px)',
+                                                                height: 'var(--spacing-13, 36px)',
+                                                                justifyContent: 'center',
+                                                                alignItems: 'center',
+                                                                borderRadius: 'var(--spacing-15, 99px)',
+                                                                border: 'none',
+                                                                background: 'transparent',
+                                                                cursor: 'pointer',
+                                                                padding: 0
+                                                            },
+                                                            "aria-label": "더보기",
+                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                xmlns: "http://www.w3.org/2000/svg",
+                                                                width: "16.667",
+                                                                height: "16.667",
+                                                                viewBox: "0 0 19 19",
+                                                                fill: "none",
+                                                                style: {
+                                                                    strokeWidth: '1.68px',
+                                                                    stroke: 'var(--neutral-700-secondary, #404040)'
+                                                                },
+                                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                    d: "M14.1733 6.67336H15.84C16.282 6.67336 16.7059 6.84896 17.0185 7.16152C17.3311 7.47408 17.5067 7.898 17.5067 8.34003V17.5067L14.1733 14.1734H9.17333C8.7313 14.1734 8.30738 13.9978 7.99482 13.6852C7.68226 13.3726 7.50666 12.9487 7.50666 12.5067V11.6734M10.84 6.67336C10.84 7.11539 10.6644 7.53931 10.3518 7.85187C10.0393 8.16443 9.61536 8.34003 9.17333 8.34003H4.17333L0.839996 11.6734V2.50669C0.839996 1.59003 1.59 0.840027 2.50666 0.840027H9.17333C9.61536 0.840027 10.0393 1.01562 10.3518 1.32818C10.6644 1.64074 10.84 2.06467 10.84 2.50669V6.67336Z",
+                                                                    stroke: "var(--neutral-700-secondary, #404040)",
+                                                                    strokeWidth: "1.68",
+                                                                    strokeLinecap: "round",
+                                                                    strokeLinejoin: "round"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/app/page.tsx",
+                                                                    lineNumber: 1060,
+                                                                    columnNumber: 27
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "[project]/app/page.tsx",
+                                                                lineNumber: 1049,
+                                                                columnNumber: 25
+                                                            }, this)
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 1029,
+                                                            columnNumber: 23
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/app/page.tsx",
+                                                    lineNumber: 1009,
+                                                    columnNumber: 21
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/page.tsx",
+                                                lineNumber: 1007,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "recommended-products-grid",
+                                                style: {
+                                                    maxWidth: 1216
+                                                },
+                                                children: mockProducts.map((product, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                                                        initial: {
+                                                            opacity: 0,
+                                                            y: 12
+                                                        },
+                                                        animate: {
+                                                            opacity: 1,
+                                                            y: 0
+                                                        },
+                                                        transition: {
+                                                            duration: 0.35,
+                                                            delay: index * 0.04,
+                                                            ease: [
+                                                                0.25,
+                                                                0.46,
+                                                                0.45,
+                                                                0.94
+                                                            ]
+                                                        },
+                                                        className: "recommended-products-grid-item",
+                                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$RecommendedProductItem$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["RecommendedProductItem"], {
+                                                            id: product.id,
+                                                            brand: product.brand,
+                                                            title: product.title,
+                                                            price: product.price,
+                                                            image: product.image,
+                                                            discountRate: product.discountRate,
+                                                            aspectRatio: product.aspectRatio
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/page.tsx",
+                                                            lineNumber: 1080,
+                                                            columnNumber: 23
+                                                        }, this)
+                                                    }, product.id, false, {
+                                                        fileName: "[project]/app/page.tsx",
+                                                        lineNumber: 1073,
+                                                        columnNumber: 21
+                                                    }, this))
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/page.tsx",
+                                                lineNumber: 1071,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/page.tsx",
+                                        lineNumber: 920,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 447,
+                                lineNumber: 823,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 440,
+                            lineNumber: 816,
                             columnNumber: 13
                         }, this)
                     ]
                 }, "fullpage", true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 269,
+                    lineNumber: 532,
                     columnNumber: 11
                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
                     initial: {
@@ -1282,12 +2166,12 @@ function GelatoApp() {
                                         className: "rounded-lg border border-border-primary bg-background-input-normal px-4 py-2.5 text-sm focus-visible:ring-1 focus-visible:ring-content-highlighted"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 492,
+                                        lineNumber: 1112,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 491,
+                                    lineNumber: 1111,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1312,22 +2196,22 @@ function GelatoApp() {
                                                     children: msg.content
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 516,
+                                                    lineNumber: 1136,
                                                     columnNumber: 23
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 509,
+                                                lineNumber: 1129,
                                                 columnNumber: 21
                                             }, this)
                                         }, index, false, {
                                             fileName: "[project]/app/page.tsx",
-                                            lineNumber: 502,
+                                            lineNumber: 1122,
                                             columnNumber: 19
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 500,
+                                    lineNumber: 1120,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1338,18 +2222,18 @@ function GelatoApp() {
                                         children: "Back to Home"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 522,
+                                        lineNumber: 1142,
                                         columnNumber: 17
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/page.tsx",
-                                    lineNumber: 521,
+                                    lineNumber: 1141,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 485,
+                            lineNumber: 1105,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -1373,7 +2257,7 @@ function GelatoApp() {
                                         children: "Search Results"
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 537,
+                                        lineNumber: 1157,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1400,49 +2284,49 @@ function GelatoApp() {
                                                     discountRate: product.discountRate
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/page.tsx",
-                                                    lineNumber: 547,
+                                                    lineNumber: 1167,
                                                     columnNumber: 23
                                                 }, this)
                                             }, product.id, false, {
                                                 fileName: "[project]/app/page.tsx",
-                                                lineNumber: 540,
+                                                lineNumber: 1160,
                                                 columnNumber: 21
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/app/page.tsx",
-                                        lineNumber: 538,
+                                        lineNumber: 1158,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/page.tsx",
-                                lineNumber: 536,
+                                lineNumber: 1156,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/page.tsx",
-                            lineNumber: 530,
+                            lineNumber: 1150,
                             columnNumber: 13
                         }, this)
                     ]
                 }, "search", true, {
                     fileName: "[project]/app/page.tsx",
-                    lineNumber: 477,
+                    lineNumber: 1097,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/page.tsx",
-                lineNumber: 267,
+                lineNumber: 530,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/page.tsx",
-        lineNumber: 199,
+        lineNumber: 315,
         columnNumber: 5
     }, this);
 }
-_s(GelatoApp, "mw83vuYprKnR7spYplHvlIgnCxY=");
+_s(GelatoApp, "nHpWdU6giW1EFNx5VowN2Woxqmw=");
 _c = GelatoApp;
 var _c;
 __turbopack_context__.k.register(_c, "GelatoApp");
