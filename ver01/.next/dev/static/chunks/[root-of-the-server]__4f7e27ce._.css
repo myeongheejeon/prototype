@@ -5571,10 +5571,6 @@
     height: 1.15rem;
   }
 
-  .h-\[15px\] {
-    height: 15px;
-  }
-
   .h-\[52px\] {
     height: 52px;
   }
@@ -5719,10 +5715,6 @@
     width: 72px;
   }
 
-  .w-\[15px\] {
-    width: 15px;
-  }
-
   .w-\[35\%\] {
     width: 35%;
   }
@@ -5769,10 +5761,6 @@
 
   .max-w-\[calc\(100\%-2rem\)\] {
     max-width: calc(100% - 2rem);
-  }
-
-  .max-w-full {
-    max-width: 100%;
   }
 
   .max-w-max {
@@ -6116,16 +6104,8 @@
     gap: calc(var(--spacing) * 7);
   }
 
-  .gap-\[5\.765px\] {
-    gap: 5.765px;
-  }
-
   .gap-\[10px\] {
     gap: 10px;
-  }
-
-  .gap-\[var\(--4\,4px\)\] {
-    gap: var(--4, 4px);
   }
 
   :where(.space-y-4 > :not(:last-child)) {
@@ -6757,10 +6737,6 @@
     padding-top: 4px;
   }
 
-  .pt-\[52px\] {
-    padding-top: 52px;
-  }
-
   .pr-1 {
     padding-right: calc(var(--spacing) * 1);
   }
@@ -7116,10 +7092,6 @@
   .subpixel-antialiased {
     -webkit-font-smoothing: auto;
     -moz-osx-font-smoothing: auto;
-  }
-
-  .placeholder-\[var\(--content-placeholder\,\#9EA2A8\)\]::placeholder {
-    color: var(--content-placeholder, #9ea2a8);
   }
 
   .opacity-0 {
@@ -8111,10 +8083,6 @@
 
   .focus-visible\:ring-\[var\(--button-primaryActivated\)\]:focus-visible {
     --tw-ring-color: var(--button-primaryActivated);
-  }
-
-  .focus-visible\:ring-\[var\(--content-primary\)\]:focus-visible {
-    --tw-ring-color: var(--content-primary);
   }
 
   .focus-visible\:ring-content-highlighted:focus-visible {
@@ -10845,7 +10813,13 @@
     padding-left: 24px;
     padding-right: 24px;
   }
+}
 
+body.design-a-body {
+  background: #000;
+}
+
+@media (max-width: 639px) {
   .design-a-content-padding {
     box-sizing: border-box;
     padding-left: 24px;

@@ -1,0 +1,3 @@
+module.exports=[87924,(a,b,c)=>{"use strict";b.exports=a.r(42602).vendored["react-ssr"].ReactJsxRuntime},98185,a=>{"use strict";var b=a.i(87924),c=a.i(72131);let d="design-a-body";function e({children:a}){return(0,c.useEffect)(()=>(document.body.classList.add(d),()=>document.body.classList.remove(d)),[]),(0,b.jsx)(b.Fragment,{children:a})}a.s(["default",()=>e])}];
+
+//# sourceMappingURL=_66100dab._.js.map

@@ -1,3 +1,6 @@
+# GitHub Pages 배포 (https://myeongheejeon.github.io/prototype/)
+# ⚠️ 저장소 Settings → Pages → Build and deployment → Source 를 "GitHub Actions" 로 설정해야 합니다.
+#    "Deploy from a branch" 로 되어 있으면 루트에 index.html 이 없어 404 가 납니다.
 name: Deploy to GitHub Pages
 
 on:
@@ -44,6 +47,8 @@ jobs:
           ls -la ver01/out/
           echo "=== index.html 존재 여부 ==="
           test -f ver01/out/index.html && echo "OK: index.html 있음" || (echo "ERROR: index.html 없음" && exit 1)
+          echo "=== design-a 경로 (trailingSlash) ==="
+          test -f ver01/out/design-a/index.html && echo "OK: design-a/index.html 있음" || echo "WARN: design-a/index.html 없음"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
