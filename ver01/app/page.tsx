@@ -1109,7 +1109,10 @@ export default function GelatoApp() {
                         </svg>
                       </button>
                     </div>
-                    <div className="recommended-products-grid recommended-products-grid-newrunner" style={{ width: '100%', maxWidth: 1216, minWidth: 0 }}>
+                    <div
+                      className="recommended-products-grid recommended-products-grid-newrunner"
+                      style={{ width: '100%', maxWidth: 1216, minWidth: 0, display: 'block' }}
+                    >
                       {newRunnerDisplayData.map(({ product, masonryAspect }, index) => (
                         <motion.div
                           key={`new-runner-${product.id}`}

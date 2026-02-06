@@ -10777,6 +10777,10 @@
   }
 }
 
+.recommended-products-grid-newrunner {
+  column-fill: auto;
+}
+
 .quick-start-item {
   aspect-ratio: 1;
   width: calc(40vw - .8rem);

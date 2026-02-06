@@ -385,9 +385,33 @@
   }
 }
 
-/* New Runner 전용: 컬럼 순서대로 채워서 열 높이 동일 → 바닥 일직선 */
-.recommended-products-grid-newrunner {
-  column-fill: auto;
+/* New Runner 전용: 컬럼 순서대로 채워서 열 높이 동일 → 바닥 일직선 (배포 시에도 적용되도록 !important) */
+.recommended-products-grid.recommended-products-grid-newrunner {
+  column-count: 2 !important;
+  column-gap: 16px !important;
+  column-fill: auto !important;
+  display: block !important;
+  width: 100% !important;
+}
+@media (min-width: 520px) {
+  .recommended-products-grid.recommended-products-grid-newrunner {
+    column-count: 3 !important;
+  }
+}
+@media (min-width: 720px) {
+  .recommended-products-grid.recommended-products-grid-newrunner {
+    column-count: 4 !important;
+  }
+}
+@media (min-width: 960px) {
+  .recommended-products-grid.recommended-products-grid-newrunner {
+    column-count: 5 !important;
+  }
+}
+@media (min-width: 1200px) {
+  .recommended-products-grid.recommended-products-grid-newrunner {
+    column-count: 6 !important;
+  }
 }
 
 /* 빠른 스타트 아이템: 모바일 2.5개 노출(풀폭 스크롤 시 100vw 기준), 데스크톱 148px 고정 */
