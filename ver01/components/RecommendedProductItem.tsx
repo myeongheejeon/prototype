@@ -8,8 +8,8 @@ const getImagePath = (path: string) => {
   return `${basePath}${path}`
 }
 
-/** 매디슨 그리드용 비율 타입: square(1/1), tall(3/4), taller(2/3) */
-export type MasonryAspectType = 'square' | 'tall' | 'taller'
+/** 매디슨 그리드용 비율: Square 1/1, Tall 3/4, Short 5/4 */
+export type MasonryAspectType = 'square' | 'tall' | 'short'
 
 export type AspectRatioType = '1:1' | '2:1' | '1:2'
 
@@ -21,19 +21,21 @@ export interface RecommendedProductItemProps {
   image: string
   discountRate?: number
   aspectRatio?: AspectRatioType
+  masonryAspect?: MasonryAspectType
 }
-
-const MASONRY_ASPECT_TYPES: MasonryAspectType[] = ['square', 'tall', 'taller']
 
 const MASONRY_ASPECT_VALUES: Record<MasonryAspectType, string> = {
   square: '1 / 1',
   tall: '3 / 4',
-  taller: '2 / 3',
+  short: '5 / 4',
 }
 
-/** id 기반으로 결정론적 "랜덤" 비율 반환 (SSR/클라이언트 동일, 수화 오류 방지) */
+/** Discovery 등: id 기반 결정론적 분배 (수화 일치) */
 function getMasonryAspectForId(id: number): MasonryAspectType {
-  return MASONRY_ASPECT_TYPES[(id * 7 + 13) % 3]
+  const r = id % 3
+  if (r === 0) return 'square'
+  if (r === 1) return 'tall'
+  return 'short'
 }
 
 export function RecommendedProductItem({
@@ -43,9 +45,12 @@ export function RecommendedProductItem({
   price,
   image,
   discountRate,
+  masonryAspect: masonryAspectProp,
 }: RecommendedProductItemProps) {
-  const masonryAspect = useMemo(() => getMasonryAspectForId(id), [id])
-  const aspectRatioCss = MASONRY_ASPECT_VALUES[masonryAspect]
+  const aspectRatioCss = useMemo(
+    () => MASONRY_ASPECT_VALUES[masonryAspectProp ?? getMasonryAspectForId(id)],
+    [id, masonryAspectProp]
+  )
 
   const displayPrice = price.toLocaleString('ko-KR')
   const discountedPrice =

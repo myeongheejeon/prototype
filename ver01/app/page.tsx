@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 import { Search, ChevronRight } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Header, HEADER_TOTAL_HEIGHT_PX } from '@/components/Header'
-import { RecommendedProductItem } from '@/components/RecommendedProductItem'
+import { RecommendedProductItem, type MasonryAspectType } from '@/components/RecommendedProductItem'
 import { motion, AnimatePresence } from 'framer-motion'
 
 // basePath를 포함한 이미지 경로 처리 함수
@@ -88,6 +88,24 @@ const mockProducts: Product[] = (() => {
   })
 
   return list
+})()
+
+/** New Runner: 사전 정의 패턴 — 홀수열 Pattern A, 짝수열 Pattern B → 지그재그 + 바닥 일직선 */
+const PATTERN_A: MasonryAspectType[] = ['tall', 'square', 'short']   // 홀수 컬럼 (1, 3, 5)
+const PATTERN_B: MasonryAspectType[] = ['short', 'tall', 'square']  // 짝수 컬럼 (0, 2, 4)
+const NEW_RUNNER_COLUMNS = 6
+const NEW_RUNNER_ITEMS_PER_COLUMN = 3
+
+const newRunnerDisplayData: { product: Product; masonryAspect: MasonryAspectType }[] = (() => {
+  const base = mockProducts.slice(0, 18)
+  const out: { product: Product; masonryAspect: MasonryAspectType }[] = []
+  for (let col = 0; col < NEW_RUNNER_COLUMNS; col++) {
+    const pattern = col % 2 === 0 ? PATTERN_B : PATTERN_A
+    for (let i = 0; i < NEW_RUNNER_ITEMS_PER_COLUMN; i++) {
+      out.push({ product: base[col * NEW_RUNNER_ITEMS_PER_COLUMN + i], masonryAspect: pattern[i] })
+    }
+  }
+  return out
 })()
 
 const placeholders = [
@@ -1029,7 +1047,7 @@ export default function GelatoApp() {
                 </div>
                 <div className="w-full flex flex-col items-center" style={{ paddingLeft: 24, paddingRight: 24, marginTop: 40 }}>
                   {/* New Runner 섹션 */}
-                  <div style={{ width: '100%', maxWidth: 1216, marginBottom: 40 }}>
+                  <div style={{ width: '100%', maxWidth: 1216, marginBottom: 40, minWidth: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 16 }}>
                       <h2
                         onClick={() => {
@@ -1091,8 +1109,8 @@ export default function GelatoApp() {
                         </svg>
                       </button>
                     </div>
-                    <div className="recommended-products-grid" style={{ maxWidth: 1216 }}>
-                      {mockProducts.slice(0, 30).map((product, index) => (
+                    <div className="recommended-products-grid recommended-products-grid-newrunner" style={{ width: '100%', maxWidth: 1216, minWidth: 0 }}>
+                      {newRunnerDisplayData.map(({ product, masonryAspect }, index) => (
                         <motion.div
                           key={`new-runner-${product.id}`}
                           initial={{ opacity: 0, y: 12 }}
@@ -1107,14 +1125,14 @@ export default function GelatoApp() {
                             price={product.price}
                             image={product.image}
                             discountRate={product.discountRate}
-                            aspectRatio={product.aspectRatio}
+                            masonryAspect={masonryAspect}
                           />
                         </motion.div>
                       ))}
                     </div>
                   </div>
                   
-                  <div style={{ width: '100%', maxWidth: 1216 }}>
+                  <div style={{ width: '100%', maxWidth: 1216, minWidth: 0 }}>
                     {/* Discovery 타이틀 */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginBottom: 16 }}>
                       <h2
@@ -1178,8 +1196,8 @@ export default function GelatoApp() {
                       </button>
                     </div>
                   </div>
-                  <div className="recommended-products-grid" style={{ maxWidth: 1216 }}>
-                    {mockProducts.map((product, index) => (
+                  <div className="recommended-products-grid" style={{ width: '100%', maxWidth: 1216, minWidth: 0 }}>
+                    {mockProducts.slice(0, 54).map((product, index) => (
                     <motion.div
                       key={product.id}
                       initial={{ opacity: 0, y: 12 }}
@@ -1194,7 +1212,6 @@ export default function GelatoApp() {
                         price={product.price}
                         image={product.image}
                         discountRate={product.discountRate}
-                        aspectRatio={product.aspectRatio}
                       />
                     </motion.div>
                   ))}
@@ -1281,7 +1298,6 @@ export default function GelatoApp() {
                         price={product.price}
                         image={product.image}
                         discountRate={product.discountRate}
-                        aspectRatio={product.aspectRatio}
                       />
                     </motion.div>
                   ))}

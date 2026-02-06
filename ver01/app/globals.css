@@ -332,21 +332,24 @@
   animation: search-shadow-pulse-4 5.8s ease-in-out infinite;
 }
 
-/* 추천 상품: 핀터레스트 스타일 그리드 (좌우 24px만, 나머지 전부 아이템) */
+/* 추천 상품: 매디슨 그리드 (CSS Multi-column, 모바일 우선) */
 .recommended-products-grid {
-  width: 100%;
+  display: block !important;
+  width: 100% !important;
   max-width: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  column-count: 6;
+  column-count: 2;
   column-gap: 16px;
   column-fill: balance;
   transition: column-gap 0.3s ease;
 }
 
 .recommended-products-grid-item {
+  display: block;
   break-inside: avoid;
+  page-break-inside: avoid;
   margin-bottom: 16px;
   transition: transform 0.25s ease, opacity 0.3s ease;
   width: 100%;
@@ -358,29 +361,33 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-@media (max-width: 1200px) {
-  .recommended-products-grid {
-    column-count: 5;
-  }
-}
-
-@media (max-width: 960px) {
-  .recommended-products-grid {
-    column-count: 4;
-  }
-}
-
-@media (max-width: 720px) {
+@media (min-width: 520px) {
   .recommended-products-grid {
     column-count: 3;
   }
 }
 
-@media (max-width: 520px) {
+@media (min-width: 720px) {
   .recommended-products-grid {
-    column-count: 2;
-    column-gap: 16px;
+    column-count: 4;
   }
+}
+
+@media (min-width: 960px) {
+  .recommended-products-grid {
+    column-count: 5;
+  }
+}
+
+@media (min-width: 1200px) {
+  .recommended-products-grid {
+    column-count: 6;
+  }
+}
+
+/* New Runner 전용: 컬럼 순서대로 채워서 열 높이 동일 → 바닥 일직선 */
+.recommended-products-grid-newrunner {
+  column-fill: auto;
 }
 
 /* 빠른 스타트 아이템: 모바일 2.5개 노출(풀폭 스크롤 시 100vw 기준), 데스크톱 148px 고정 */
