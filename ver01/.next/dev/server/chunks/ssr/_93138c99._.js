@@ -344,19 +344,33 @@ __turbopack_context__.s([
     ()=>RecommendedProductItem
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 'use client';
+;
 ;
 // basePath를 포함한 이미지 경로 처리 함수
 const getImagePath = (path)=>{
     const basePath = ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : '';
     return `${basePath}${path}`;
 };
-const aspectRatioMap = {
-    '1:1': '1',
-    '2:1': '2',
-    '1:2': '1 / 2'
+const MASONRY_ASPECT_TYPES = [
+    'square',
+    'tall',
+    'taller'
+];
+const MASONRY_ASPECT_VALUES = {
+    square: '1 / 1',
+    tall: '3 / 4',
+    taller: '2 / 3'
 };
-function RecommendedProductItem({ brand, title, price, image, discountRate, aspectRatio = '1:1' }) {
+/** id 기반으로 결정론적 "랜덤" 비율 반환 (SSR/클라이언트 동일, 수화 오류 방지) */ function getMasonryAspectForId(id) {
+    return MASONRY_ASPECT_TYPES[(id * 7 + 13) % 3];
+}
+function RecommendedProductItem({ id, brand, title, price, image, discountRate }) {
+    const masonryAspect = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>getMasonryAspectForId(id), [
+        id
+    ]);
+    const aspectRatioCss = MASONRY_ASPECT_VALUES[masonryAspect];
     const displayPrice = price.toLocaleString('ko-KR');
     const discountedPrice = discountRate != null && discountRate > 0 ? Math.round(price * (100 - discountRate) / 100).toLocaleString('ko-KR') : null;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("article", {
@@ -371,7 +385,7 @@ function RecommendedProductItem({ brand, title, price, image, discountRate, aspe
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "relative flex w-full items-center justify-center overflow-hidden border-b border-[var(--border-primary,#F4F5F7)]",
                 style: {
-                    aspectRatio: aspectRatioMap[aspectRatio],
+                    aspectRatio: aspectRatioCss,
                     borderTopLeftRadius: 'var(--8, 8px)',
                     borderTopRightRadius: 'var(--8, 8px)',
                     borderBottom: '1px solid var(--border-primary, #F4F5F7)'
@@ -380,10 +394,15 @@ function RecommendedProductItem({ brand, title, price, image, discountRate, aspe
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                         src: getImagePath(image),
                         alt: title,
-                        className: "h-full w-full object-cover object-center"
+                        className: "object-cover object-center",
+                        style: {
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover'
+                        }
                     }, void 0, false, {
                         fileName: "[project]/components/RecommendedProductItem.tsx",
-                        lineNumber: 63,
+                        lineNumber: 76,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -406,18 +425,18 @@ function RecommendedProductItem({ brand, title, price, image, discountRate, aspe
                             className: "shrink-0 w-5 h-5"
                         }, void 0, false, {
                             fileName: "[project]/components/RecommendedProductItem.tsx",
-                            lineNumber: 82,
+                            lineNumber: 96,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/RecommendedProductItem.tsx",
-                        lineNumber: 69,
+                        lineNumber: 83,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/RecommendedProductItem.tsx",
-                lineNumber: 54,
+                lineNumber: 67,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -446,7 +465,7 @@ function RecommendedProductItem({ brand, title, price, image, discountRate, aspe
                         children: brand
                     }, void 0, false, {
                         fileName: "[project]/components/RecommendedProductItem.tsx",
-                        lineNumber: 96,
+                        lineNumber: 110,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -467,7 +486,7 @@ function RecommendedProductItem({ brand, title, price, image, discountRate, aspe
                         children: title
                     }, void 0, false, {
                         fileName: "[project]/components/RecommendedProductItem.tsx",
-                        lineNumber: 115,
+                        lineNumber: 129,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -494,7 +513,7 @@ function RecommendedProductItem({ brand, title, price, image, discountRate, aspe
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/RecommendedProductItem.tsx",
-                                lineNumber: 143,
+                                lineNumber: 157,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -512,7 +531,7 @@ function RecommendedProductItem({ brand, title, price, image, discountRate, aspe
                                         children: discountedPrice ?? displayPrice
                                     }, void 0, false, {
                                         fileName: "[project]/components/RecommendedProductItem.tsx",
-                                        lineNumber: 158,
+                                        lineNumber: 172,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -529,31 +548,31 @@ function RecommendedProductItem({ brand, title, price, image, discountRate, aspe
                                         children: "원"
                                     }, void 0, false, {
                                         fileName: "[project]/components/RecommendedProductItem.tsx",
-                                        lineNumber: 170,
+                                        lineNumber: 184,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/RecommendedProductItem.tsx",
-                                lineNumber: 157,
+                                lineNumber: 171,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/RecommendedProductItem.tsx",
-                        lineNumber: 134,
+                        lineNumber: 148,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/RecommendedProductItem.tsx",
-                lineNumber: 87,
+                lineNumber: 101,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/RecommendedProductItem.tsx",
-        lineNumber: 44,
+        lineNumber: 57,
         columnNumber: 5
     }, this);
 }

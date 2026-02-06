@@ -1,12 +1,15 @@
 'use client'
 
-import React from 'react'
+import React, { useMemo } from 'react'
 
 // basePath를 포함한 이미지 경로 처리 함수
 const getImagePath = (path: string) => {
   const basePath = process.env.NODE_ENV === 'production' ? '/prototype' : ''
   return `${basePath}${path}`
 }
+
+/** 매디슨 그리드용 비율 타입: square(1/1), tall(3/4), taller(2/3) */
+export type MasonryAspectType = 'square' | 'tall' | 'taller'
 
 export type AspectRatioType = '1:1' | '2:1' | '1:2'
 
@@ -20,20 +23,30 @@ export interface RecommendedProductItemProps {
   aspectRatio?: AspectRatioType
 }
 
-const aspectRatioMap: Record<AspectRatioType, string> = {
-  '1:1': '1',
-  '2:1': '2',
-  '1:2': '1 / 2',
+const MASONRY_ASPECT_TYPES: MasonryAspectType[] = ['square', 'tall', 'taller']
+
+const MASONRY_ASPECT_VALUES: Record<MasonryAspectType, string> = {
+  square: '1 / 1',
+  tall: '3 / 4',
+  taller: '2 / 3',
+}
+
+/** id 기반으로 결정론적 "랜덤" 비율 반환 (SSR/클라이언트 동일, 수화 오류 방지) */
+function getMasonryAspectForId(id: number): MasonryAspectType {
+  return MASONRY_ASPECT_TYPES[(id * 7 + 13) % 3]
 }
 
 export function RecommendedProductItem({
+  id,
   brand,
   title,
   price,
   image,
   discountRate,
-  aspectRatio = '1:1',
 }: RecommendedProductItemProps) {
+  const masonryAspect = useMemo(() => getMasonryAspectForId(id), [id])
+  const aspectRatioCss = MASONRY_ASPECT_VALUES[masonryAspect]
+
   const displayPrice = price.toLocaleString('ko-KR')
   const discountedPrice =
     discountRate != null && discountRate > 0
@@ -50,11 +63,11 @@ export function RecommendedProductItem({
         transition: 'transform 0.25s ease, box-shadow 0.25s ease',
       }}
     >
-      {/* 이미지 영역: 1:1, 2:1, 1:2 비율 (상단 모서리 둥글게) */}
+      {/* 이미지 영역: 매디슨 비율(square / tall / taller) + 꽉 채우기 */}
       <div
         className="relative flex w-full items-center justify-center overflow-hidden border-b border-[var(--border-primary,#F4F5F7)]"
         style={{
-          aspectRatio: aspectRatioMap[aspectRatio],
+          aspectRatio: aspectRatioCss,
           borderTopLeftRadius: 'var(--8, 8px)',
           borderTopRightRadius: 'var(--8, 8px)',
           borderBottom: '1px solid var(--border-primary, #F4F5F7)',
@@ -63,7 +76,8 @@ export function RecommendedProductItem({
         <img
           src={getImagePath(image)}
           alt={title}
-          className="h-full w-full object-cover object-center"
+          className="object-cover object-center"
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
         {/* 리파인 버튼 */}
         <button
