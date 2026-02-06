@@ -1110,8 +1110,8 @@ export default function GelatoApp() {
                       </button>
                     </div>
                     <div
-                      className="recommended-products-grid recommended-products-grid-newrunner"
-                      style={{ width: '100%', maxWidth: 1216, minWidth: 0, display: 'block' }}
+                      className="force-masonry-grid"
+                      style={{ width: '100%', maxWidth: 1216, minWidth: 0 }}
                     >
                       {newRunnerDisplayData.map(({ product, masonryAspect }, index) => (
                         <motion.div
@@ -1119,7 +1119,7 @@ export default function GelatoApp() {
                           initial={{ opacity: 0, y: 12 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.35, delay: index * 0.04, ease: [0.25, 0.46, 0.45, 0.94] }}
-                          className="recommended-products-grid-item"
+                          className="force-masonry-item"
                         >
                           <RecommendedProductItem
                             id={product.id}
