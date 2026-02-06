@@ -57,6 +57,9 @@ const mockProducts: Product[] = (() => {
     ;[shuffledImages[i], shuffledImages[j]] = [shuffledImages[j], shuffledImages[i]]
   }
 
+  // 비율 순서: 1:1, 1:2, 2:1 반복 (지그재그)
+  const aspectRatios: AspectRatioType[] = ['1:1', '1:2', '2:1']
+
   // 60개 상품 생성 시 이미지를 배치
   for (let i = 0; i < 60; i++) {
     const baseIndex = i % baseProducts.length
@@ -68,7 +71,7 @@ const mockProducts: Product[] = (() => {
       title: base.title + (i >= baseProducts.length ? ` ${Math.floor(i / baseProducts.length) + 1}` : ''),
       price: base.price + (i % 7) * 1000,
       image: shuffledImages[imageIndex],
-      aspectRatio: '1:1',
+      aspectRatio: aspectRatios[i % 3],
     })
   }
 
@@ -77,6 +80,12 @@ const mockProducts: Product[] = (() => {
     const j = Math.floor(seededRandom(seed++) * (i + 1))
     ;[list[i], list[j]] = [list[j], list[i]]
   }
+
+  // 셔플 후 표시 순서대로 비율 할당: 같은 열에 같은 비율이 반복되지 않도록 섞음
+  // (idx + floor(idx/3)) % 3 → 인덱스가 0,6,12…(같은 열)일 때 서로 다른 비율
+  list.forEach((p, idx) => {
+    p.aspectRatio = aspectRatios[(idx + Math.floor(idx / 3)) % 3]
+  })
 
   return list
 })()
@@ -1272,6 +1281,7 @@ export default function GelatoApp() {
                         price={product.price}
                         image={product.image}
                         discountRate={product.discountRate}
+                        aspectRatio={product.aspectRatio}
                       />
                     </motion.div>
                   ))}
