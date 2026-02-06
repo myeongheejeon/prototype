@@ -1,0 +1,8 @@
+1:"$Sreact.fragment"
+2:I[97367,["/prototype/design-a/_next/static/chunks/ff1a16fafef87110.js","/prototype/design-a/_next/static/chunks/bfa4740ca9d3df3a.js"],"ViewportBoundary"]
+4:I[97367,["/prototype/design-a/_next/static/chunks/ff1a16fafef87110.js","/prototype/design-a/_next/static/chunks/bfa4740ca9d3df3a.js"],"MetadataBoundary"]
+5:"$Sreact.suspense"
+7:I[27201,["/prototype/design-a/_next/static/chunks/ff1a16fafef87110.js","/prototype/design-a/_next/static/chunks/bfa4740ca9d3df3a.js"],"IconMark"]
+0:{"buildId":"zhzsH1se_hlApUOu3FLL6","rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":"$@3"}],["$","div",null,{"hidden":true,"children":["$","$L4",null,{"children":["$","$5",null,{"name":"Next.Metadata","children":"$@6"}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"loading":null,"isPartial":false}
+3:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]
+6:[["$","title","0",{"children":"Gelato 시안 A - AI 검색"}],["$","meta","1",{"name":"description","content":"시안 A: 전체 배경 동영상 + 중앙 검색 + 대화 칩 + 태깅 대화 영역"}],["$","link","2",{"rel":"icon","href":"/icon.svg"}],["$","link","3",{"rel":"apple-touch-icon","href":"/apple-icon.png"}],["$","$L7","4",{}]]

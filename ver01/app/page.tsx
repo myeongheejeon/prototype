@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { Search, ChevronRight } from 'lucide-react'
 import { Input } from '@/components/ui/input'
-import { Header } from '@/components/Header'
+import { Header, HEADER_TOTAL_HEIGHT_PX } from '@/components/Header'
 import { RecommendedProductItem } from '@/components/RecommendedProductItem'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -142,7 +142,6 @@ const page0Variants = {
   },
 }
 
-const GNB_HEIGHT = 52
 const page1Variants = {
   active: {
     y: '0%',
@@ -632,16 +631,18 @@ export default function GelatoApp() {
 
       <AnimatePresence mode="wait">
         {!isSearchMode ? (
-          <div key="fullpage" className="relative h-full w-full overflow-hidden" style={{ height: '100vh' }}>
+          <div key="fullpage" className="relative h-full w-full overflow-hidden" style={{ height: '100vh', background: '#FFF' }}>
             {/* Page 0: 검색 포커스 영역 — 뷰포트 반응형, 피그마 스펙 */}
             <motion.div
-              className="absolute inset-0 z-0 flex flex-col items-center justify-center pt-[52px]"
+              className="absolute inset-0 z-0 flex flex-col items-center justify-center"
               style={{
+                paddingTop: HEADER_TOTAL_HEIGHT_PX,
                 paddingLeft: 24,
                 paddingRight: 24,
                 gap: 40,
                 minHeight: '100dvh',
                 boxSizing: 'border-box',
+                background: '#FFF',
               }}
               initial={false}
               variants={page0Variants}
@@ -916,7 +917,7 @@ export default function GelatoApp() {
             {/* Page 1: 추천 상품 — GNB 아래에서 올라옴 */}
             <motion.div
               className="absolute left-0 right-0 bottom-0 z-30 flex flex-col overflow-hidden bg-background-primary shadow-2xl pt-4 pb-4 px-0"
-              style={{ top: `${GNB_HEIGHT}px`, pointerEvents: page === 0 ? 'none' : 'auto' }}
+              style={{ top: `${HEADER_TOTAL_HEIGHT_PX}px`, pointerEvents: page === 0 ? 'none' : 'auto' }}
               initial={false}
               variants={page1Variants}
               animate={page === 0 ? 'inactive' : 'active'}
@@ -1082,7 +1083,7 @@ export default function GelatoApp() {
                       </button>
                     </div>
                     <div className="recommended-products-grid" style={{ maxWidth: 1216 }}>
-                      {mockProducts.slice(0, 12).map((product, index) => (
+                      {mockProducts.slice(0, 30).map((product, index) => (
                         <motion.div
                           key={`new-runner-${product.id}`}
                           initial={{ opacity: 0, y: 12 }}

@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import './design-tokens.css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: var(--background-primary);
+  --foreground: var(--content-primary);
+  --border: var(--border-primary);
+  --input: var(--background-input-normal);
+  --ring: var(--kitkat-purple-500);
+  --primary: var(--kitkat-purple-500);
+  --primary-foreground: var(--content-inversePrimary);
+  --secondary: var(--background-secondary);
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback';
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-content-primary: var(--content-primary);
+  --color-content-placeholder: var(--content-placeholder);
+  --color-background-primary: var(--background-primary);
+  --color-border-secondary: var(--border-secondary);
+  --color-button-primaryActivated: var(--button-primaryActivated);
+  --color-button-highlightOutline: var(--button-highlightOutline);
+  --color-background-overlay-lightSecondary: var(--background-overlay-lightSecondary);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply text-foreground;
+    background: var(--background-primary-main);
+    min-height: 100vh;
+  }
+}
+
+/* 시안 A: 중앙 검색창 쉐도우 */
+@keyframes search-shadow-pulse-1 {
+  0%, 100% { box-shadow: 0 -1px 18px 0 rgba(176, 67, 255, 0.08); }
+  50% { box-shadow: 0 -1px 18px 0 rgba(176, 67, 255, 0.38); }
+}
+.search-shadow-layer-1 {
+  animation: search-shadow-pulse-1 5.8s ease-in-out infinite;
+}

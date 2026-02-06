@@ -239,7 +239,7 @@
   }
   body {
     @apply text-foreground;
-    background: var(--background-primary-main);
+    background: var(--common-white, #FFF);
     min-height: 100vh;
   }
 }
@@ -419,5 +419,29 @@
   .quick-start-scroll-inner {
     padding-left: 24px;
     padding-right: 24px;
+  }
+}
+
+/* design-a: 모바일에서 검색/칩 영역 좌우 24px */
+@media (max-width: 639px) {
+  .design-a-content-padding {
+    padding-left: 24px;
+    padding-right: 24px;
+    box-sizing: border-box;
+  }
+}
+
+/* design-a 제안 칩: 24px 영향 없이 좌우 풀폭 스크롤, 처음 시작할 때만 왼쪽 24px */
+.design-a-chips-scroll-wrap {
+  width: 100%;
+}
+@media (max-width: 639px) {
+  .design-a-chips-scroll-wrap {
+    margin-left: -24px;
+    margin-right: -24px;
+    width: calc(100% + 48px);
+  }
+  .design-a-chips-scroll-inner {
+    padding-left: 24px;
   }
 }
