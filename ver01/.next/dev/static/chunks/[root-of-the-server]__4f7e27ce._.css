@@ -4967,7 +4967,7 @@
 
   body {
     color: var(--foreground);
-    background: var(--background-primary-main);
+    background: var(--common-white, #fff);
     min-height: 100vh;
   }
 }

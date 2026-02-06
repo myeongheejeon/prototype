@@ -422,6 +422,11 @@
   }
 }
 
+/* design-a: 바디 배경 검정 (흰색 대신) */
+body.design-a-body {
+  background: #000;
+}
+
 /* design-a: 모바일에서 검색/칩 영역 좌우 24px */
 @media (max-width: 639px) {
   .design-a-content-padding {

@@ -60,6 +60,15 @@ type LayoutConfig<Route extends LayoutRoutes = LayoutRoutes> = {
 
 
 
+// Validate ../../../app/design-a/layout.tsx
+{
+  type __IsExpected<Specific extends LayoutConfig<"/design-a">> = Specific
+  const handler = {} as typeof import("../../../app/design-a/layout.js")
+  type __Check = __IsExpected<typeof handler>
+  // @ts-ignore
+  type __Unused = __Check
+}
+
 // Validate ../../../app/layout.tsx
 {
   type __IsExpected<Specific extends LayoutConfig<"/">> = Specific
